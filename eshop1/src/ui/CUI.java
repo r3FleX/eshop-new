@@ -87,7 +87,6 @@ public class CUI {
 		System.out.println("Artikel ausgeben: a");
 		System.out.println("Artikel ordnen: o");
 		System.out.println("Artikelmenge aendern: z");
-		System.out.println("Packungsgroesse aendern: p");
 		System.out.println();
 		System.out.println("Ausloggen: al");
 		System.out.println();
