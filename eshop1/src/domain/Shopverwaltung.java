@@ -150,89 +150,43 @@ public class Shopverwaltung {
 		return meineAccounts.logoutAccount(name, passwort);
 	}
 
-	/**
-	 * Methode zum ï¿½ndern des Bestands
-	 * 
-	 * @param bestandAendern
-	 * @param newBestand1
-	 * @return
-	 * @throws ArtikelExistiertNichtException
-	 */
 	
+	//Bestand ändern
 	public int aendereBestand(int bestandAendern, int newBestand1) throws ArtikelExistiertNichtException {
 		return meineArtikel.aendereBestand(bestandAendern, newBestand1);
 		
 	}
 	
-	/**
-	 * Methode, um Artikel in den Warenkorb einzufï¿½gen
-	 * 
-	 * @param art Artikel
-	 * @param anzahl Artikelanzahl
-	 * @param kunde Kunde
-	 * @throws BestandUeberschrittenException
-	 * @throws ArtikelExistiertNichtException
-	 */
-	
+	//Warenkorn einfügen
 	public void inWarenkorbEinfuegen(Artikel art, int anzahl, Kunde kunde) throws BestandUeberschrittenException, ArtikelExistiertNichtException {
 		Warenkorb warenkorb = kunde.getWarenkorb();
 		
 		warenkorb.einfuegen(art, anzahl);
 	}
 	
-	/**
-	 * Methode zum Suchen nach Artikeln
-	 * 
-	 * @param gesuchteNummer
-	 * @return
-	 * @throws BestandUeberschrittenException
-	 * @throws ArtikelExistiertNichtException
-	 */
-	
+	// Artikel suchen
 	public Artikel artikelSuchen(int gesuchteNummer) throws BestandUeberschrittenException, ArtikelExistiertNichtException {
 		return meineArtikel.artikelSuchen (gesuchteNummer);
 	}
 	
-	/**
-	 * Methode, um alle Artikel aus dem Warenkorb anzugeben
-	 * 
-	 * @param kunde
-	 * @return
-	 */
-
-	@SuppressWarnings("unchecked")
+	
+	// Artikel aus dem Warenkorb ausgeben
 	public HashMap<Artikel, Integer> gibAlleArtikelAusWarenkorb(Kunde kunde) {
 		Warenkorb warenkorb = kunde.getWarenkorb();
-		
 		return warenkorb.getInhalt();
 	}
 
-	/**
-	 * Methode zum Schreiben der Artikeldaten
-	 * 
-	 * @throws IOException
-	 */
-	
+	//schreibe Artikeldaten
 	public void schreibeArtikeldaten() throws IOException {
 		meineArtikel.schreibeDaten(datei+"_A.txt");
 	}
 	
-	/**
-	 * Methode zum Schreiben der Mitarbeiterdaten
-	 * 
-	 * @throws IOException
-	 */
-	
+	//Schreibe Mitarbeiterdaten
 	public void schreibeMitarbeiterdaten() throws IOException {
 		meineAccounts.schreibeMitarbeiterdaten(datei+"_Mitarbeiter.txt");
 	}
 	
-	/**
-	 * Methode zum Schreiben der Kundendaten
-	 * 
-	 * @throws IOException
-	 */
-	
+	//Kundendaten
 	public void schreibeKundendaten() throws IOException {
 		meineAccounts.schreibeKundendaten(datei+"_Kunde.txt");
 	}
