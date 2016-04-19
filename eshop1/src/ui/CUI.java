@@ -238,12 +238,10 @@ public class CUI {
 		 * Befehl f: Artikel finden --> nach Artikelname
 		 * 
 		 */
-
+		
+		//Artikel suchen
 		else if (line.equals("f")) {
-			System.out.print("Artikelname > ");
-			String artname = liesEingabe();
-			List<Artikel> liste = shop.sucheNachArtikel(artname);
-			System.out.print(liste);
+			
 		}
 
 		/**
