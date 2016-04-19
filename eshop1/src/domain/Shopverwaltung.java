@@ -48,8 +48,7 @@ public class Shopverwaltung {
 		meineAccounts.liesKundendaten(datei+"_Kunde.txt");
 		meineAccounts.liesMitarbeiterdaten(datei+"_Mitarbeiter.txt");
 		// Rechnungen einlesen
-		meineRechnungen = new Rechnungsverwaltung();
-		
+		meineRechnungen = new Rechnungsverwaltung();	
 	}
 
 	
@@ -58,14 +57,9 @@ public class Shopverwaltung {
 		return meineArtikel.getArtikelBestand();
 	}
 	
-	/*
-	// Methode zur Artikelsuche anhand des Artikelnamens
-	public List<Artikel> sucheNachArtikel(String artname) {
-		//delegieren an meineArtikel (Artikelverwaltung)
-		return meineArtikel.sucheArtikel(artname);
-	}
-	*/
 	
+	// Methode zur Artikelsuche anhand des Artikelnamens
+
 	// Füge Artikel ein
 	public boolean fuegeArtikelEin(String artname, int artnr, int artbestand, float preis) throws ArtikelExistiertBereitsException{
 		Artikel a = new Artikel(artname, artnr, artbestand, preis);
@@ -108,127 +102,50 @@ public class Shopverwaltung {
 	
 	
 	public HashMap<Artikel, Integer> pruefeKauf(Kunde user) {
-		HashMap<Artikel, Integer> fehlerliste = new HashMap<Artikel, Integer>();
-		HashMap<Artikel, Integer> pruefkorb = user.getWarenkorb().getInhalt();
-		
-		if (!pruefkorb.isEmpty()){
-		Set<Artikel> articles = pruefkorb.keySet();
-		for(Artikel artikel : articles) {
-			int anzahl = (Integer) pruefkorb.get(artikel);
-			
-			if ((artikel.getBestand() - anzahl) < 0) {
-				fehlerliste.put(artikel, anzahl);
-			}
-			/*else {
-				if (artikel.getPackungsgroesse() > 0 && anzahl%artikel.getPackungsgroesse() != 0) {
-					fehlerliste.put(artikel, anzahl);
-				}
-			}	*/	
-		}
-		if (!fehlerliste.isEmpty()) {
-			Set<Artikel> articlos = fehlerliste.keySet();
-			for(Artikel artikel : articlos) {
-				user.getWarenkorb().loeschen(artikel);
-				
-			}
-		}
-	}	
+		HashMap<Artikel, Integer> fehlerliste = new HashMap<Artikel, Integer>();	
 		return fehlerliste;
 	}
 
-	/**
-	 * Methode zur Kaufabwicklung
-	 * 
-	 * @param kaeufer
-	 * @param warenkorbBestand
-	 * @throws IOException 
-	 */
 
+	//Methode zur Kaufabwicklung
 	public Rechnung kaufAbwickeln(Kunde kaeufer) throws IOException{
 		
 		Rechnung rechnung = new Rechnung(kaeufer);
 		
-		@SuppressWarnings("unchecked")
-		Set<Artikel> articles = kaeufer.getWarenkorb().getInhalt().keySet();
-		
-		for(Artikel artikel : articles) {
-			int anzahl = (Integer) kaeufer.getWarenkorb().getInhalt().get(artikel);
-			
-			artikel.setBestand(artikel.getBestand() - anzahl);
-			schreibeArtikeldaten();
-		}
-		
-		kaeufer.getWarenkorb().leeren();
-		
 		return rechnung;
 	}
 	
-	/**
-	 * Methode zum Entfernen eines Artikels
-	 * 
-	 * @param artnr
-	 * @return
-	 */
 	
+	//Artikel entfernen
 	public boolean entferneArtikel(int artnr) {
 		// delegieren nach Artikelverwaltung
 		return meineArtikel.entfernen(artnr);
 	}
 
-	/**
-	 * Methoden zum Abfragen des LoginStatus (Kunde oder Mitarbeiter)
-	 * 
-	 * @return
-	 */
-	
+	//login Status
 	public boolean getLoginStatus() {
-		// delegieren nach Accountverwaltung
+		// -> an Accountverwaltung
 		return meineAccounts.getLoginStatus();
 	}
 	
-	/**
-	 * Methode zum Sortieren nach Artikelnamen
-	 * 
-	 * @return
-	 */
-
+	//Sortiere nach Artikelnamen
 	public List<Artikel> getSortierteArtikelnamen() {
-		// delegieren nach Artikelverwaltung
+		// -> an Artikelverwaltung
 		return meineArtikel.getSortierteArtikelnamen();
 	}
 	
-	/**
-	 * Methode zum Sortieren nach Artikelnummern
-	 * 
-	 * @return
-	 */
-
+	//Sortiere nach Artikelnummern
 	public List<Artikel> getSortierteArtikelnummern() {
-		// delegieren nach Artikelverwaltung
+		// -> an Artikelverwaltung
 		return meineArtikel.getSortierteArtikelnummern();
 	}
 	
-	/**
-	 * Methode zum Einloggen eines Accounts
-	 * 
-	 * @param name 
-	 * @param passwort
-	 * @return
-	 * @throws AccountExistiertNichtException
-	 */
-	
+	//Einloggen eines Accounts
 	public Account loginAccount(String name, String passwort) throws AccountExistiertNichtException {
 		return meineAccounts.loginAccount(name, passwort);		
 	}
 	
-	/**
-	 * Methode zum Ausloggen eines Accounts
-	 * 
-	 * @param name
-	 * @param passwort
-	 * @return
-	 */
-	
+	//Ausloggen eines Accounts
 	public Account logoutAccount(String name, String passwort) {
 		return meineAccounts.logoutAccount(name, passwort);
 	}
