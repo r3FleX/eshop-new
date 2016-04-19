@@ -18,6 +18,7 @@ public class Account {
 		this.accountNr = accnummer;
 	}
 
+	//überprüft ob der Account schon vorhanden ist
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Account) {
