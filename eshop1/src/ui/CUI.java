@@ -23,7 +23,7 @@ import domain.exceptions.BestandUeberschrittenException;
 
 public class CUI {
 
-	// Instanzierung der benštigten Objekte
+	// Instanzierung der benï¿½tigten Objekte
 	private Shopverwaltung shop;
 	private BufferedReader reader;
 	private Account user;
@@ -60,7 +60,7 @@ public class CUI {
 
 	}
 
-	// Startmenue: interne (private) Methode zur Ausgabe des Menues für den Kunden
+	// Startmenue: interne (private) Methode zur Ausgabe des Menues fï¿½r den Kunden
 	
 	private void menueKunde() {
 
@@ -80,7 +80,7 @@ public class CUI {
 		System.out.flush();
 	}
 
-	// Startmenue: interne (private) Methode zur Ausgabe des Menues für den Mitarbeiter
+	// Startmenue: interne (private) Methode zur Ausgabe des Menues fï¿½r den Mitarbeiter
 	
 	private void menueMitarbeiter() {
 		System.out.println("[Mitarbeiterbereich]");
@@ -106,7 +106,7 @@ public class CUI {
 	}
 
 	/**
-	 * Methode zum Verarbeiten der Eingabe im Menü
+	 * Methode zum Verarbeiten der Eingabe im Menï¿½
 	 * 
 	 * @param line
 	 * @throws IOException
@@ -116,7 +116,7 @@ public class CUI {
 		// Eingabe bearbeiten
 		
 		/**
-		 * Befehl e: Artikel einfügen, nur als Mitarbeiter
+		 * Befehl e: Artikel einfï¿½gen, nur als Mitarbeiter
 		 */
 		
 		if (line.equals("e")) {
@@ -156,30 +156,7 @@ public class CUI {
 				String preis = liesEingabe();
 				float artpreis = Float.parseFloat(preis);
 				boolean ok;
-				try {
-
-					if (!massengut) {
-						ok = shop.fuegeArtikelEin(artname, artnr, artbestand,
-								artpreis, packung, massengut);
-						shop.schreibeArtikeldaten();
-						if (ok)
-							System.out
-									.println("Einfuegen ok, Artikel wurde angelegt.");
-						else
-							throw new ArtikelExistiertBereitsException();
-					} else if (massengut) {
-						ok = shop.fuegeMassengutEin(artname, artnr, artbestand,
-								artpreis, packung);
-						shop.schreibeArtikeldaten();
-						if (ok)
-							System.out
-									.println("Einfuegen ok, Artikel wurde angelegt.");
-						else
-							throw new ArtikelExistiertBereitsException();
-					}
-				} catch (ArtikelExistiertBereitsException e) {
-
-				}
+				
 
 			// wenn als Kunde eingeloggt 
 			} else
@@ -221,7 +198,7 @@ public class CUI {
 				shop.schreibeArtikeldaten();
 
 				if (ok) {
-					System.out.println("Entfernen ok, Artikel wurde gelšscht.");
+					System.out.println("Entfernen ok, Artikel wurde gelï¿½scht.");
 				} else
 					System.out.println("Fehler beim Entfernen.");
 				
@@ -479,13 +456,13 @@ public class CUI {
 				
 			// wenn als Mitarbeiter eingeloggt	
 			} else
-				System.out.println("Bitte loggen Sie sich für diesen Vorgang als"
+				System.out.println("Bitte loggen Sie sich fï¿½r diesen Vorgang als"
 								+ "Kunde ein!");
 
 		}
 
 		/**
-		 * Befehl z: Bestand ändern, nur als Mitarbeiter
+		 * Befehl z: Bestand ï¿½ndern, nur als Mitarbeiter
 		 * 
 		 */
 		
@@ -536,7 +513,7 @@ public class CUI {
 		}
 
 		/**
-		 * Befehl b: Bestellung abschließen, Kauf abewickeln nur als Kunde
+		 * Befehl b: Bestellung abschlieï¿½en, Kauf abewickeln nur als Kunde
 		 * 
 		 */
 		
@@ -636,7 +613,7 @@ public class CUI {
 	}
 
 	/**
-	 * Methode zur Ausführung der Hauptschleife: - Menue ausgeben - Eingabe des
+	 * Methode zur Ausfï¿½hrung der Hauptschleife: - Menue ausgeben - Eingabe des
 	 * Benutzers einlesen - Eingabe verarbeiten und Ergebnis ausgeben -->
 	 * EVA-Prinzip: Eingabe-Verarbeitung-Ausgabe
 	 * 

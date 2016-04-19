@@ -1,7 +1,7 @@
 package valueobjects;
 
 /**
- * Unter-Klasse zur Repräsentation der Kunden eines Accounts.
+ * Unter-Klasse zur Reprï¿½sentation der Kunden eines Accounts.
  */
 
 public class Kunde extends Account {
@@ -12,23 +12,6 @@ public class Kunde extends Account {
 	private int plz;
 	private String wohnort;
 	private Warenkorb warenkorb = new Warenkorb();
-
-	/**
-	 * Konstruktor
-	 * 
-	 * @param name
-	 *            Kundenname
-	 * @param passwort
-	 *            Kundenpasswort
-	 * @param accnummer
-	 *            Accoutnnummer
-	 * @param strasse1
-	 *            Strasse
-	 * @param plz1
-	 *            Postleitzahl
-	 * @param ort
-	 *            Wohnort
-	 */
 
 	public Kunde(String name, String passwort, int accnummer, String strasse1, int plz1, String ort) {
 		super(name, passwort, accnummer);
@@ -71,9 +54,9 @@ public class Kunde extends Account {
 	}
 
 	/**
-	 * Methode zum Abrufen der Straße
+	 * Methode zum Abrufen der Straï¿½e
 	 * 
-	 * @return Straße
+	 * @return Straï¿½e
 	 */
 
 	public String getStrasse() {
@@ -81,10 +64,10 @@ public class Kunde extends Account {
 	}
 
 	/**
-	 * Methode zum Setzen der Straße
+	 * Methode zum Setzen der Straï¿½e
 	 * 
 	 * @param strasse
-	 *            Straße
+	 *            Straï¿½e
 	 */
 
 	public void setStrasse(String strasse) {

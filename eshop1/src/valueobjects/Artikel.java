@@ -1,9 +1,9 @@
 package valueobjects;
 
-import valueobjects.Artikel;
+//import valueobjects.Artikel;
 
 /**
- * Klasse zur Repräsentation der Artikel.
+ * Klasse zur Reprï¿½sentation der Artikel.
  */
 
 public class Artikel {
@@ -15,33 +15,12 @@ public class Artikel {
 	private int nummer;
 	private float preis;
 
-	/**
-	 * Konstruktor
-	 * 
-	 * @param artname
-	 *            Artikelname
-	 * @param artnr
-	 *            Artikelnummer
-	 * @param artbestand
-	 *            Artikelbestand
-	 * @param artpreis
-	 *            Artikelpreis
-	 */
-
 	public Artikel(String artname, int artnr, int artbestand, float artpreis) {
 		nummer = artnr;
 		this.artname = artname;
 		bestand = artbestand;
 		preis = artpreis;
-
 	}
-
-	/**
-	 * 
-	 * 
-	 * @param a
-	 *            Artikel
-	 */
 
 	public Artikel(Artikel a) {
 		// Copy-Konstruktor
@@ -136,10 +115,11 @@ public class Artikel {
 	}
 
 	/**
-	 * Methode zum Abrufen der Packungsgröße
+	 * Methode zum Abrufen der Packungsgrï¿½ï¿½e
 	 * 
 	 * @return 0
 	 */
+	//???
 	public int getPackungsgroesse() {
 		return 0;
 	}

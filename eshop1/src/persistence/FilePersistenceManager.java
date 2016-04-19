@@ -11,7 +11,6 @@ import java.io.PrintWriter;
 
 import valueobjects.Artikel;
 import valueobjects.Kunde;
-import valueobjects.Massengutartikel;
 import valueobjects.Mitarbeiter;
 
 
@@ -100,7 +99,7 @@ public class FilePersistenceManager implements PersistenceManager {
 		if (zeile == null) {
 			return null;
 		}
-	
+		/*
 		int packung = Integer.parseInt(zeile);
 		boolean massengut;
 		
@@ -111,14 +110,15 @@ public class FilePersistenceManager implements PersistenceManager {
 			massengut = false;
 		}
 		
-		// neues Artikel-Objekt anlegen und zurückgeben
+		// neues Artikel-Objekt anlegen und zurï¿½ckgeben
 		
 		if (!massengut) {
 			return new Artikel(artname, artikelNummer, bestand, preis);
 		}
 		else {
 			return new Massengutartikel(artname, artikelNummer, bestand, preis, packung);
-		}
+		}*/
+		return new Artikel(artname, artikelNummer, bestand, preis);
 	}
 	
 	/**
@@ -166,7 +166,7 @@ public class FilePersistenceManager implements PersistenceManager {
 		
 		String ort = liesDaten();
 		
-		// neues Kunden-Objekt anlegen und zurückgeben
+		// neues Kunden-Objekt anlegen und zurï¿½ckgeben
 		return new Kunde(name, passwort, nummer1, strasse, plz, ort);
 	}
 	
@@ -209,7 +209,7 @@ public class FilePersistenceManager implements PersistenceManager {
 		String nummer = liesDaten();
 		int nummer1 = Integer.parseInt(nummer);
 		
-		// neues Mitarbeiter-Objekt anlegen und zurückgeben
+		// neues Mitarbeiter-Objekt anlegen und zurï¿½ckgeben
 		return new Mitarbeiter(name, passwort, nummer1);
 	}
 	

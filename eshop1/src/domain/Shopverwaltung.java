@@ -20,7 +20,6 @@ import ui.CUI;
 import valueobjects.Account;
 import valueobjects.Artikel;
 import valueobjects.Kunde;
-import valueobjects.Massengutartikel;
 import valueobjects.Mitarbeiter;
 import valueobjects.Rechnung;
 import valueobjects.Warenkorb;
@@ -90,17 +89,17 @@ public class Shopverwaltung {
 	}
 
 	/**
-	 * Methode zum Einfügen eines neuen Artikels in den Bestand. 
-	 * Bei Existieren des Artikels wird Bestand nicht geändert.
+	 * Methode zum Einfï¿½gen eines neuen Artikels in den Bestand. 
+	 * Bei Existieren des Artikels wird Bestand nicht geï¿½ndert.
 	 * 
 	 * @param artname Artikelbezeichnung
 	 * @param artnr Artikelnummer
 	 * @param artbestand Artikelliste
 	 * @param preis Artikelpreis
-	 * @param packungsgroesse Packungsgröße
+	 * @param packungsgroesse Packungsgrï¿½ï¿½e
 	 * @param massengut Massengutartikel
 	 * 
-	 * @return true, bei erfolgreichem Einfügen; false, bei vorhandenem Artikel etc.
+	 * @return true, bei erfolgreichem Einfï¿½gen; false, bei vorhandenem Artikel etc.
 	 * 
 	 * @throws ArtikelExistiertBereitsException wenn ein Artikel bereits existiert
 	 */
@@ -113,7 +112,7 @@ public class Shopverwaltung {
 	
 	
 	/**
-	 * Methode zum Einfügen eines Massengutartikels
+	 * Methode zum Einfï¿½gen eines Massengutartikels
 	 * 
 	 * @param artname Artikelname
 	 * @param artnr Artikelnummer
@@ -125,7 +124,7 @@ public class Shopverwaltung {
 	 * @throws ArtikelExistiertBereitsException wenn Artikel bereits existiert
 	 */
 	
-	public boolean fuegeMassengutEin(String artname, int artnr, int artbestand,
+	/*public boolean fuegeMassengutEin(String artname, int artnr, int artbestand,
 					float artpreis, int packung) throws ArtikelExistiertBereitsException {
 		
 		Massengutartikel a = new Massengutartikel(artname, artnr, artbestand, artpreis, packung);
@@ -133,7 +132,7 @@ public class Shopverwaltung {
 		
 		return false;
 		
-	}
+	}*/
 
 	/**
 	 * Methode zum Einfuegen eines Mitabeiter - Accounts
@@ -159,11 +158,11 @@ public boolean fuegeMitarbeiterAccountEin(String name, String passwort) throws A
 	}
 
 	/**
-	 * Methode zum Einfügen eines Kunden - Accounts
+	 * Methode zum Einfï¿½gen eines Kunden - Accounts
 	 * 
 	 * @param name Kundenname
 	 * @param passwort Kundenpasswort
-	 * @param strasse Straße
+	 * @param strasse Straï¿½e
 	 * @param plz postleitzahl
 	 * @param ort wohnort
 	 * @throws AccountExistiertBereitsException
@@ -184,7 +183,7 @@ public boolean fuegeMitarbeiterAccountEin(String name, String passwort) throws A
 	}
 	
 	/**
-	 * Methode zur Überprüfung des Warenkorbs zum Kauf (Bestandsabfragen, Packungsgrösse, etc.)
+	 * Methode zur ï¿½berprï¿½fung des Warenkorbs zum Kauf (Bestandsabfragen, Packungsgrï¿½sse, etc.)
 	 * 
 	 * @param user
 	 * @return 
@@ -317,7 +316,7 @@ public boolean fuegeMitarbeiterAccountEin(String name, String passwort) throws A
 	}
 
 	/**
-	 * Methode zum Ändern des Bestands
+	 * Methode zum ï¿½ndern des Bestands
 	 * 
 	 * @param bestandAendern
 	 * @param newBestand1
@@ -331,7 +330,7 @@ public boolean fuegeMitarbeiterAccountEin(String name, String passwort) throws A
 	}
 	
 	/**
-	 * Methode, um Artikel in den Warenkorb einzufügen
+	 * Methode, um Artikel in den Warenkorb einzufï¿½gen
 	 * 
 	 * @param art Artikel
 	 * @param anzahl Artikelanzahl
