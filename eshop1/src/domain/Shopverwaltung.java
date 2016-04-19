@@ -24,12 +24,7 @@ import valueobjects.Mitarbeiter;
 import valueobjects.Rechnung;
 import valueobjects.Warenkorb;
 
-/**
- * Klasse zur Verwaltung des E-Shops
- * 
- * Beinhaltet Methoden zum Ausgeben des Artikelbestands, zur Artikelsuche, zum Einfuegen neuer Artikel und zum Speichern des Bestands
- * 
- */
+
 
 public class Shopverwaltung {
 
@@ -38,18 +33,10 @@ public class Shopverwaltung {
 	private BenutzerVerwaltung meineAccounts;
 	private Rechnungsverwaltung meineRechnungen;
 	
-	// Praefix fuer Namen der Dateien, in welcher die Daten des Shops gespeichert sind
+	// Namen der Dateien, in der die Daten des Shops gespeichert sind
 	private String datei = "";
 
-
-	/**
-	 * Konstruktor, der die Basisdaten (Artikel, Kunden, Mitarbeiter) aus Dateien einliest 
-	 * Initialisierung des Shops
-	 * 
-	 * @param datei
-	 * @throws IOException, z.B. wenn ein Artikel nicht existiert.
-	 */
-	
+	// Konstrukter
 	public Shopverwaltung(String datei) throws IOException {
 		this.datei = datei;
 
@@ -65,84 +52,43 @@ public class Shopverwaltung {
 		
 	}
 
-	/**
-	 * Methode zur Auflistung aller Artikel
-	 * 
-	 * @return Auflistung der Artikel
-	 */
 	
 	public List<Artikel> gibAlleArtikel() {
-		// delegieren an meineArtikel ( Artikelverwaltung)
+		// -> an Artikelverwaltung
 		return meineArtikel.getArtikelBestand();
 	}
 	
-	/**
-	 * Methode zur Artikelsuche anhand des Artikelnamens
-	 * 
-	 * @param artname Bezeichnung des Artikels
-	 * @return Liste der Artikel, evtl. leer
-	 */
-
+	/*
+	// Methode zur Artikelsuche anhand des Artikelnamens
 	public List<Artikel> sucheNachArtikel(String artname) {
 		//delegieren an meineArtikel (Artikelverwaltung)
 		return meineArtikel.sucheArtikel(artname);
 	}
-
-	/**
-	 * Methode zum Einfï¿½gen eines neuen Artikels in den Bestand. 
-	 * Bei Existieren des Artikels wird Bestand nicht geï¿½ndert.
-	 * 
-	 * @param artname Artikelbezeichnung
-	 * @param artnr Artikelnummer
-	 * @param artbestand Artikelliste
-	 * @param preis Artikelpreis
-	 * 
-	 * @return true, bei erfolgreichem Einfï¿½gen; false, bei vorhandenem Artikel etc.
-	 * 
-	 * @throws ArtikelExistiertBereitsException wenn ein Artikel bereits existiert
-	 */
+	*/
 	
+	// Füge Artikel ein
 	public boolean fuegeArtikelEin(String artname, int artnr, int artbestand, float preis) throws ArtikelExistiertBereitsException{
 		Artikel a = new Artikel(artname, artnr, artbestand, preis);
 		meineArtikel.einfuegen(a);
 		return true;
 	}
-	
 
-	/**
-	 * Methode zum Einfuegen eines Mitabeiter - Accounts
-	 * 
-	 * @param name Mitarbeitername
-	 * @param passwort Mitarbeiter passwort
-	 * @return
-	 * @throws AccountExistiertBereitsException
-	 */
-	
-public boolean fuegeMitarbeiterAccountEin(String name, String passwort) throws AccountExistiertBereitsException{
-		
-		// Accountnummer wird zugewiesen (AccountBestand + 1)
-		int accnummer = meineAccounts.getAccountBestand().size()+1;
-		
-		Mitarbeiter mitarbeiter = new Mitarbeiter(name, passwort, accnummer);
-		try {
-			meineAccounts.MitarbeiterEinfuegen(mitarbeiter);
-		} catch (AccountExistiertBereitsException e) {
-			return false;
+	//Füge Mitarbeiter Account ein	
+	public boolean fuegeMitarbeiterAccountEin(String name, String passwort) throws AccountExistiertBereitsException{
+			
+			// Accountnummer wird zugewiesen (AccountBestand + 1)
+			int accnummer = meineAccounts.getAccountBestand().size()+1;
+			
+			Mitarbeiter mitarbeiter = new Mitarbeiter(name, passwort, accnummer);
+			try {
+				meineAccounts.MitarbeiterEinfuegen(mitarbeiter);
+			} catch (AccountExistiertBereitsException e) {
+				return false;
+			}
+			return true;
 		}
-		return true;
-	}
-
-	/**
-	 * Methode zum Einfï¿½gen eines Kunden - Accounts
-	 * 
-	 * @param name Kundenname
-	 * @param passwort Kundenpasswort
-	 * @param strasse Straï¿½e
-	 * @param plz postleitzahl
-	 * @param ort wohnort
-	 * @throws AccountExistiertBereitsException
-	 */
 	
+	//Füge Kunden Account ein	
 	public boolean fuegeKundenAccountEin(String name, String passwort, String strasse, int plz, String ort) throws AccountExistiertBereitsException {
 		
 		// Accountnummer wird zugewiesen (AccountBestand + 1)
@@ -157,12 +103,9 @@ public boolean fuegeMitarbeiterAccountEin(String name, String passwort) throws A
 		return true;
 	}
 	
-	/**
-	 * Methode zur ï¿½berprï¿½fung des Warenkorbs zum Kauf (Bestandsabfragen etc.)
-	 * 
-	 * @param user
-	 * @return 
-	 */
+	
+	//Methode zur Überprüfung des Warenkorbs zum Kauf (Bestandsabfragen etc.)
+	
 	
 	public HashMap<Artikel, Integer> pruefeKauf(Kunde user) {
 		HashMap<Artikel, Integer> fehlerliste = new HashMap<Artikel, Integer>();
