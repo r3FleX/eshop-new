@@ -99,25 +99,7 @@ public class FilePersistenceManager implements PersistenceManager {
 		if (zeile == null) {
 			return null;
 		}
-		/*
-		int packung = Integer.parseInt(zeile);
-		boolean massengut;
 		
-		if(packung > 0) {
-			massengut = true;
-		}
-		else {
-			massengut = false;
-		}
-		
-		// neues Artikel-Objekt anlegen und zur�ckgeben
-		
-		if (!massengut) {
-			return new Artikel(artname, artikelNummer, bestand, preis);
-		}
-		else {
-			return new Massengutartikel(artname, artikelNummer, bestand, preis, packung);
-		}*/
 		return new Artikel(artname, artikelNummer, bestand, preis);
 	}
 	
