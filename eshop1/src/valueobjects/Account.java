@@ -9,9 +9,9 @@ public class Account {
 	// Attribute zur Beschreibung des Accounts
 	//??? ???
 
-	private int accountNr;
-	private String accountname;
-	private String accountpasswort;
+	protected int accountNr;
+	protected String accountname;
+	protected String accountpasswort;
 
 	public Account(String name, String passwort, int accnummer) {
 		this.accountname = name;

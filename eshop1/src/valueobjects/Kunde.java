@@ -27,7 +27,7 @@ public class Kunde extends Account {
 
 	public String toString() {
 
-		return ("Kunde:\n  " + getName() + " \n  " + strasse + "\n " + plz + " " + wohnort);
+		return ("Kunde:\n  " + accountname + " \n  " + strasse + "\n " + plz + " " + wohnort);
 	}
 
 	// Getter und Setter
