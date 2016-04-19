@@ -96,43 +96,18 @@ public class Shopverwaltung {
 	 * @param artnr Artikelnummer
 	 * @param artbestand Artikelliste
 	 * @param preis Artikelpreis
-	 * @param packungsgroesse Packungsgr��e
-	 * @param massengut Massengutartikel
 	 * 
 	 * @return true, bei erfolgreichem Einf�gen; false, bei vorhandenem Artikel etc.
 	 * 
 	 * @throws ArtikelExistiertBereitsException wenn ein Artikel bereits existiert
 	 */
 	
-	public boolean fuegeArtikelEin(String artname, int artnr, int artbestand, float preis, int packungsgroesse, boolean massengut) throws ArtikelExistiertBereitsException{
+	public boolean fuegeArtikelEin(String artname, int artnr, int artbestand, float preis) throws ArtikelExistiertBereitsException{
 		Artikel a = new Artikel(artname, artnr, artbestand, preis);
 		meineArtikel.einfuegen(a);
 		return true;
 	}
 	
-	
-	/**
-	 * Methode zum Einf�gen eines Massengutartikels
-	 * 
-	 * @param artname Artikelname
-	 * @param artnr Artikelnummer
-	 * @param artbestand Artikelbestand
-	 * @param artpreis Artikelpreis
-	 * @param packung Packungsgroesse
-	 * 
-	 * @return
-	 * @throws ArtikelExistiertBereitsException wenn Artikel bereits existiert
-	 */
-	
-	/*public boolean fuegeMassengutEin(String artname, int artnr, int artbestand,
-					float artpreis, int packung) throws ArtikelExistiertBereitsException {
-		
-		Massengutartikel a = new Massengutartikel(artname, artnr, artbestand, artpreis, packung);
-		meineArtikel.einfuegen(a);
-		
-		return false;
-		
-	}*/
 
 	/**
 	 * Methode zum Einfuegen eines Mitabeiter - Accounts
@@ -183,7 +158,7 @@ public boolean fuegeMitarbeiterAccountEin(String name, String passwort) throws A
 	}
 	
 	/**
-	 * Methode zur �berpr�fung des Warenkorbs zum Kauf (Bestandsabfragen, Packungsgr�sse, etc.)
+	 * Methode zur �berpr�fung des Warenkorbs zum Kauf (Bestandsabfragen etc.)
 	 * 
 	 * @param user
 	 * @return 
@@ -201,11 +176,11 @@ public boolean fuegeMitarbeiterAccountEin(String name, String passwort) throws A
 			if ((artikel.getBestand() - anzahl) < 0) {
 				fehlerliste.put(artikel, anzahl);
 			}
-			else {
+			/*else {
 				if (artikel.getPackungsgroesse() > 0 && anzahl%artikel.getPackungsgroesse() != 0) {
 					fehlerliste.put(artikel, anzahl);
 				}
-			}		
+			}	*/	
 		}
 		if (!fehlerliste.isEmpty()) {
 			Set<Artikel> articlos = fehlerliste.keySet();

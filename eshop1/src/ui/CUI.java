@@ -39,7 +39,6 @@ public class CUI {
 		// Der Buffered Reader wird benutzt um die Eingabe einer einzelnen Zeile
 		// zu bekommen.
 		reader = new BufferedReader(new InputStreamReader(System.in));
-
 	}
 
 	// Startmenue: interne (private) Methode zur Ausgabe des Menues
@@ -56,7 +55,6 @@ public class CUI {
 		System.out.println();
 		System.out.println("Eingabe: ");
 		System.out.flush();
-
 	}
 
 	// Startmenue: interne (private) Methode zur Ausgabe des Menues f�r den Kunden
@@ -142,7 +140,6 @@ public class CUI {
 				float artpreis = Float.parseFloat(preis);
 				boolean ok;
 				
-
 			// wenn als Kunde eingeloggt 
 			} else
 				System.out.println("Das darfst du nicht!");
