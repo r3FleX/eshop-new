@@ -7,7 +7,7 @@ package valueobjects;
 public class Account {
 
 	// Attribute zur Beschreibung des Accounts
-	//???
+	//??? ???
 
 	private int accountNr;
 	private String accountname;
