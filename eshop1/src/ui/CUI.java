@@ -435,7 +435,7 @@ public class CUI {
 				
 			// wenn als Mitarbeiter eingeloggt	
 			} else
-				System.out.println("Bitte loggen Sie sich fÃ¼r diesen Vorgang als"
+				System.out.println("Bitte loggen Sie sich für diesen Vorgang als"
 								+ "Kunde ein!");
 
 		}
@@ -464,15 +464,10 @@ public class CUI {
 		 * 
 		 */
 		
-		//Bestellung abschliessen
+		// Bestellung abschliessen
 	}
 
-	/**
-	 * interne, private Methode zur Ausgabe des Warenkorbbestandes
-	 * 
-	 * @param warenkorbBestand Bestand im Warenkorb
-	 */
-	
+	// Ausgabe des Warenkorbbestandes
 	private void gibWarenbestandAus(HashMap<Artikel, Integer> warenkorbBestand) {
 		if (warenkorbBestand.isEmpty()) {
 			System.out.println("Liste ist leer.");
@@ -485,12 +480,6 @@ public class CUI {
 		}
 	}
 
-	/**
-	 * interne, private Methode zur Ausgabe des Artikelbestandes
-	 * 
-	 * @param artikel2
-	 */
-
 	private void gibArtikellisteAus(List<Artikel> artikel2) {
 		if (artikel2.isEmpty()) {
 			System.out.println("Liste ist leer.");
@@ -502,13 +491,6 @@ public class CUI {
 			}
 		}
 	}
-
-	/**
-	 * Methode zur Ausfï¿½hrung der Hauptschleife: - Menue ausgeben - Eingabe des
-	 * Benutzers einlesen - Eingabe verarbeiten und Ergebnis ausgeben -->
-	 * EVA-Prinzip: Eingabe-Verarbeitung-Ausgabe
-	 * 
-	 */
 
 	public void run() throws IOException {
 		// Variable fuer Eingaben von der Konsole
