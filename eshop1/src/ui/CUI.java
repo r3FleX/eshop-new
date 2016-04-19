@@ -23,7 +23,7 @@ import domain.exceptions.BestandUeberschrittenException;
 
 public class CUI {
 
-	// Instanzierung der benï¿½tigten Objekte
+	// Instanzierung der benötigten Objekte
 	private Shopverwaltung shop;
 	private BufferedReader reader;
 	private Account user;
