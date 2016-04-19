@@ -441,44 +441,12 @@ public class CUI {
 		}
 
 		/**
-		 * Befehl z: Bestand ï¿½ndern, nur als Mitarbeiter
+		 * Befehl z: Bestand ändern, nur als Mitarbeiter
 		 * 
 		 */
 		
 		else if (line.equals("z")) {
-
-			if (user instanceof Mitarbeiter) {
-				List<Artikel> artikelListe = shop.gibAlleArtikel();
-				gibArtikellisteAus(artikelListe);
-				System.out
-						.println("Waehlen Sie einen Artikel aus, dessen Bestand "
-								+ "Sie veraendern wollen, indem Sie die Artikelnummer angeben.");
-				String bestandAnders = liesEingabe();
-				int bestandAendern = Integer.parseInt(bestandAnders);
-
-				System.out.println("Neuer Bestand: ");
-
-				String newBestand = liesEingabe();
-				int newBestand1 = Integer.parseInt(newBestand);
-
-				if (newBestand1 <= 0) {
-					shop.entferneArtikel(bestandAendern);
-					System.out.println("Artikel geloescht.");
-					shop.schreibeArtikeldaten();
-				} else {
-
-					try {
-						shop.aendereBestand(bestandAendern, newBestand1);
-						System.out.println("Bestand geaendert.");
-						shop.schreibeArtikeldaten();
-					} catch (ArtikelExistiertNichtException e) {
-						System.out.println(e.getMessage());
-					}
-				}
-				
-			// wenn als Kunde eingeloggt
-			} else
-				System.out.println("Darfst du nicht");
+			//Bestand ändern
 		}
 
 		/**
@@ -496,63 +464,7 @@ public class CUI {
 		 * 
 		 */
 		
-		else if (line.equals("b")) {
-
-			if (user instanceof Kunde) {
-				HashMap<Artikel, Integer> warenkorbBestand = shop
-						.gibAlleArtikelAusWarenkorb((Kunde) user);
-				gibWarenbestandAus(warenkorbBestand);
-
-				if (warenkorbBestand.isEmpty()) {
-
-				} else {
-					System.out
-							.println("Warenkorbartikel jetzt kaufen? j/n?");
-					String kaufenJaNein = liesEingabe();
-
-					if (kaufenJaNein.equals("j")) {
-						HashMap<Artikel, Integer> fehlerliste = shop
-								.pruefeKauf((Kunde) user);
-						if (!fehlerliste.isEmpty()) {
-							System.out
-									.println("Folgende Artikel konnten nicht zum Kauf angeboten werden:");
-							Set<Artikel> articles = fehlerliste.keySet();
-							for (Artikel artikel : articles) {
-								System.out.println(artikel);
-							}
-						}
-
-						// cast Argument (Kunde) user
-						Rechnung rechnung = shop.kaufAbwickeln((Kunde) user);
-
-						System.out.println("R E C H N U N G");
-						System.out.println("");
-						System.out.println("Datum: " + rechnung.getDatum());
-						System.out.println("Gekauft von: " + user.getName());
-						System.out.println(((Kunde) user).getStrasse());
-						System.out.println(((Kunde) user).getPlz() + " "
-								+ ((Kunde) user).getWohnort());
-						System.out.println("");
-						System.out.println("Der Gesamtpreis betraegt: "
-								+ rechnung.getGesamtpreis());
-
-					} else if (kaufenJaNein.equals("n")) {
-						menueKunde();
-					} else {
-						System.out
-								.println("Bitte geben Sie nur j (Ja) oder n (Nein) ein.");
-					}
-				}
-				
-			// wenn als Mitarbeiter eingeloggt
-			} else
-				System.out
-						.println("Bitte loggen Sie sich fuer diesen Vorgang als Kunde ein!");
-		} else {
-			if (!line.equals("q"))
-				System.out
-						.println("Bitte geben Sie einen der aufgefuehrten Befehle ein.");
-		}
+		//Bestellung abschliessen
 	}
 
 	/**
