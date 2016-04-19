@@ -1,7 +1,7 @@
 package valueobjects;
 
 /**
- * Klasse zur Repräsentation der Accounts.
+ * Klasse zur Reprï¿½sentation der Accounts.
  */
 
 public class Account {
@@ -11,17 +11,6 @@ public class Account {
 	private int accountNr;
 	private String accountname;
 	private String accountpasswort;
-
-	/**
-	 * Konstruktor
-	 * 
-	 * @param name
-	 *            Name des Users
-	 * @param passwort
-	 *            Passwort
-	 * @param accnummer
-	 *            Accountnummer
-	 */
 
 	public Account(String name, String passwort, int accnummer) {
 		this.accountname = name;
