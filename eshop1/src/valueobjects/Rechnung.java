@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.Vector;
 
 /**
- * Klasse zur Repräsentation der Rechnung.
+ * Klasse zur Reprï¿½sentation der Rechnung.
  */
 
 public class Rechnung {
@@ -19,13 +19,6 @@ public class Rechnung {
 	private Date datum = null;
 	private HashMap<Artikel, Integer> positionen = null;
 	private float gesamtpreis = 0.0f;
-
-	/**
-	 * Konstruktor
-	 * 
-	 * @param kunde
-	 *            Kunde
-	 */
 
 	@SuppressWarnings("unchecked")
 	public Rechnung(Kunde kunde) {

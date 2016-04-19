@@ -49,13 +49,13 @@ public class CUI {
 
 		System.out.println();
 		System.out.println("[Startmenue]");
-		System.out.println("Willkommen in unserem eShop!");
+		System.out.println("Los geht's!");
 		System.out.println();
-		System.out.println("Neuen Account erstellen: n");
+		System.out.println("Account anlegen: n");
 		System.out.println("Login: l");
 		System.out.println("Beenden: q");
 		System.out.println();
-		System.out.println("Ihre Eingabe: ");
+		System.out.println("Eingabe: ");
 		System.out.flush();
 
 	}
@@ -76,7 +76,7 @@ public class CUI {
 		System.out.println();
 		System.out.println("Ausloggen: al");
 		System.out.println("");
-		System.out.println("Ihre Eingabe: ");
+		System.out.println("Eingabe: ");
 		System.out.flush();
 	}
 
@@ -130,20 +130,6 @@ public class CUI {
 				int artnr = Integer.parseInt(nummer);
 				System.out.print("Artikelname  > ");
 				String artname = liesEingabe();
-				System.out.println("Massengutartikel? j/n");
-				String massengut1 = liesEingabe();
-				int packung = 0;
-
-				if (massengut1.equals("j")) {
-					System.out.println("Packungsgroesse > ");
-					String packungsgroesse = liesEingabe();
-					packung = Integer.parseInt(packungsgroesse);
-					massengut = true;
-				} else if (line.equals("n")) {
-					massengut = false;
-				} else {
-					massengut = false;
-				}
 
 				int artbestand;
 
@@ -160,7 +146,7 @@ public class CUI {
 
 			// wenn als Kunde eingeloggt 
 			} else
-				System.out.println("Dazu sind Sie nicht berechtigt!");
+				System.out.println("Das darfst du nicht!");
 		}
 
 		/**
@@ -189,8 +175,8 @@ public class CUI {
 				gibArtikellisteAus(artikelListe);
 
 				System.out
-						.println("Bitte geben Sie die Artikelnummer des zu entfernenden Produktes ein:");
-				System.out.println("Ihre Eingabe >");
+						.println("Artikelnummer zum entfernen des Produktes:");
+				System.out.println("Eingabe >");
 				String nummer = liesEingabe();
 				int artnr = Integer.parseInt(nummer);
 
@@ -198,13 +184,13 @@ public class CUI {
 				shop.schreibeArtikeldaten();
 
 				if (ok) {
-					System.out.println("Entfernen ok, Artikel wurde gel�scht.");
+					System.out.println("Artikel wurde gelöscht.");
 				} else
 					System.out.println("Fehler beim Entfernen.");
 				
 			// wenn als Kunde eingeloggt	
 			} else
-				System.out.println("Dazu sind Sie nicht berechtigt!");
+				System.out.println("Darfst du nicht!");
 		}
 
 		/**
@@ -216,7 +202,7 @@ public class CUI {
 
 			if (user != null) {
 				System.out.println("Sortieren nach Name (x) oder Nummer (y)");
-				System.out.println("Ihre Eingabe >");
+				System.out.println("Eingabe >");
 				String name = liesEingabe();
 
 				List<Artikel> artikelListe;
@@ -246,11 +232,11 @@ public class CUI {
 					System.out
 							.println("Zum Sortieren nur Befehl x oder y moeglich.");
 					System.out
-							.println("Bitte wiederholen Sie den Sortiervorgang.");
+							.println("Sortiervorgang wiederholen");
 				}
 
 			} else
-				System.out.println("Bitte loggen Sie sich ein!");
+				System.out.println("Bitte einloggen");
 		}
 
 		/**
@@ -271,13 +257,13 @@ public class CUI {
 		 */
 
 		else if (line.equals("n")) {
-			System.out.println("Neuen Account anlegen.");
-			System.out.println("Bitte geben Sie einen Namen an.");
+			System.out.println("Account anlegen.");
+			System.out.println("Name eingeben");
 			String name = liesEingabe();
-			System.out.println("Bitte geben Sie ein Passwort an.");
+			System.out.println("Passwort eingeben");
 			String passwort = liesEingabe();
 			System.out
-					.println("Bitte geben Sie an, ob Sie Kunde oder Mitarbeiter sind. Kunde = k / Mitarbeiter = m");
+					.println("Kunde oder Mitarbeiter? Kunde = k / Mitarbeiter = m");
 			String account = liesEingabe();
 
 			// Auswahldialog mit erweiterter Eingabe
@@ -308,7 +294,7 @@ public class CUI {
 				} catch (AccountExistiertBereitsException e1) {
 					System.out.println(e1.getMessage());
 					System.out
-							.println("Bitte wiederholen Sie den Registrierungsvorgang.");
+							.println("Registrierungsvorgang wiederholen");
 				}
 
 			// Mitarbeiter m	
@@ -323,7 +309,7 @@ public class CUI {
 									.getAccountNr();
 							shop.schreibeMitarbeiterdaten();
 							System.out
-									.println("Ein neuer Mitarbeiter-Account wurde angelegt. Ihre Accountnummer ist "
+									.println("Mitarbeiter-Account wurde angelegt. Accountnummer: "
 											+ accnummer + ".");
 						} catch (AccountExistiertNichtException e) {
 							e.printStackTrace();
@@ -351,9 +337,9 @@ public class CUI {
 			if (user == null) {
 
 				System.out.println("Login:");
-				System.out.println("Bitte geben Sie Ihren Namen an:");
+				System.out.println("Namen eingeben:");
 				String name = liesEingabe();
-				System.out.println("Bitte geben Sie Ihr Passwort an:");
+				System.out.println("Passwort eingeben:");
 				String passwort = liesEingabe();
 
 				
@@ -399,7 +385,7 @@ public class CUI {
 				List<Artikel> artikelListe = shop.gibAlleArtikel();
 				gibArtikellisteAus(artikelListe);
 
-				System.out.println("Welchen Artikel wollen Sie in den Warenkorb legen? Bitte geben Sie die Artikelnummer an.");
+				System.out.println("Welchen Artikel wollen Sie in den Warenkorb legen? Bitte Artikelnummer eingeben.");
 
 				try {
 
@@ -456,7 +442,7 @@ public class CUI {
 				
 			// wenn als Mitarbeiter eingeloggt	
 			} else
-				System.out.println("Bitte loggen Sie sich f�r diesen Vorgang als"
+				System.out.println("Bitte loggen Sie sich für diesen Vorgang als"
 								+ "Kunde ein!");
 
 		}
@@ -499,7 +485,7 @@ public class CUI {
 				
 			// wenn als Kunde eingeloggt
 			} else
-				System.out.println("Dazu sind Sie nicht berechtigt!");
+				System.out.println("Darfst du nicht");
 		}
 
 		/**
@@ -513,7 +499,7 @@ public class CUI {
 		}
 
 		/**
-		 * Befehl b: Bestellung abschlie�en, Kauf abewickeln nur als Kunde
+		 * Befehl b: Bestellung abschliessen, Kauf abewickeln nur als Kunde
 		 * 
 		 */
 		
@@ -528,7 +514,7 @@ public class CUI {
 
 				} else {
 					System.out
-							.println("Wollen Sie Ihre Warenkorbartikel jetzt kaufen? j/n?");
+							.println("Warenkorbartikel jetzt kaufen? j/n?");
 					String kaufenJaNein = liesEingabe();
 
 					if (kaufenJaNein.equals("j")) {
