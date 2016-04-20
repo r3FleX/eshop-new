@@ -23,8 +23,6 @@ import domain.exceptions.AccountExistiertNichtException;
 
 public class Accountverwaltung {
 
-	private boolean loginStatus = false;
-
 	// Verwaltung der Accounts als Liste
 	// Als Implementierung der Liste dient ein Vektor
 	private List<Account> accountBestand = new Vector<Account>();
@@ -242,8 +240,13 @@ public class Accountverwaltung {
 	 * @return loginStatus
 	 */
 	
-	public boolean getLoginStatus() {
-		return loginStatus;
+	public boolean getLoginStatus(Account account) {
+		// -> an Accountverwaltung
+		
+		return account.getLoginStatus();
 	}
-
+	
+	public void setLoginStatus(Account account, boolean loginStatus){
+		account.setLoginStatus(loginStatus);
+	}
 }

@@ -8,6 +8,13 @@ import java.util.List;
  * Klasse zur Repräsentation des Warenkorbs.
  */
 
+//Ereignisse 
+// -> wer
+// -> wann
+// -> was (Artikel)
+// -> ggf. wie viel
+// -> typ -> Enumeration (ANGELEGT, BESTAND_ERHÖJT, ..., )
+
 public class Warenkorb {
 
 	// Verwaltung des Warenkorbbestands als Liste

@@ -11,11 +11,14 @@ public class Account {
 	protected int accountNr;
 	protected String accountname;
 	protected String accountpasswort;
+	
+	private boolean loginStatus = false;
+	
 
 	public Account(String name, String passwort, int accnummer) {
 		this.accountname = name;
 		this.accountpasswort = passwort;
-		this.accountNr = accnummer;
+		this.accountNr = accnummer;	
 	}
 
 	//Überprüfe ob der Account schon vorhanden ist
@@ -57,5 +60,13 @@ public class Account {
 
 	public void setPasswort(String passwort) {
 		this.accountpasswort = passwort;
+	}
+	
+	public boolean getLoginStatus() {
+		return loginStatus;
+	}
+	
+	public void setLoginStatus(boolean loginStatus) {
+		this.loginStatus = loginStatus;
 	}
 }

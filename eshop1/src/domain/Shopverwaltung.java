@@ -123,9 +123,13 @@ public class Shopverwaltung {
 	}
 
 	//login Status
-	public boolean getLoginStatus() {
+	public boolean getLoginStatus(Account account) {
 		// -> an Accountverwaltung
-		return meineAccounts.getLoginStatus();
+			return meineAccounts.getLoginStatus(account);
+	}
+	
+	public void setLoginStatus(Account account, boolean loginStatus){
+		meineAccounts.setLoginStatus(account, loginStatus);
 	}
 	
 	//Sortiere nach Artikelnamen
