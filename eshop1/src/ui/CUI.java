@@ -49,8 +49,9 @@ public class CUI {
 		System.out.println("Los geht's! \n");
 		System.out.println("Account anlegen: n");
 		System.out.println("Login: l");
-		System.out.println("Beenden: q \n\n");
-		System.out.println("Eingabe: ");
+		System.out.println("Beenden: q \n\n");		
+		System.out.println("Eingabe: ");		
+		
 		System.out.flush();
 	}
 
@@ -59,7 +60,7 @@ public class CUI {
 	private void menueKunde() {
 
 		System.out.println("\n[Kundenbereich] \n");
-		System.out.println("Artikel im Warenkorb ablegen: k");
+		System.out.println("[some bugs inside]Artikel im Warenkorb ablegen: k");
 		System.out.println("Warenkorb einsehen: w");
 		System.out.println("[nicht vollständig impelemtiert(16.4)] Warenkorb - Bestellung abschliessen: b \n");
 		System.out.println("Artikel ausgeben: a");
@@ -98,9 +99,9 @@ public class CUI {
 	 * @throws IOException
 	 */
 	private void verarbeiteEingabe(String line) throws IOException {
-		//TODO @Stefan fehleingaben abfangen und fehlermeldung ausgeben 19.04
-		
-		
+		//TODO @Stefan Fehleingaben abfangen und fehlermeldung ausgeben 19.04
+		//TODO @Stefan Login fehlerhaft feedback
+		//TODO @stefan Warenkorb befüllen texte erweitern
 		
 		
 		// Eingabe bearbeiten

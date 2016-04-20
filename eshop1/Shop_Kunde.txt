@@ -16,3 +16,9 @@ Abc
 Abcstr.
 23212
 ABECE
+mytest
+1234
+7
+weg
+12345
+woanders
