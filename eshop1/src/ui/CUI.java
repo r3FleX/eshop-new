@@ -73,7 +73,7 @@ public class CUI {
 	
 	private void menueMitarbeiter() {
 		System.out.println("\n[Mitarbeiterbereich]\n");
-		System.out.println("Artikel einfuegen: e");
+		System.out.println("[nicht implementiert] Artikel einfuegen: e");
 		System.out.println("Artikel entfernen: d");
 		System.out.println("Artikel ausgeben: a");
 		System.out.println("Artikel ordnen: o");
@@ -129,6 +129,8 @@ public class CUI {
 				String preis = liesEingabe();
 				float artpreis = Float.parseFloat(preis);
 				boolean ok;
+				
+				//TODO Artikel in Persistens einfügen
 				
 			// wenn als Kunde eingeloggt 
 			} else
