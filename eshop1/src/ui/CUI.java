@@ -77,7 +77,7 @@ public class CUI {
 		System.out.println("Artikel entfernen: d");
 		System.out.println("Artikel ausgeben: a");
 		System.out.println("Artikel ordnen: o");
-		System.out.println("Artikelmenge ändern: z \n");
+		System.out.println("[nicht implementiert] Artikelmenge ändern: z \n");
 		System.out.println("Ausloggen: al \n\n");
 		System.out.println("Ihre Eingabe: ");
 		System.out.flush();
@@ -97,6 +97,7 @@ public class CUI {
 		//TODO @Stefan Fehleingaben abfangen und fehlermeldung ausgeben 19.04
 		//TODO @Stefan Login fehlerhaft feedback
 		//TODO @stefan Warenkorb befüllen texte erweitern
+		//TODO @stefan Artikelmenge ändern "z"
 		
 		 
 		// Eingabe bearbeiten
@@ -436,7 +437,7 @@ public class CUI {
 		 */
 		
 		else if (line.equals("z")) {
-			//Bestand ï¿½ndern
+			//Bestand ändern
 		}
 
 		/**
