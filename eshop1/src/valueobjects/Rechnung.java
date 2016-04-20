@@ -20,7 +20,6 @@ public class Rechnung {
 	private HashMap<Artikel, Integer> positionen = null;
 	private float gesamtpreis = 0.0f;
 
-	@SuppressWarnings("unchecked")
 	public Rechnung(Kunde kunde) {
 		this.kunde = kunde;
 

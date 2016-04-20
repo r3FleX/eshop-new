@@ -1,8 +1,5 @@
 package valueobjects;
 
-/**
- * Unter-Klasse zur Repr�sentation der Kunden eines Accounts.
- */
 
 public class Kunde extends Account {
 
@@ -13,17 +10,12 @@ public class Kunde extends Account {
 	private String wohnort;
 	private Warenkorb warenkorb = new Warenkorb();
 
-	public Kunde(String name, String passwort, int accnummer, String strasse1, int plz1, String ort) {
+	public Kunde(String name, String passwort, int accnummer, String strasse, int plz, String ort) {
 		super(name, passwort, accnummer);
-		this.strasse = strasse1;
-		this.plz = plz1;
+		this.strasse = strasse;
+		this.plz = plz;
 		this.wohnort = ort;
 	}
-
-	/**
-	 * Methode zum Auflisten der Kundendaten
-	 * 
-	 */
 
 	public String toString() {
 
@@ -32,85 +24,34 @@ public class Kunde extends Account {
 
 	// Getter und Setter
 
-	/**
-	 * Methode zum Abrufen der Postleitzahl
-	 * 
-	 * @return plz Postleitzahl
-	 */
-
 	public int getPlz() {
 		return plz;
 	}
-
-	/**
-	 * Methode zum Setzen der Postleitzahl
-	 * 
-	 * @param plz
-	 *            Postleitzahl
-	 */
 
 	public void setPlz(int plz) {
 		this.plz = plz;
 	}
 
-	/**
-	 * Methode zum Abrufen der Stra�e
-	 * 
-	 * @return Stra�e
-	 */
-
 	public String getStrasse() {
 		return strasse;
 	}
-
-	/**
-	 * Methode zum Setzen der Stra�e
-	 * 
-	 * @param strasse
-	 *            Stra�e
-	 */
 
 	public void setStrasse(String strasse) {
 		this.strasse = strasse;
 	}
 
-	/**
-	 * Methode zum Abrufen des Wohnortes
-	 * 
-	 * @return wohnort Wohnort
-	 */
-
 	public String getWohnort() {
 		return wohnort;
 	}
 
-	/**
-	 * Methode zum Setzen des Wohnortes
-	 * 
-	 * @param wohnort
-	 *            Wohnort
-	 */
 
 	public void setWohnort(String wohnort) {
 		this.wohnort = wohnort;
 	}
 
-	/**
-	 * Methode zum Abrufen des Warenkorbs
-	 * 
-	 * @return warenkorb Warenkorb
-	 */
-
 	public Warenkorb getWarenkorb() {
 		return warenkorb;
 	}
-
-	/**
-	 * Methode zum Setzen des Warenkorbs
-	 * 
-	 * @param warenkorb
-	 *            Warenkorb
-	 */
 
 	public void setWarenkorb(Warenkorb warenkorb) {
 		this.warenkorb = warenkorb;
