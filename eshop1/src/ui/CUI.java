@@ -131,6 +131,12 @@ public class CUI {
 				boolean ok;
 				
 				//TODO Artikel in Persistens einfügen
+				try {
+					shop.fuegeArtikelEin(artname, artnr, artbestand, artpreis);
+				} catch (ArtikelExistiertBereitsException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 			// wenn als Kunde eingeloggt 
 			} else

@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.Vector;
 
 /**
- * Klasse zur Reprï¿½sentation der Rechnung.
+ * Klasse zur Repräsentation der Rechnung.
  */
 
 public class Rechnung {
