@@ -15,10 +15,6 @@ public class Warenkorb {
 
 	private HashMap<Artikel, Integer> inhalt = new HashMap<Artikel, Integer>();
 
-	/**
-	 * Konstruktor
-	 * 
-	 */
 
 	public Warenkorb() {
 

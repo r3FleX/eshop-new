@@ -32,7 +32,6 @@ public class Kunde extends Account {
 		this.plz = plz;
 	}
 
-
 	public String getStrasse() {
 		return strasse;
 	}
