@@ -435,18 +435,18 @@ public class CUI {
 				
 			// wenn als Mitarbeiter eingeloggt	
 			} else
-				System.out.println("Bitte loggen Sie sich für diesen Vorgang als"
+				System.out.println("Bitte loggen Sie sich fï¿½r diesen Vorgang als"
 								+ "Kunde ein!");
 
 		}
 
 		/**
-		 * Befehl z: Bestand ändern, nur als Mitarbeiter
+		 * Befehl z: Bestand ï¿½ndern, nur als Mitarbeiter
 		 * 
 		 */
 		
 		else if (line.equals("z")) {
-			//Bestand ändern
+			//Bestand ï¿½ndern
 		}
 
 		/**
@@ -511,6 +511,7 @@ public class CUI {
 	}
 
 	// Die main-Methode
+	// .....
 
 	public static void main(String[] args) {
 
