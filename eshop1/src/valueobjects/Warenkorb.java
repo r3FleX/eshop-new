@@ -49,7 +49,6 @@ public class Warenkorb {
 	}
 
 	public void wirdGekauft() {
-		// TODO Auto-generated method stub
 
 	}
 }
