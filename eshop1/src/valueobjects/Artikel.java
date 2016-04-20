@@ -3,7 +3,7 @@ package valueobjects;
 //import valueobjects.Artikel;
 
 /**
- * Klasse zur Reprï¿½sentation der Artikel.
+ * Klasse zur Repräsentation der Artikel.
  */
 
 public class Artikel {
@@ -114,13 +114,4 @@ public class Artikel {
 		this.preis = preis;
 	}
 
-	/**
-	 * Methode zum Abrufen der Packungsgrï¿½ï¿½e
-	 * 
-	 * @return 0
-	 */
-	//???
-	public int getPackungsgroesse() {
-		return 0;
-	}
 }

@@ -115,7 +115,6 @@ public class FilePersistenceManager implements PersistenceManager {
 		this.schreibeDaten(new Integer(a.getNummer()).toString());
 		this.schreibeDaten(new Integer(a.getBestand()).toString());
 		this.schreibeDaten(new Float(a.getPreis()).toString());
-		this.schreibeDaten(new Integer(a.getPackungsgroesse()).toString());
 		
 		return true;
 	}
