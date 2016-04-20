@@ -10,10 +10,10 @@ public class Kunde extends Account {
 	private String wohnort;
 	private Warenkorb warenkorb = new Warenkorb();
 
-	public Kunde(String name, String passwort, int accnummer, String strasse1, int plz1, String ort) {
+	public Kunde(String name, String passwort, int accnummer, String strasse, int plz, String ort) {
 		super(name, passwort, accnummer);
-		this.strasse = strasse1;
-		this.plz = plz1;
+		this.strasse = strasse;
+		this.plz = plz;
 		this.wohnort = ort;
 	}
 
@@ -43,7 +43,6 @@ public class Kunde extends Account {
 	public String getWohnort() {
 		return wohnort;
 	}
-
 
 	public void setWohnort(String wohnort) {
 		this.wohnort = wohnort;
