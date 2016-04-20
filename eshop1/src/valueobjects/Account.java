@@ -1,7 +1,7 @@
 package valueobjects;
 
 /**
- * Klasse zur Reprï¿½sentation der Accounts.
+ * Klasse zur Repräsentation der Accounts.
  */
 
 public class Account {

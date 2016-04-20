@@ -21,7 +21,7 @@ import domain.exceptions.AccountExistiertNichtException;
  * 
  */
 
-public class BenutzerVerwaltung {
+public class Accountverwaltung {
 
 	private boolean loginStatus = false;
 
@@ -34,7 +34,7 @@ public class BenutzerVerwaltung {
 	// verantwortlich ist
 	private PersistenceManager pm = new FilePersistenceManager();
 
-	public BenutzerVerwaltung() {
+	public Accountverwaltung() {
 		
 	}
 

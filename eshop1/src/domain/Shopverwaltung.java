@@ -30,7 +30,7 @@ public class Shopverwaltung {
 
 	// Verwaltungsklassen fuer Artikel, Accounts etc.
 	private Artikelverwaltung meineArtikel;
-	private BenutzerVerwaltung meineAccounts;
+	private Accountverwaltung meineAccounts;
 	private Rechnungsverwaltung meineRechnungen;
 	
 	// Namen der Dateien, in der die Daten des Shops gespeichert sind
@@ -44,7 +44,7 @@ public class Shopverwaltung {
 		meineArtikel = new Artikelverwaltung();
 		meineArtikel.liesDaten(datei+"_A.txt");
 		//Accounts einlesen
-		meineAccounts = new BenutzerVerwaltung();  
+		meineAccounts = new Accountverwaltung();  
 		meineAccounts.liesKundendaten(datei+"_Kunde.txt");
 		meineAccounts.liesMitarbeiterdaten(datei+"_Mitarbeiter.txt");
 		// Rechnungen einlesen
