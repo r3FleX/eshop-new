@@ -40,7 +40,6 @@ public class CUI {
 		// zu bekommen.
 		reader = new BufferedReader(new InputStreamReader(System.in));
 	}
-
 	// Startmenue: interne (private) Methode zur Ausgabe des Menues
 
 	private void menueStart() {
@@ -64,13 +63,12 @@ public class CUI {
 		System.out.println("Warenkorb einsehen: w");
 		System.out.println("[nicht vollständig impelemtiert(16.4)] Warenkorb - Bestellung abschliessen: b \n");
 		System.out.println("Artikel ausgeben: a");
-		System.out.println("[Noch nicht implementiert] Artikel ordnen: o");
-		System.out.println("[Noch nicht implementiert] Artikel suchen: f");
+		System.out.println("Artikel ordnen: o");
+		System.out.println("Artikel suchen: f");
 		System.out.println("\n Ausloggen: al\n\n");
 		System.out.println("Eingabe: ");
 		System.out.flush();
 	}
-
 	// Startmenue: interne (private) Methode zur Ausgabe des Menues fï¿½r den Mitarbeiter
 	
 	private void menueMitarbeiter() {
@@ -84,14 +82,11 @@ public class CUI {
 		System.out.println("Ihre Eingabe: ");
 		System.out.flush();
 	}
-
 	// Interne, private Methode zur Verarbeitung der Eingaben und Ausgaben der
 	// Ergebnisse
-
 	private String liesEingabe() throws IOException {
 		return reader.readLine();
 	}
-
 	/**
 	 * Methode zum Verarbeiten der Eingabe im Menü
 	 * 
@@ -103,7 +98,7 @@ public class CUI {
 		//TODO @Stefan Login fehlerhaft feedback
 		//TODO @stefan Warenkorb befüllen texte erweitern
 		
-		
+		 
 		// Eingabe bearbeiten
 		
 		/**
@@ -130,7 +125,6 @@ public class CUI {
 				artbestand = Integer.parseInt(bestand);
 
 				System.out.println("Einzelpreis > ");
-				//FEHLER WENN KOMMA EINGABE
 				String preis = liesEingabe();
 				float artpreis = Float.parseFloat(preis);
 				boolean ok;

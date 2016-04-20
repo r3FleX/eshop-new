@@ -1,1 +1,6 @@
 Fehler beim artikel in den warenkorb legen (leereingabe abfangen)
+
+
+bei falscheingaben fehlt das userfeedback (login etc)
+
+Fehler artikel hinzufügen preißeingabe
