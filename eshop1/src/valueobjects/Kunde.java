@@ -4,6 +4,7 @@ package valueobjects;
 public class Kunde extends Account {
 
 	// Attribute zur Beschreibung des Kunden
+	///Mit oder ohne ???
 
 	private String strasse;
 	private int plz;
