@@ -31,7 +31,7 @@ public class Accountverwaltung {
 	
 	
 	// Persistenz-Schnittstelle, die fuer die Details des Dateizugriffs
-	// verantwortlich ist
+	// verantwortlich ist .
 	private PersistenceManager pm = new FilePersistenceManager();
 
 	public Accountverwaltung() {
