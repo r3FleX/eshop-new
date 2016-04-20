@@ -45,14 +45,11 @@ public class CUI {
 
 	private void menueStart() {
 
-		System.out.println();
-		System.out.println("[Startmenue]");
-		System.out.println("Los geht's!");
-		System.out.println();
+		System.out.println("\n[Startmenue] \n");
+		System.out.println("Los geht's! \n");
 		System.out.println("Account anlegen: n");
 		System.out.println("Login: l");
-		System.out.println("Beenden: q");
-		System.out.println();
+		System.out.println("Beenden: q \n\n");
 		System.out.println("Eingabe: ");
 		System.out.flush();
 	}
@@ -61,18 +58,14 @@ public class CUI {
 	
 	private void menueKunde() {
 
-		System.out.println();
-		System.out.println("[Kundenbereich]");
-		System.out.println();
+		System.out.println("\n[Kundenbereich] \n");
 		System.out.println("Artikel im Warenkorb ablegen: k");
 		System.out.println("Warenkorb einsehen: w");
-		System.out.println("Warenkorb - Bestellung abschliessen: b");
+		System.out.println("[nicht vollständig impelemtiert(16.4)] Warenkorb - Bestellung abschliessen: b \n");
 		System.out.println("Artikel ausgeben: a");
-		System.out.println("Artikel ordnen: o");
-		System.out.println("Artikel suchen: f");
-		System.out.println();
-		System.out.println("Ausloggen: al");
-		System.out.println("");
+		System.out.println("[Noch nicht implementiert] Artikel ordnen: o");
+		System.out.println("[Noch nicht implementiert] Artikel suchen: f");
+		System.out.println("\n Ausloggen: al\n\n");
 		System.out.println("Eingabe: ");
 		System.out.flush();
 	}
@@ -80,16 +73,13 @@ public class CUI {
 	// Startmenue: interne (private) Methode zur Ausgabe des Menues fï¿½r den Mitarbeiter
 	
 	private void menueMitarbeiter() {
-		System.out.println("[Mitarbeiterbereich]");
-		System.out.println();
+		System.out.println("\n[Mitarbeiterbereich]\n");
 		System.out.println("Artikel einfuegen: e");
 		System.out.println("Artikel entfernen: d");
 		System.out.println("Artikel ausgeben: a");
 		System.out.println("Artikel ordnen: o");
-		System.out.println("Artikelmenge aendern: z");
-		System.out.println();
-		System.out.println("Ausloggen: al");
-		System.out.println();
+		System.out.println("Artikelmenge ändern: z \n");
+		System.out.println("Ausloggen: al \n\n");
 		System.out.println("Ihre Eingabe: ");
 		System.out.flush();
 	}
@@ -108,6 +98,10 @@ public class CUI {
 	 * @throws IOException
 	 */
 	private void verarbeiteEingabe(String line) throws IOException {
+		//TODO @Stefan fehleingaben abfangen und fehlermeldung ausgeben 19.04
+		
+		
+		
 		
 		// Eingabe bearbeiten
 		
