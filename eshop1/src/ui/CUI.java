@@ -23,7 +23,7 @@ import domain.exceptions.BestandUeberschrittenException;
 
 public class CUI {
 
-	// Instanzierung der benï¿½tigten Objekte
+	// Instanzierung der benöigten Objekte
 	private Shopverwaltung shop;
 	private BufferedReader reader;
 	private Account user;
@@ -93,7 +93,7 @@ public class CUI {
 	}
 
 	/**
-	 * Methode zum Verarbeiten der Eingabe im Menï¿½
+	 * Methode zum Verarbeiten der Eingabe im Menü
 	 * 
 	 * @param line
 	 * @throws IOException
@@ -107,7 +107,7 @@ public class CUI {
 		// Eingabe bearbeiten
 		
 		/**
-		 * Befehl e: Artikel einfï¿½gen, nur als Mitarbeiter
+		 * Befehl e: Artikel einfügen, nur als Mitarbeiter
 		 */
 		
 		if (line.equals("e")) {

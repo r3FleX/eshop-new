@@ -21,13 +21,13 @@ public class Warenkorb {
 	}
 
 	public void einfuegen(Artikel a, int anzahl) {
-		//bevor artikel kaufen: pruefe ob massenartik. oder ...
+		//bevor artikel kaufen: pruefe ob massenartikel
 		inhalt.put(a, anzahl);
 	}
 
 
-	public void loeschen(Artikel a) {
-		inhalt.remove(a);
+	public void loeschen(Artikel artikel) {
+		inhalt.remove(artikel);
 	}
 
 

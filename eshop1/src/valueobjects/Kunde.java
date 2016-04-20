@@ -44,7 +44,6 @@ public class Kunde extends Account {
 		return wohnort;
 	}
 
-
 	public void setWohnort(String wohnort) {
 		this.wohnort = wohnort;
 	}
