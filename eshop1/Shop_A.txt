@@ -38,7 +38,7 @@ Samsung Macbook Pro
 150
 2000.0
 0
-Tasche
+Tasche 
 47523
 60
 40.0
