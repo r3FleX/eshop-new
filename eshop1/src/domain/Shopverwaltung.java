@@ -164,7 +164,7 @@ public class Shopverwaltung {
 		warenkorb.einfuegen(art, anzahl);
 	}
 	
-	// Artikel suchen
+	// Artikel suchen.
 	public Artikel artikelSuchen(int gesuchteNummer) throws BestandUeberschrittenException, ArtikelExistiertNichtException {
 		return meineArtikel.artikelSuchen (gesuchteNummer);
 	}
