@@ -130,6 +130,7 @@ public class CUI {
 				artbestand = Integer.parseInt(bestand);
 
 				System.out.println("Einzelpreis > ");
+				//FEHLER WENN KOMMA EINGABE
 				String preis = liesEingabe();
 				float artpreis = Float.parseFloat(preis);
 				boolean ok;
