@@ -460,7 +460,6 @@ public class CUI {
 
 		/**
 		 * Befehl b: Bestellung abschliessen, Kauf abewickeln nur als Kunde
-		 * 
 		 */
 		
 		// Bestellung abschliessen
