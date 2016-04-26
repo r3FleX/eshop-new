@@ -20,6 +20,7 @@ import ui.CUI;
 import valueobjects.Account;
 import valueobjects.Artikel;
 import valueobjects.Kunde;
+import valueobjects.Massengutartikel;
 import valueobjects.Mitarbeiter;
 import valueobjects.Rechnung;
 import valueobjects.Warenkorb;
@@ -57,11 +58,18 @@ public class Shopverwaltung {
 		return meineArtikel.getArtikelBestand();
 	}
 	
+	public boolean fuegeMassengutEin(String artname, int artnr, int artbestand, float artpreis, int packung) throws ArtikelExistiertBereitsException {
+
+		Massengutartikel a = new Massengutartikel(artname, artnr, artbestand, artpreis, packung);
+		meineArtikel.einfuegen(a);
+		return false;
+	}
+	
 	
 	// Methode zur Artikelsuche anhand des Artikelnamens
 
 	// Füge Artikel ein
-	public boolean fuegeArtikelEin(String artname, int artnr, int artbestand, float preis) throws ArtikelExistiertBereitsException{
+	public boolean fuegeArtikelEin(String artname, int artnr, int artbestand, float preis, int packungsgroesse, boolean massengut) throws ArtikelExistiertBereitsException{
 		Artikel a = new Artikel(artname, artnr, artbestand, preis);
 		meineArtikel.einfuegen(a);
 		return true;

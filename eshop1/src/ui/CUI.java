@@ -27,6 +27,7 @@ public class CUI {
 	private Shopverwaltung shop;
 	private BufferedReader reader;
 	private Account user;
+	private boolean massengut;
 
 	public CUI(String datei) throws IOException {
 
@@ -117,7 +118,19 @@ public class CUI {
 				int artnr = Integer.parseInt(nummer);
 				System.out.print("Artikelname  > ");
 				String artname = liesEingabe();
-
+				System.out.println("Massengutartikel? j/n");
+				String massengut1 = liesEingabe();
+				int packung = 0;
+				if (massengut1.equals("j")) {
+					System.out.println("Packungsgroesse > ");
+					String packungsgroesse = liesEingabe();
+					packung = Integer.parseInt(packungsgroesse);
+					massengut = true;
+				} else if (line.equals("n")) {
+					massengut = false;
+				} else {
+					massengut = false;
+				}
 				int artbestand;
 
 				System.out.println("Bestand  > ");
@@ -130,9 +143,38 @@ public class CUI {
 				float artpreis = Float.parseFloat(preis);
 				boolean ok;
 				
+				//Massengut
+				try {
+
+					if (!massengut) {
+						ok = shop.fuegeArtikelEin(artname, artnr, artbestand,
+								artpreis, packung, massengut);
+						shop.schreibeArtikeldaten();
+						if (ok)
+							System.out
+									.println("Einfuegen ok, Artikel wurde angelegt.");
+						else
+							throw new ArtikelExistiertBereitsException();
+					} else if (massengut) {
+						ok = shop.fuegeMassengutEin(artname, artnr, artbestand, artpreis, packung);
+						shop.schreibeArtikeldaten();
+						if (ok)
+							System.out
+									.println("Einfuegen ok, Artikel wurde angelegt.");
+						else
+							throw new ArtikelExistiertBereitsException();
+					}
+				} catch (ArtikelExistiertBereitsException e) {
+
+				}
+				
+				//Ende Massengut
+				
+				
 				//TODO Artikel in Persistens einfügen
 				try {
-					shop.fuegeArtikelEin(artname, artnr, artbestand, artpreis);
+					shop.fuegeArtikelEin(artname, artnr, artbestand,
+							artpreis, packung, massengut);
 				} catch (ArtikelExistiertBereitsException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -434,13 +476,12 @@ public class CUI {
 				
 			// wenn als Mitarbeiter eingeloggt	
 			} else
-				System.out.println("Bitte loggen Sie sich fï¿½r diesen Vorgang als"
+				System.out.println("Bitte loggen Sie sich für diesen Vorgang als"
 								+ "Kunde ein!");
-
 		}
 
 		/**
-		 * Befehl z: Bestand ï¿½ndern, nur als Mitarbeiter
+		 * Befehl z: Bestand Ündern, nur als Mitarbeiter
 		 * 
 		 */
 		

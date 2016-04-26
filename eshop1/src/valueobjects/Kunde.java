@@ -23,7 +23,6 @@ public class Kunde extends Account {
 	}
 
 	// Getter und Setter
-
 	public int getPlz() {
 		return plz;
 	}

@@ -2,9 +2,6 @@ package valueobjects;
 
 //import valueobjects.Artikel;
 
-/**
- * Klasse zur Repräsentation der Artikel.
- */
 
 public class Artikel {
 
@@ -27,20 +24,11 @@ public class Artikel {
 		this(a.artname, a.nummer, a.bestand, a.preis);
 	}
 
-	/**
-	 * Methode zum Auflisten der Artikelattribute
-	 * 
-	 */
 	public String toString() {
 
 		return ("Artikelnummer: " + nummer + " / Artikelname: " + artname + " / " + "Bestand: " + bestand + " / "
 				+ "Preis: " + preis + " " + '\u20ac');
 	}
-
-	/**
-	 * Methode zum Vergleichen der Artikelnummern
-	 * 
-	 */
 
 	public boolean equals(Object andererArtikel) {
 		if (andererArtikel instanceof Artikel)
@@ -51,64 +39,25 @@ public class Artikel {
 	}
 
 	// Getter und Setter
-
-	/**
-	 * Methode zum Abrufen der Artikelnummer
-	 * 
-	 * @return nummer Artikelnummer
-	 */
-
 	public int getNummer() {
 		return nummer;
 	}
-
-	/**
-	 * Methode zum Abrufen des Artikelnamen
-	 * 
-	 * @return artname Artikelname
-	 */
 
 	public String getName() {
 		return artname;
 	}
 
-	/**
-	 * Methode zum Abrufen des Artikelbestands
-	 * 
-	 * @return bestand Artikelbestand
-	 */
-
 	public int getBestand() {
 		return bestand;
 	}
-
-	/**
-	 * Methode zum Setzen des Artikelbestands
-	 * 
-	 * @param bestand
-	 *            Artikelbestand
-	 */
 
 	public void setBestand(int bestand) {
 		this.bestand = bestand;
 	}
 
-	/**
-	 * Methode zum Abrufen des Preises
-	 * 
-	 * @return preis Artikelpreis
-	 */
-
 	public float getPreis() {
 		return preis;
 	}
-
-	/**
-	 * Methode zum Setzen des Preises
-	 * 
-	 * @param preis
-	 *            Artikelpreis
-	 */
 
 	public void setPreis(float preis) {
 		this.preis = preis;

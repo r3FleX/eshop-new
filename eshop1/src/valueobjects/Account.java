@@ -28,7 +28,6 @@ public class Account {
 			Account anderesAccount = (Account) obj;
 			return this.accountname.equals(anderesAccount.accountname);
 		}
-
 		return false;
 	}
 

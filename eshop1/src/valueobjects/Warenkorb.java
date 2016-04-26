@@ -13,7 +13,7 @@ import java.util.List;
 // -> wann
 // -> was (Artikel)
 // -> ggf. wie viel
-// -> typ -> Enumeration (ANGELEGT, BESTAND_ERHÖJT, ..., )
+// -> typ -> Enumeration (ANGELEGT, BESTAND_ERHÖT, ... )
 
 public class Warenkorb {
 
