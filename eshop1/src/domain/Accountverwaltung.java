@@ -40,14 +40,14 @@ public class Accountverwaltung {
 	/**
 	 * Methode zum Einlesen der Kundendaten
 	 * 
-	 * @param datei Datei, die Accounts enthŠlt
+	 * @param datei Datei, die Accounts enthï¿½lt
 	 * @throws IOException
 	 */
 	
 	public void liesKundendaten(String datei) throws IOException {
 		// PersistenzManager fuer Lesevorgaenge oeffnen
 		pm.openForReading(datei);
-
+		
 		Kunde einKunde;
 		do {
 			// Account-Objekt einlesen
@@ -63,7 +63,7 @@ public class Accountverwaltung {
 			}
 		} while (einKunde != null);
 
-		// Persistenz-Schnittstelle wieder schließen
+		// Persistenz-Schnittstelle wieder schlieï¿½en
 		pm.close();
 	}
 
@@ -84,7 +84,7 @@ public class Accountverwaltung {
 			// Account-Objekt einlesen
 			einMitarbeiter = pm.ladeMitarbeiter();
 			if (einMitarbeiter != null) {
-				// Account in Liste einfügen
+				// Account in Liste einfï¿½gen
 				try {
 					MitarbeiterEinfuegen(einMitarbeiter);
 				} catch (AccountExistiertBereitsException e1) {
@@ -94,7 +94,7 @@ public class Accountverwaltung {
 			}
 		} while (einMitarbeiter != null);
 
-		// Persistenz-Schnittstelle wieder schließen
+		// Persistenz-Schnittstelle wieder schlieï¿½en
 		pm.close();
 
 	}
@@ -118,7 +118,7 @@ public class Accountverwaltung {
 	}
 	
 	/**
-	 * Methode zum Einfügen eines Mitarbeiter-Accounts
+	 * Methode zum Einfï¿½gen eines Mitarbeiter-Accounts
 	 * 
 	 * @param einMitarbeiter
 	 * @throws AccountExistiertBereitsException
@@ -180,12 +180,12 @@ public class Accountverwaltung {
 	/**
 	 * Methode zum Schreiben der Kundendaten in eine Datei.
 	 * 
-	 * @param datei Datei, die Accounts enthält
+	 * @param datei Datei, die Accounts enthï¿½lt
 	 * @throws IOException
 	 */
 
 	public void schreibeKundendaten(String datei) throws IOException {
-		// PersistenzManager fŸr SchreibvorgŠnge oeffnen
+		// PersistenzManager fï¿½r Schreibvorgï¿½nge oeffnen
 		pm.openForWriting(datei);
 
 		Iterator<Account> iter = accountBestand.iterator();
@@ -195,19 +195,19 @@ public class Accountverwaltung {
 				pm.speichereKunde((Kunde) person);
 		}
 
-		// Persistenz-Schnittstelle wieder schließen
+		// Persistenz-Schnittstelle wieder schlieï¿½en
 		pm.close();
 	}
 	
 	/**
 	 * Methode zum Schreiben der Mitarbeiterdaten in eine Datei.
 	 * 
-	 * @param datei Datei, die Accounts enthält
+	 * @param datei Datei, die Accounts enthï¿½lt
 	 * @throws IOException
 	 */
 
 	public void schreibeMitarbeiterdaten(String datei) throws IOException {
-		// PersistenzManager fuer SchreibvorgŠnge šöffnen
+		// PersistenzManager fuer Schreibvorgï¿½nge ï¿½ï¿½ffnen
 		pm.openForWriting(datei);
 
 		Iterator<Account> iter = accountBestand.iterator();
@@ -217,9 +217,8 @@ public class Accountverwaltung {
 				pm.speichereMitarbeiter((Mitarbeiter) person);
 		}
 
-		// Persistenz-Schnittstelle wieder schließen
+		// Persistenz-Schnittstelle wieder schlieï¿½en
 		pm.close();
-
 	}
 	
 	// Getter und Setter
