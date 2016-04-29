@@ -95,10 +95,11 @@ public class CUI {
 	 * @throws IOException
 	 */
 	private void verarbeiteEingabe(String line) throws IOException {
-		//TODO @Stefan Fehleingaben abfangen und fehlermeldung ausgeben 19.04
-		//TODO @Stefan Login fehlerhaft feedback
-		//TODO @stefan Warenkorb befüllen texte erweitern
+		//TODO @Daniel (bei Flascher Eingabe) Fehleingaben abfangen und fehlermeldung ausgeben 19.04
+		//TODO @Daniel Login fehlerhaft feedback
+		//TODO @Manu Warenkorb befüllen texte erweitern
 		//TODO @stefan Artikelmenge ändern "z"
+		//TODO @alle bug fixen
 		
 		 
 		// Eingabe bearbeiten

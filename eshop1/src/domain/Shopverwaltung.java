@@ -74,7 +74,7 @@ public class Shopverwaltung {
 		meineArtikel.einfuegen(a);
 		return true;
 	}
-
+	
 	//Füge Mitarbeiter Account ein	
 	public boolean fuegeMitarbeiterAccountEin(String name, String passwort) throws AccountExistiertBereitsException{
 			
