@@ -100,7 +100,9 @@ public class FilePersistenceManager implements PersistenceManager {
 			return null;
 		}
 		
-		return new Artikel(artname, artikelNummer, bestand, preis);
+		int packungsgroesse = Integer.parseInt(zeile);
+		
+		return new Artikel(artname, artikelNummer, bestand, preis, packungsgroesse);
 	}
 	
 	/**

@@ -11,17 +11,48 @@ public class Artikel {
 	private int bestand;
 	private int nummer;
 	private float preis;
+	private int packungsgroesse;
+	public String getArtname() {
+		return artname;
+	}
 
-	public Artikel(String artname, int artnr, int artbestand, float artpreis) {
-		nummer = artnr;
+	public void setArtname(String artname) {
 		this.artname = artname;
-		bestand = artbestand;
-		preis = artpreis;
+	}
+
+	public int getPackungsgroesse() {
+		return packungsgroesse;
+	}
+
+	public void setPackungsgroesse(int packungsgroesse) {
+		this.packungsgroesse = packungsgroesse;
+	}
+
+	public boolean isMassengut() {
+		return massengut;
+	}
+
+	public void setMassengut(boolean massengut) {
+		this.massengut = massengut;
+	}
+
+	public void setNummer(int nummer) {
+		this.nummer = nummer;
+	}
+
+	private boolean massengut;
+
+	public Artikel(String artname, int artnr, int artbestand, float artpreis, int packungsgroesse) {
+		this.nummer = artnr;
+		this.artname = artname;
+		this.bestand = artbestand;
+		this.preis = artpreis;
+		this.packungsgroesse = packungsgroesse;
 	}
 
 	public Artikel(Artikel a) {
 		// Copy-Konstruktor
-		this(a.artname, a.nummer, a.bestand, a.preis);
+		this(a.artname, a.nummer, a.bestand, a.preis, a.packungsgroesse);
 	}
 
 	public String toString() {

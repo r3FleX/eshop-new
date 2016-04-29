@@ -27,7 +27,7 @@ public class CUI {
 	private Shopverwaltung shop;
 	private BufferedReader reader;
 	private Account user;
-	private boolean massengut;
+	private boolean massengut = false;
 
 	public CUI(String datei) throws IOException {
 
@@ -148,7 +148,7 @@ public class CUI {
 
 					if (!massengut) {
 						ok = shop.fuegeArtikelEin(artname, artnr, artbestand,
-								artpreis, packung, massengut);
+								artpreis, packung);
 						shop.schreibeArtikeldaten();
 						if (ok)
 							System.out
@@ -169,12 +169,13 @@ public class CUI {
 				}
 				
 				//Ende Massengut
+			
 				
 				
 				//TODO Artikel in Persistens einfügen
 				try {
 					shop.fuegeArtikelEin(artname, artnr, artbestand,
-							artpreis, packung, massengut);
+							artpreis, packung);
 				} catch (ArtikelExistiertBereitsException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
