@@ -23,7 +23,7 @@ import domain.exceptions.BestandUeberschrittenException;
 
 public class CUI {
 
-	// Instanzierung der benöigten Objekte
+	// Instanzierung der benï¿½igten Objekte
 	private Shopverwaltung shop;
 	private BufferedReader reader;
 	private Account user;
@@ -62,7 +62,7 @@ public class CUI {
 		System.out.println("\n[Kundenbereich] \n");
 		System.out.println("[some bugs inside]Artikel im Warenkorb ablegen: k");
 		System.out.println("Warenkorb einsehen: w");
-		System.out.println("[nicht vollständig impelemtiert(16.4)] Warenkorb - Bestellung abschliessen: b \n");
+		System.out.println("[nicht vollstï¿½ndig impelemtiert(16.4)] Warenkorb - Bestellung abschliessen: b \n");
 		System.out.println("Artikel ausgeben: a");
 		System.out.println("Artikel ordnen: o");
 		System.out.println("Artikel suchen: f");
@@ -78,7 +78,7 @@ public class CUI {
 		System.out.println("Artikel entfernen: d");
 		System.out.println("Artikel ausgeben: a");
 		System.out.println("Artikel ordnen: o");
-		System.out.println("[nicht implementiert] Artikelmenge ändern: z \n");
+		System.out.println("[nicht implementiert] Artikelmenge ï¿½ndern: z \n");
 		System.out.println("Ausloggen: al \n\n");
 		System.out.println("Ihre Eingabe: ");
 		System.out.flush();
@@ -89,7 +89,7 @@ public class CUI {
 		return reader.readLine();
 	}
 	/**
-	 * Methode zum Verarbeiten der Eingabe im Menü
+	 * Methode zum Verarbeiten der Eingabe im Menï¿½
 	 * 
 	 * @param line
 	 * @throws IOException
@@ -97,15 +97,15 @@ public class CUI {
 	private void verarbeiteEingabe(String line) throws IOException {
 		//TODO @Daniel (bei Flascher Eingabe) Fehleingaben abfangen und fehlermeldung ausgeben 19.04
 		//TODO @Daniel Login fehlerhaft feedback
-		//TODO @Manu Warenkorb befüllen texte erweitern
-		//TODO @stefan Artikelmenge ändern "z"
+		//TODO @Manu Warenkorb befï¿½llen texte erweitern
+		//TODO @stefan Artikelmenge ï¿½ndern "z"
 		//TODO @alle bug fixen
 		
 		 
 		// Eingabe bearbeiten
 		
 		/**
-		 * Befehl e: Artikel einfügen, nur als Mitarbeiter
+		 * Befehl e: Artikel einfï¿½gen, nur als Mitarbeiter
 		 */
 		
 		if (line.equals("e")) {
@@ -408,14 +408,14 @@ public class CUI {
 				List<Artikel> artikelListe = shop.gibAlleArtikel();
 				gibArtikellisteAus(artikelListe);
 
-				System.out.println("Welchen Artikel wollen Sie in den Warenkorb legen? Bitte Artikelnummer eingeben.");
+				System.out.println("Welchen Artikel? Artikelnummer eingeben.");
 
 				try {
 
 					String kaufen = liesEingabe();
 					int einkaufen = Integer.parseInt(kaufen);
 					Artikel a = shop.artikelSuchen(einkaufen);
-					if (a==null)
+					//if (a==null)
 
 					System.out.println("Wie oft wollen Sie den Artikel kaufen?");
 
@@ -465,17 +465,17 @@ public class CUI {
 				
 			// wenn als Mitarbeiter eingeloggt	
 			} else
-				System.out.println("Bitte loggen Sie sich für diesen Vorgang als"
+				System.out.println("Bitte loggen Sie sich fï¿½r diesen Vorgang als"
 								+ "Kunde ein!");
 		}
 
 		/**
-		 * Befehl z: Bestand Ündern, nur als Mitarbeiter
+		 * Befehl z: Bestand ï¿½ndern, nur als Mitarbeiter
 		 * 
 		 */
 		
 		else if (line.equals("z")) {
-			//Bestand ändern
+			//Bestand ï¿½ndern
 		}
 
 		/**
