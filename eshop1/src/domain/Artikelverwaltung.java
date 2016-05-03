@@ -97,10 +97,9 @@ public class Artikelverwaltung {
 
 		for (Artikel testArtikel : artikelBestand) {
 			if (testArtikel.getNummer() == einArtikel.getNummer()) {
-				throw new ArtikelExistiertBereitsException(/* einArtikel */);
+				throw new ArtikelExistiertBereitsException();
 			}
 		}
-
 		artikelBestand.add(einArtikel);
 	}
 

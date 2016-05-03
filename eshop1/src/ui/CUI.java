@@ -146,7 +146,6 @@ public class CUI {
 				
 				//Massengut
 				try {
-
 					if (!massengut) {
 						ok = shop.fuegeArtikelEin(artname, artnr, artbestand,
 								artpreis, packung);
@@ -170,18 +169,6 @@ public class CUI {
 				}
 				
 				//Ende Massengut
-			
-				
-				
-				//TODO Artikel in Persistens einfügen
-				try {
-					shop.fuegeArtikelEin(artname, artnr, artbestand,
-							artpreis, packung);
-				} catch (ArtikelExistiertBereitsException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
 			// wenn als Kunde eingeloggt 
 			} else
 				System.out.println("Das darfst du nicht!");
