@@ -22,3 +22,9 @@ mytest
 weg
 12345
 woanders
+aaa
+111
+11
+str
+12123
+ort

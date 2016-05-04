@@ -68,14 +68,14 @@ public class Shopverwaltung {
 	
 	// Methode zur Artikelsuche anhand des Artikelnamens
 
-	// Füge Artikel ein
+	// Fï¿½ge Artikel ein
 	public boolean fuegeArtikelEin(String artname, int artnr, int artbestand, float preis, int packungsgroesse) throws ArtikelExistiertBereitsException{
 		Artikel a = new Artikel(artname, artnr, artbestand, preis, packungsgroesse);
 		meineArtikel.einfuegen(a);
 		return true;
 	}
 	
-	//Füge Mitarbeiter Account ein	
+	//Fï¿½ge Mitarbeiter Account ein	
 	public boolean fuegeMitarbeiterAccountEin(String name, String passwort) throws AccountExistiertBereitsException{
 			
 			// Accountnummer wird zugewiesen (AccountBestand + 1)
@@ -90,7 +90,7 @@ public class Shopverwaltung {
 			return true;
 		}
 	
-	//Füge Kunden Account ein	
+	//Fï¿½ge Kunden Account ein	
 	public boolean fuegeKundenAccountEin(String name, String passwort, String strasse, int plz, String ort) throws AccountExistiertBereitsException {
 		
 		// Accountnummer wird zugewiesen (AccountBestand + 1)
@@ -106,7 +106,7 @@ public class Shopverwaltung {
 	}
 	
 	
-	//Methode zur Überprüfung des Warenkorbs zum Kauf (Bestandsabfragen etc.)
+	//Methode zur ï¿½berprï¿½fung des Warenkorbs zum Kauf (Bestandsabfragen etc.)
 	
 	
 	public HashMap<Artikel, Integer> pruefeKauf(Kunde user) {
@@ -163,13 +163,13 @@ public class Shopverwaltung {
 	}
 
 	
-	//Bestand ändern
+	//Bestand ï¿½ndern
 	public int aendereBestand(int bestandAendern, int newBestand1) throws ArtikelExistiertNichtException {
 		return meineArtikel.aendereBestand(bestandAendern, newBestand1);
 		
 	}
 	
-	//Warenkorn einfügen
+	//Warenkorn einfï¿½gen
 	public void inWarenkorbEinfuegen(Artikel art, int anzahl, Kunde kunde) throws BestandUeberschrittenException, ArtikelExistiertNichtException {
 		Warenkorb warenkorb = kunde.getWarenkorb();
 		

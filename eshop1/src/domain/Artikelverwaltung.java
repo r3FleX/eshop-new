@@ -55,7 +55,7 @@ public class Artikelverwaltung {
 			einArtikel = pm.ladeArtikel();
 
 			if (einArtikel != null) {
-				// Artikel in Liste einfügen
+				// Artikel in Liste einfï¿½gen
 				try {
 					einfuegen(einArtikel);
 				} catch (ArtikelExistiertBereitsException e1) {
@@ -79,7 +79,7 @@ public class Artikelverwaltung {
 	 */
 
 	public void schreibeArtikel(String datei) throws IOException {
-
+		
 	}
 
 	/**
@@ -122,10 +122,10 @@ public class Artikelverwaltung {
 	}
 
 	/**
-	 * Methode, um den Bestand eines bereits existierenden Artikels zu ändern.
+	 * Methode, um den Bestand eines bereits existierenden Artikels zu ï¿½ndern.
 	 * 
 	 * @param gesuchteNummer eingegebene Artikelnummer
-	 * @param neuerBestand geänderter Bestand
+	 * @param neuerBestand geï¿½nderter Bestand
 	 * @return
 	 */
 
@@ -160,7 +160,7 @@ for (Artikel testArtikel : artikelBestand) {
 				
 		Iterator<Artikel> iter = artikelBestand.iterator();
 		while (iter.hasNext()) {
-			// WICHTIG: Type Cast auf 'Artikel' für späteren Zugriff auf Bezeichnung
+			// WICHTIG: Type Cast auf 'Artikel' fï¿½r spï¿½teren Zugriff auf Bezeichnung
 			// 		    hier nicht erforderlich wegen Verwendung von Generics
 			// 			(-> Vergleiche mit Einsatz von Vector OHNE Generics)
 			Artikel art = iter.next();
@@ -229,7 +229,7 @@ for (Artikel testArtikel : artikelBestand) {
 	 */
 	
 	public void schreibeDaten(String datei) throws IOException {
-		// PersistenzManager fŸr SchreibvorgŠnge oeffnen
+		// PersistenzManager fÃ¼r SchreibvorgÃ¤nge oeffnen
 		pm.openForWriting(datei);
 
 		Iterator<Artikel> iter = artikelBestand.iterator();
@@ -238,7 +238,7 @@ for (Artikel testArtikel : artikelBestand) {
 			pm.speichereArtikel(a);
 		}
 
-		// Persistenz-Schnittstelle wieder schließen
+		// Persistenz-Schnittstelle wieder schlieÃŸen
 		pm.close();
 	}
 }

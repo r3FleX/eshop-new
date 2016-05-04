@@ -30,12 +30,12 @@ public class CUI {
 	private boolean massengut = false;
 
 	public CUI(String datei) throws IOException {
-
+		
 		// Die Shop-Verwaltung erledigt, die Aufgaben,
 		// die nichts mit Ein-/Ausgabe zu tun haben
-
+		
 		shop = new Shopverwaltung(datei);
-
+		
 		// Stream-Objekt fuer Texteingabe ueber Konsolenfenster erzeugen
 		// Der Buffered Reader wird benutzt um die Eingabe einer einzelnen Zeile
 		// zu bekommen.
@@ -403,23 +403,28 @@ public class CUI {
 		 * 
 		 */
 		else if (line.equals("k")) {
-
+			
 			if (user instanceof Kunde) {
 				List<Artikel> artikelListe = shop.gibAlleArtikel();
 				gibArtikellisteAus(artikelListe);
-
+				
 				System.out.println("Welchen Artikel? Artikelnummer eingeben.");
-
+				
 				try {
-
+					
 					String kaufen = liesEingabe();
 					int einkaufen = Integer.parseInt(kaufen);
 					Artikel a = shop.artikelSuchen(einkaufen);
 					//if (a==null)
-
+					
 					System.out.println("Wie oft wollen Sie den Artikel kaufen?");
-
+					
 					String anzahl = liesEingabe();
+					/*
+					while(anzahl>bestand){
+						System.out.println("Es sind nur "+bestand+"vorhanden!");
+					}
+					*/
 					int anzahl1 = Integer.parseInt(anzahl);
 					
 					// Artikel in den Warenkorb einfuegen
@@ -451,18 +456,23 @@ public class CUI {
 				Kunde kunde = (Kunde) user;
 
 				Warenkorb warenkorb = kunde.getWarenkorb();
-
-				Set<Artikel> articles = warenkorb.getInhalt().keySet();
-
-				for (Artikel artikel : articles) {
-					int anzahl = (Integer) warenkorb.getInhalt().get(artikel);
-
-					float artikelGesamtpreis = (anzahl * artikel.getPreis());
-					System.out.println(artikel.getName() + " - Anzahl: "
-							+ anzahl + " - Einzelpreis: " + artikel.getPreis()
-							+ " - Artikel-Gesamtpreis: " + artikelGesamtpreis);
-				}
 				
+				if(warenkorb.getInhalt().isEmpty()){
+					System.out.println("Warenkorbe ist leer!");
+				}
+				else{
+					Set<Artikel> articles = warenkorb.getInhalt().keySet();
+				
+				
+					for (Artikel artikel : articles) {
+						int anzahl = (Integer) warenkorb.getInhalt().get(artikel);
+	
+						float artikelGesamtpreis = (anzahl * artikel.getPreis());
+						System.out.println(artikel.getName() + " - Anzahl: "
+								+ anzahl + " - Einzelpreis: " + artikel.getPreis()
+								+ " - Artikel-Gesamtpreis: " + artikelGesamtpreis);
+					}
+				}
 			// wenn als Mitarbeiter eingeloggt	
 			} else
 				System.out.println("Bitte loggen Sie sich f�r diesen Vorgang als"

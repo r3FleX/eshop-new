@@ -9,7 +9,7 @@ import valueobjects.Mitarbeiter;
 
 /**
  *
- * Allgemeine Schnittstelle fŸr den Zugriff auf ein Speichermedium
+ * Allgemeine Schnittstelle fï¿½r den Zugriff auf ein Speichermedium
  * (z.B. Datei oder Datenbank) zum Ablegen von beispielsweise
  * Artikel- oder Kundendaten.
  * 
@@ -33,7 +33,6 @@ public interface PersistenceManager {
 	 */
 	public Artikel ladeArtikel() throws IOException;
 	
-
 	/**
 	 * Methode zum Schreiben der Artikeldaten in eine externe Datenquelle.
 	 * 
