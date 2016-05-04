@@ -42,7 +42,7 @@ public class Artikel {
 
 	private boolean massengut;
 
-	public Artikel(String artname, int artnr, int artbestand, float artpreis, int packungsgroesse) {
+	public Artikel(String artname, int artnr, int artbestand, float artpreis /*, int packungsgroesse */) {
 		this.nummer = artnr;
 		this.artname = artname;
 		this.bestand = artbestand;

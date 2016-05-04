@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Klasse zur Repräsentation des Warenkorbs.
+ * Klasse zur Reprï¿½sentation des Warenkorbs.
  */
 
 //Ereignisse 
@@ -13,7 +13,7 @@ import java.util.List;
 // -> wann
 // -> was (Artikel)
 // -> ggf. wie viel
-// -> typ -> Enumeration (ANGELEGT, BESTAND_ERHÖT, ... )
+// -> typ -> Enumeration (ANGELEGT, BESTAND_ERHï¿½T, ... )
 
 public class Warenkorb {
 
@@ -22,10 +22,6 @@ public class Warenkorb {
 
 	private HashMap<Artikel, Integer> inhalt = new HashMap<Artikel, Integer>();
 
-
-	public Warenkorb() {
-
-	}
 
 	public void einfuegen(Artikel a, int anzahl) {
 		//bevor artikel kaufen: pruefe ob massenartikel

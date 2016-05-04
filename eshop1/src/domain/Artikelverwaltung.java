@@ -89,6 +89,8 @@ public class Artikelverwaltung {
 	 * @throws ArtikelExistiertBereitsException wenn der Artikel bereits existiert
 	 */
 
+	//TODO Ereignisse hinzufügen (extra txt-Datei), z.B. bei Bestand erhöht usw. nach Tag filtern ...
+	
 	public void einfuegen(Artikel einArtikel)
 			throws ArtikelExistiertBereitsException {
 

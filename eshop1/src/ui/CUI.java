@@ -428,7 +428,7 @@ public class CUI {
 					int anzahl1 = Integer.parseInt(anzahl);
 					
 					// Artikel in den Warenkorb einfuegen
-					shop.inWarenkorbEinfuegen(shop.artikelSuchen(einkaufen),anzahl1, (Kunde) user);
+					shop.inWarenkorbEinfuegen(a ,anzahl1, (Kunde) user);
 					System.out.println("Artikel in den Warenkorb gelegt.");
 				} catch (BestandUeberschrittenException e) {
 					// Text siehe Exception
@@ -454,6 +454,7 @@ public class CUI {
 
 				Kunde kunde = (Kunde) user;
 
+				// Warenkorb warenkorb = shop.getWarenkorbByKunde((Kunde) user);
 				Warenkorb warenkorb = kunde.getWarenkorb();
 				
 				if(warenkorb.getInhalt().isEmpty()){

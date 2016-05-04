@@ -118,8 +118,12 @@ public class Shopverwaltung {
 	//Methode zur Kaufabwicklung
 	public Rechnung kaufAbwickeln(Kunde kaeufer) throws IOException{
 		
-		Rechnung rechnung = new Rechnung(kaeufer);
+		// aus Lager abbuchen (prüfen!)
 		
+		Rechnung rechnung = new Rechnung(kaeufer);
+
+		// Warenkorb leeren
+
 		return rechnung;
 	}
 	
