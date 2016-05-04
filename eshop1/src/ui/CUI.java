@@ -451,7 +451,6 @@ public class CUI {
 		else if (line.equals("w")) {
 
 			if (user instanceof Kunde) {
-				System.out.println("Der Inhalt des Warenkorbes:");
 
 				Kunde kunde = (Kunde) user;
 
@@ -461,8 +460,9 @@ public class CUI {
 					System.out.println("Warenkorbe ist leer!");
 				}
 				else{
+					System.out.println("Der Inhalt des Warenkorbes:");
+					
 					Set<Artikel> articles = warenkorb.getInhalt().keySet();
-				
 				
 					for (Artikel artikel : articles) {
 						int anzahl = (Integer) warenkorb.getInhalt().get(artikel);
