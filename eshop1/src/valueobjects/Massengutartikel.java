@@ -7,7 +7,7 @@ public class Massengutartikel extends Artikel {
 
 
 	public Massengutartikel(String artname, int artnr, int artbestand, float artpreis, int packungsgroesse) {
-		super(artname, artnr, artbestand, artpreis, packungsgroesse);
+		super(artname, artnr, artbestand, artpreis);
 		this.packungsgroesse = packungsgroesse;
 	}
 

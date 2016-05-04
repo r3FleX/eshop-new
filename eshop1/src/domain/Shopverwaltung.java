@@ -70,7 +70,7 @@ public class Shopverwaltung {
 
 	// F�ge Artikel ein
 	public boolean fuegeArtikelEin(String artname, int artnr, int artbestand, float preis, int packungsgroesse) throws ArtikelExistiertBereitsException{
-		Artikel a = new Artikel(artname, artnr, artbestand, preis, packungsgroesse);
+		Artikel a = new Artikel(artname, artnr, artbestand, preis);
 		meineArtikel.einfuegen(a);
 		return true;
 	}

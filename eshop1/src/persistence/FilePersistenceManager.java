@@ -90,19 +90,9 @@ public class FilePersistenceManager implements PersistenceManager {
 		zeile = liesDaten();
 		if (zeile == null) {
 			return null;
-		}
-		
-		float preis = Float.parseFloat(zeile);
-
-		// 5. Zeile: Packungsgroesse
-		zeile = liesDaten();
-		if (zeile == null) {
-			return null;
-		}
-		
-		int packungsgroesse = Integer.parseInt(zeile);
-		
-		return new Artikel(artname, artikelNummer, bestand, preis, packungsgroesse);
+		}		
+		float preis = Float.parseFloat(zeile);		
+		return new Artikel(artname, artikelNummer, bestand, preis);
 	}
 	
 	/**
