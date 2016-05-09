@@ -34,14 +34,13 @@ public class StatsVerwaltung {
 	public void liesDaten(String datei) throws IOException {
 		// PersistenzManager fuer Lesevorgaenge oeffnen
 		pm.openForReading(datei);
-
+/* TODO
 		Stats eineStat;
-/*TODO		do {
+		do {
 			// Artikel-Objekt einlesen
 			eineStat = pm.ladeStats();
 
 			if (eineStat != null) {
-				//
 				try {
 					einfuegen(eineStat);					
 				} catch (StatExistiertBereitsException e1) {

@@ -7,7 +7,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import valueobjects.Artikel;
 import valueobjects.Kunde;
@@ -220,10 +222,28 @@ public class FilePersistenceManager implements PersistenceManager {
 			writer.println(daten);
 	}
 
-	@Override
 	public Stats ladeStats() throws IOException {
-		// TODO Auto-generated method stub
-		return null;
+		String zeile = null;		
+		// 1. Zeile: Artikelnummer
+		zeile = liesDaten();
+		if (zeile == null) {
+			// keine Daten mehr vorhanden
+			return null;   
+		}
+		int atklNummer = Integer.parseInt(zeile);
+		// 2. Zeile: Bestand
+		zeile = liesDaten();
+		if (zeile == null) {
+			return null;
+		}		
+		int bestand = Integer.parseInt(zeile);
+		// 3. Zeile: Datum
+		zeile = liesDaten();
+		if (zeile == null) {
+			return null;
+		}
+		String date = zeile;		
+		return new Stats(atklNummer, bestand, date);
 	}
 
 	@Override

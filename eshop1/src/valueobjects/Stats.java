@@ -1,5 +1,7 @@
 package valueobjects;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -7,20 +9,28 @@ import java.util.Date;
  */
 
 public class Stats {
-	private int bestand;
 	private int arklnummer;
-	private Date datum = null;
+	private int bestand;
+	private String datum = null;
 	
-	public Stats(int arklnummer, int bestand) {
+	/** Erstellt ein Statistik objekt 
+	 * 
+	 * @param arklnummer
+	 * @param bestand
+	 */
+	public Stats(int arklnummer, int bestand,String datum) {
 		this.arklnummer = arklnummer;
 		this.bestand = bestand;
-		Calendar cal = Calendar.getInstance();
-		this.datum = cal.getTime();
+		//datum als string einfügen
+	//	DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+	//	Date today = Calendar.getInstance().getTime();        
+	//	this.datum = df.format(today);
+		this.datum = datum;
 	}	
-	public Date getDatum() {
+	public String getDatum() {
 		return this.datum;
 	}
-	public void setDatum(Date datum) {
+	public void setDatum(String datum) {
 		this.datum = datum;
 	}
 	public int getArklnummer() {
