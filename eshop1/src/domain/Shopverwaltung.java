@@ -1,13 +1,8 @@
 package domain;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 //import domain.exceptions.ArtikelExistiertBereitsException;
 
@@ -19,14 +14,12 @@ import domain.exceptions.ArtikelExistiertBereitsException;
 import domain.exceptions.ArtikelExistiertNichtException;
 import domain.exceptions.BestandUeberschrittenException;
 import domain.exceptions.StatExistiertBereitsException;
-import ui.CUI;
 import valueobjects.Account;
 import valueobjects.Artikel;
 import valueobjects.Kunde;
 import valueobjects.Massengutartikel;
 import valueobjects.Mitarbeiter;
 import valueobjects.Rechnung;
-import valueobjects.Stats;
 import valueobjects.Warenkorb;
 
 

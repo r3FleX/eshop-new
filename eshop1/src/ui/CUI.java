@@ -74,11 +74,11 @@ public class CUI {
 	
 	private void menueMitarbeiter() {
 		System.out.println("\n[Mitarbeiterbereich]\n");
-		System.out.println("[nicht implementiert] Artikel einfuegen: e");
+		System.out.println("Artikel einfuegen: e");
 		System.out.println("Artikel entfernen: d");
 		System.out.println("Artikel ausgeben: a");
 		System.out.println("Artikel ordnen: o");
-		System.out.println("[nicht implementiert] Artikelmenge ï¿½ndern: z \n");
+		System.out.println("Artikelmenge ändern: z \n");
 		System.out.println("Ausloggen: al \n\n");
 		System.out.println("Ihre Eingabe: ");
 		System.out.flush();
@@ -487,7 +487,40 @@ public class CUI {
 		 */
 		
 		else if (line.equals("z")) {
-			//Bestand ï¿½ndern
+
+			if (user instanceof Mitarbeiter) {
+				List<Artikel> artikelListe = shop.gibAlleArtikel();
+				gibArtikellisteAus(artikelListe);
+				System.out
+						.println("Waehlen Sie einen Artikel aus, dessen Bestand "
+								+ "Sie veraendern wollen, indem Sie die Artikelnummer angeben.");
+				String bestandAnders = liesEingabe();
+				int bestandAendern = Integer.parseInt(bestandAnders);
+
+				System.out.println("Neuer Bestand: ");
+
+				String newBestand = liesEingabe();
+				int newBestand1 = Integer.parseInt(newBestand);
+
+				if (newBestand1 <= 0) {
+					shop.entferneArtikel(bestandAendern);
+					System.out.println("Artikel geloescht.");
+					shop.schreibeArtikeldaten();
+				} else {
+
+					try {
+						shop.aendereBestand(bestandAendern, newBestand1);
+						System.out.println("Bestand geaendert.");
+						shop.schreibeArtikeldaten();
+						shop.schreibeStatsdaten();
+					} catch (ArtikelExistiertNichtException e) {
+						System.out.println(e.getMessage());
+					}
+				}
+				
+			// wenn als Kunde eingeloggt
+			} else
+				System.out.println("Dazu sind Sie nicht berechtigt!");
 		}
 
 		/**
