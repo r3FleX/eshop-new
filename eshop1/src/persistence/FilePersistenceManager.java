@@ -12,6 +12,7 @@ import java.io.PrintWriter;
 import valueobjects.Artikel;
 import valueobjects.Kunde;
 import valueobjects.Mitarbeiter;
+import valueobjects.Stats;
 
 
 /**
@@ -217,5 +218,17 @@ public class FilePersistenceManager implements PersistenceManager {
 	private void schreibeDaten(String daten) {
 		if (writer != null)
 			writer.println(daten);
+	}
+
+	@Override
+	public Stats ladeStats() throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean speichereStats(Stats s) throws IOException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

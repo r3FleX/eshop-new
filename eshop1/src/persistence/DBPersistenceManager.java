@@ -5,6 +5,7 @@ import java.io.IOException;
 import valueobjects.Artikel;
 import valueobjects.Kunde;
 import valueobjects.Mitarbeiter;
+import valueobjects.Stats;
 
 public class DBPersistenceManager implements PersistenceManager {
 
@@ -61,6 +62,18 @@ public class DBPersistenceManager implements PersistenceManager {
 	public boolean speichereMitarbeiter(Mitarbeiter m) throws IOException {
 		// TODO Auto-generated method stub
 		return true;
+	}
+
+	@Override
+	public Stats ladeStats() throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean speichereStats(Stats s) throws IOException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

@@ -23,6 +23,7 @@ import valueobjects.Kunde;
 import valueobjects.Massengutartikel;
 import valueobjects.Mitarbeiter;
 import valueobjects.Rechnung;
+import valueobjects.Stats;
 import valueobjects.Warenkorb;
 
 
@@ -33,6 +34,7 @@ public class Shopverwaltung {
 	private Artikelverwaltung meineArtikel;
 	private Accountverwaltung meineAccounts;
 	private Rechnungsverwaltung meineRechnungen;
+	private Stats meineStats;
 	
 	// Namen der Dateien, in der die Daten des Shops gespeichert sind
 	private String datei = "";
@@ -49,10 +51,13 @@ public class Shopverwaltung {
 		meineAccounts.liesKundendaten(datei+"_Kunde.txt");
 		meineAccounts.liesMitarbeiterdaten(datei+"_Mitarbeiter.txt");
 		// Rechnungen einlesen
-		meineRechnungen = new Rechnungsverwaltung();	
-	}
-
-	
+		meineRechnungen = new Rechnungsverwaltung();
+		//TODO Rechnungskrams?!
+		
+	//	meineStats = new StatsVerwaltung();
+	//	meineStats.liesDaten(datei+"_S.txt");
+		
+	}	
 	public List<Artikel> gibAlleArtikel() {
 		// -> an Artikelverwaltung
 		return meineArtikel.getArtikelBestand();

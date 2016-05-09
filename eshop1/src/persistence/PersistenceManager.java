@@ -6,6 +6,7 @@ import valueobjects.Account;
 import valueobjects.Artikel;
 import valueobjects.Kunde;
 import valueobjects.Mitarbeiter;
+import valueobjects.Stats;
 
 /**
  *
@@ -69,5 +70,20 @@ public interface PersistenceManager {
 	 * @throws IOException
 	 */
 	public boolean speichereMitarbeiter(Mitarbeiter m) throws IOException;
+	/**
+	 * Methode zum Einlesen der Statsdaten aus einer externen Datenquelle.
+	 * 
+	 * @return Artikel-Objekt, wenn Einlesen erfolgreich, false null
+	 */
+	public Stats ladeStats() throws IOException;
+	
+	/**
+	 * Methode zum Schreiben der Statsdaten in eine externe Datenquelle.
+	 * 
+	 * @param a Artikel-Objekt, das gespeichert werden soll
+	 * @return true, wenn Schreibvorgang erfolgreich, false sonst
+	 */
+	public boolean speichereStats(Stats s) throws IOException;
+	
 	
 }
