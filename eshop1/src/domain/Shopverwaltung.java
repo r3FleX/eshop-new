@@ -1,6 +1,8 @@
 package domain;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -16,6 +18,7 @@ import domain.exceptions.AccountExistiertNichtException;
 import domain.exceptions.ArtikelExistiertBereitsException;
 import domain.exceptions.ArtikelExistiertNichtException;
 import domain.exceptions.BestandUeberschrittenException;
+import domain.exceptions.StatExistiertBereitsException;
 import ui.CUI;
 import valueobjects.Account;
 import valueobjects.Artikel;
@@ -34,13 +37,13 @@ public class Shopverwaltung {
 	private Artikelverwaltung meineArtikel;
 	private Accountverwaltung meineAccounts;
 	private Rechnungsverwaltung meineRechnungen;
-	private Stats meineStats;
+	private StatsVerwaltung meineStats;
 	
 	// Namen der Dateien, in der die Daten des Shops gespeichert sind
 	private String datei = "";
 
 	// Konstrukter
-	public Shopverwaltung(String datei) throws IOException {
+	public Shopverwaltung(String datei) throws IOException, StatExistiertBereitsException {
 		this.datei = datei;
 
 		//Artikelbestand einlesen
@@ -54,9 +57,9 @@ public class Shopverwaltung {
 		meineRechnungen = new Rechnungsverwaltung();
 		//TODO Rechnungskrams?!
 		
-	//	meineStats = new StatsVerwaltung();
-	//	meineStats.liesDaten(datei+"_S.txt");
-		
+		//Statistik
+		meineStats = new StatsVerwaltung();
+		meineStats.liesDaten(datei+"_S.txt");
 	}	
 	public List<Artikel> gibAlleArtikel() {
 		// -> an Artikelverwaltung
@@ -68,12 +71,8 @@ public class Shopverwaltung {
 		Massengutartikel a = new Massengutartikel(artname, artnr, artbestand, artpreis, packung);
 		meineArtikel.einfuegen(a);
 		return false;
-	}
-	
-	
-	// Methode zur Artikelsuche anhand des Artikelnamens
-
-	// Fï¿½ge Artikel ein
+	}	
+	// Fügt Artikel ein
 	public boolean fuegeArtikelEin(String artname, int artnr, int artbestand, float preis, int packungsgroesse) throws ArtikelExistiertBereitsException{
 		Artikel a = new Artikel(artname, artnr, artbestand, preis);
 		meineArtikel.einfuegen(a);
@@ -134,8 +133,10 @@ public class Shopverwaltung {
 	
 	
 	//Artikel entfernen
-	public boolean entferneArtikel(int artnr) {
+	public boolean entferneArtikel(int artnr) throws ArtikelExistiertNichtException {
 		// delegieren nach Artikelverwaltung
+		Artikel data = meineArtikel.artikelSuchen(artnr);
+		meineStats.statupdate(artnr,data.getName(), data.getBestand(), "Delete");
 		return meineArtikel.entfernen(artnr);
 	}
 
@@ -173,15 +174,15 @@ public class Shopverwaltung {
 
 	
 	//Bestand ï¿½ndern
-	public int aendereBestand(int bestandAendern, int newBestand1) throws ArtikelExistiertNichtException {
-		return meineArtikel.aendereBestand(bestandAendern, newBestand1);
-		
+	public int aendereBestand(int artklnummer, int newBestand1) throws ArtikelExistiertNichtException {
+		Artikel data = meineArtikel.artikelSuchen(artklnummer);
+		meineStats.statupdate(artklnummer,data.getName(), newBestand1, "Artikel");
+		return meineArtikel.aendereBestand(artklnummer, newBestand1);		
 	}
 	
 	//Warenkorn einfï¿½gen
 	public void inWarenkorbEinfuegen(Artikel art, int anzahl, Kunde kunde) throws BestandUeberschrittenException, ArtikelExistiertNichtException {
-		Warenkorb warenkorb = kunde.getWarenkorb();
-		
+		Warenkorb warenkorb = kunde.getWarenkorb();		
 		warenkorb.einfuegen(art, anzahl);
 	}
 	
@@ -210,5 +211,10 @@ public class Shopverwaltung {
 	//Kundendaten
 	public void schreibeKundendaten() throws IOException {
 		meineAccounts.schreibeKundendaten(datei+"_Kunde.txt");
+	}
+	
+	//schreibe Statistikdaten
+	public void schreibeStatsdaten() throws IOException {
+		meineStats.schreibeDaten(datei+"_S.txt");
 	}
 }

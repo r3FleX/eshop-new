@@ -126,22 +126,22 @@ public class Artikelverwaltung {
 	/**
 	 * Methode, um den Bestand eines bereits existierenden Artikels zu �ndern.
 	 * 
-	 * @param gesuchteNummer eingegebene Artikelnummer
+	 * @param ArtiklNummer eingegebene Artikelnummer
 	 * @param neuerBestand ge�nderter Bestand
 	 * @return
 	 */
 
-	public int aendereBestand(int gesuchteNummer, int neuerBestand)
+	public int aendereBestand(int artklNummer, int neuerBestand)
 	throws ArtikelExistiertNichtException {
 
 for (Artikel testArtikel : artikelBestand) {
-	if (testArtikel.getNummer() == gesuchteNummer) {
+	if (testArtikel.getNummer() == artklNummer) {
 		testArtikel.setBestand(neuerBestand);
 		return testArtikel.getBestand();
 	}
 }
 	
-		throw new ArtikelExistiertNichtException(gesuchteNummer);
+		throw new ArtikelExistiertNichtException(artklNummer);
 
 }
 

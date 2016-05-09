@@ -1,30 +1,31 @@
 package valueobjects;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+
 
 /** statistik für Artikel
+ * 
+ * 
+ * type -> "Artikel"
+ * type -> "Delete"
  */
 
 public class Stats {
 	private int arklnummer;
+	private String Atklname;
 	private int bestand;
 	private String datum = null;
+	private String type = null;
 	
 	/** Erstellt ein Statistik objekt 
 	 * 
 	 * @param arklnummer
 	 * @param bestand
 	 */
-	public Stats(int arklnummer, int bestand,String datum) {
+	public Stats(int arklnummer,String name, int bestand,String datum,String type) {
 		this.arklnummer = arklnummer;
+		this.Atklname = name;
 		this.bestand = bestand;
-		//datum als string einfügen
-	//	DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-	//	Date today = Calendar.getInstance().getTime();        
-	//	this.datum = df.format(today);
+		this.type = type;
 		this.datum = datum;
 	}	
 	public String getDatum() {
@@ -44,5 +45,17 @@ public class Stats {
 	}
 	public void setBestand(int bestand) {
 		this.bestand = bestand;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String getAtklname() {
+		return Atklname;
+	}
+	public void setAtklname(String atklname) {
+		Atklname = atklname;
 	}
 }

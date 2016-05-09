@@ -7,9 +7,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import valueobjects.Artikel;
 import valueobjects.Kunde;
@@ -235,20 +232,34 @@ public class FilePersistenceManager implements PersistenceManager {
 		zeile = liesDaten();
 		if (zeile == null) {
 			return null;
+		}
+		String name = zeile;
+		// 3. Zeile: Bestand
+		zeile = liesDaten();
+		if (zeile == null) {
+			return null;
 		}		
 		int bestand = Integer.parseInt(zeile);
-		// 3. Zeile: Datum
+		// 4. Zeile: Datum
 		zeile = liesDaten();
 		if (zeile == null) {
 			return null;
 		}
-		String date = zeile;		
-		return new Stats(atklNummer, bestand, date);
+		String date = zeile;
+		// 5. Zeile: Type
+		zeile = liesDaten();
+		if (zeile == null) {
+			return null;
+		}
+		String type = zeile;				
+		return new Stats(atklNummer, name, bestand, date, type);
 	}
 
-	@Override
-	public boolean speichereStats(Stats s) throws IOException {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean speichereStats(Stats s) throws IOException {		
+		this.schreibeDaten(new Integer(s.getArklnummer()).toString());
+		this.schreibeDaten(s.getAtklname());
+		this.schreibeDaten(new Integer(s.getBestand()).toString());
+		this.schreibeDaten(s.getDatum());			
+		return true;
 	}
 }

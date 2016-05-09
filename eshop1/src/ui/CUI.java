@@ -20,6 +20,7 @@ import domain.exceptions.AccountExistiertNichtException;
 import domain.exceptions.ArtikelExistiertBereitsException;
 import domain.exceptions.ArtikelExistiertNichtException;
 import domain.exceptions.BestandUeberschrittenException;
+import domain.exceptions.StatExistiertBereitsException;
 
 public class CUI {
 
@@ -29,7 +30,7 @@ public class CUI {
 	private Account user;
 	private boolean massengut = false;
 
-	public CUI(String datei) throws IOException {
+	public CUI(String datei) throws IOException, StatExistiertBereitsException {
 		
 		// Die Shop-Verwaltung erledigt, die Aufgaben,
 		// die nichts mit Ein-/Ausgabe zu tun haben
@@ -43,15 +44,14 @@ public class CUI {
 	}
 	// Startmenue: interne (private) Methode zur Ausgabe des Menues
 
-	private void menueStart() {
+	private void menueStart() throws IOException {
 
 		System.out.println("\n[Startmenue] \n");
 		System.out.println("Los geht's! \n");
 		System.out.println("Account anlegen: n");
 		System.out.println("Login: l");
 		System.out.println("Beenden: q \n\n");		
-		System.out.println("Eingabe: ");		
-		
+		System.out.println("Eingabe: ");				
 		System.out.flush();
 	}
 
@@ -93,8 +93,9 @@ public class CUI {
 	 * 
 	 * @param line
 	 * @throws IOException
+	 * @throws ArtikelExistiertNichtException 
 	 */
-	private void verarbeiteEingabe(String line) throws IOException {
+	private void verarbeiteEingabe(String line) throws IOException, ArtikelExistiertNichtException {
 		//TODO @Daniel (bei Flascher Eingabe) Fehleingaben abfangen und fehlermeldung ausgeben 19.04
 		//TODO @Daniel Login fehlerhaft feedback
 		//TODO @Manu Warenkorb bef�llen texte erweitern
@@ -531,7 +532,7 @@ public class CUI {
 		}
 	}
 
-	public void run() throws IOException {
+	public void run() throws IOException, ArtikelExistiertNichtException {
 		// Variable fuer Eingaben von der Konsole
 		String input = "";
 
@@ -552,7 +553,7 @@ public class CUI {
 	// Die main-Methode
 	// .....
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws StatExistiertBereitsException, ArtikelExistiertNichtException {
 
 		CUI cui;
 		try {
