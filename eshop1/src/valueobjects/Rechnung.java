@@ -35,10 +35,10 @@ public class Rechnung {
 	  
 	//Methode zum Berechnen des Gesamtpreises
 	private void berechneGesamtpreis() {
-		// 1. Schritt: Artikel extrahieren
+		//Schritt: Artikel extrahieren
 		Set<Artikel> articles = this.positionen.keySet();
 
-		// 2. Schritt: Siehe Schmierzettel
+		
 		for (Artikel artikel : articles) {
 			int anzahl = this.positionen.get(artikel);
 

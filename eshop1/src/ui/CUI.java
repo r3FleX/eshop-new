@@ -63,7 +63,7 @@ public class CUI {
 		System.out.println("\n[Kundenbereich] \n");
 		System.out.println("[some bugs inside]Artikel im Warenkorb ablegen: k");
 		System.out.println("Warenkorb einsehen: w");
-		System.out.println("[nicht vollstï¿½ndig impelemtiert(16.4)] Warenkorb - Bestellung abschliessen: b \n");
+		System.out.println("[nicht vollstaendig impelemtiert(16.4)] Warenkorb - Bestellung abschliessen: b \n");
 		System.out.println("Artikel ausgeben: a");
 		System.out.println("Artikel ordnen: o");
 		System.out.println("Artikel suchen: f");
@@ -99,15 +99,15 @@ public class CUI {
 	private void verarbeiteEingabe(String line) throws IOException, ArtikelExistiertNichtException {
 		//TODO @Daniel (bei Flascher Eingabe) Fehleingaben abfangen und fehlermeldung ausgeben 19.04
 		//TODO @Daniel Login fehlerhaft feedback
-		//TODO @Manu Warenkorb befï¿½llen texte erweitern
-		//TODO @stefan Artikelmenge ï¿½ndern "z"
+		//TODO @Manu Warenkorb befuellen texte erweitern
+		//TODO @stefan Artikelmenge aendern "z"
 		//TODO @alle bug fixen
 		
 		 
 		// Eingabe bearbeiten
 		
 		/**
-		 * Befehl e: Artikel einfï¿½gen, nur als Mitarbeiter
+		 * Befehl e: Artikel einfuegen, nur als Mitarbeiter
 		 */
 		
 		if (line.equals("e")) {
@@ -318,7 +318,7 @@ public class CUI {
 					plz = Integer.parseInt(plz1);
 
 					if (plz > 99999 || plz < 10000) {
-						System.out.println("Ungueltige Postleitzahl!");
+						System.out.println("Ungueltige Postleitzahl! Bitte fünfstellig.");
 					}
 				} while (plz == 0 || plz > 99999 || plz < 10000);
 
@@ -331,8 +331,7 @@ public class CUI {
 					shop.schreibeKundendaten();
 				} catch (AccountExistiertBereitsException e1) {
 					System.out.println(e1.getMessage());
-					System.out
-							.println("Registrierungsvorgang wiederholen");
+					System.out.println("Registrierungsvorgang wiederholen");
 				}
 
 			// Mitarbeiter m	
@@ -430,16 +429,10 @@ public class CUI {
 					String kaufen = liesEingabe();
 					int einkaufen = Integer.parseInt(kaufen);
 					Artikel a = shop.artikelSuchen(einkaufen);
-					//if (a==null)
 					
 					System.out.println("Wie oft wollen Sie den Artikel kaufen?");
 					
-					String anzahl = liesEingabe();
-					/*
-					while(anzahl>bestand){
-						System.out.println("Es sind nur "+bestand+"vorhanden!");
-					}
-					*/
+					String anzahl = liesEingabe();	
 					int anzahl1 = Integer.parseInt(anzahl);
 					
 					// Artikel in den Warenkorb einfuegen
@@ -491,12 +484,11 @@ public class CUI {
 				}
 			// wenn als Mitarbeiter eingeloggt	
 			} else
-				System.out.println("Bitte loggen Sie sich fï¿½r diesen Vorgang als"
-								+ "Kunde ein!");
+				System.out.println("Bitte loggen Sie sich fuer diesen Vorgang als Kunde ein!");
 		}
 
 		/**
-		 * Befehl z: Bestand ï¿½ndern, nur als Mitarbeiter
+		 * Befehl z: Bestand aendern, nur als Mitarbeiter
 		 * 
 		 */
 		
@@ -551,7 +543,63 @@ public class CUI {
 		 * Befehl b: Bestellung abschliessen, Kauf abewickeln nur als Kunde
 		 */
 		
-		// Bestellung abschliessen
+		else if (line.equals("b")) {
+
+			if (user instanceof Kunde) {
+				HashMap<Artikel, Integer> warenkorbBestand = shop
+						.gibAlleArtikelAusWarenkorb((Kunde) user);
+				gibWarenbestandAus(warenkorbBestand);
+
+				if (warenkorbBestand.isEmpty()) {
+
+				} else {
+					System.out
+							.println("Wollen Sie Ihre Warenkorbartikel jetzt kaufen? j/n?");
+					String kaufenJaNein = liesEingabe();
+
+					if (kaufenJaNein.equals("j")) {
+						HashMap<Artikel, Integer> fehlerliste = shop
+								.pruefeKauf((Kunde) user);
+						if (!fehlerliste.isEmpty()) {
+							System.out
+									.println("Folgende Artikel konnten nicht zum Kauf angeboten werden:");
+							Set<Artikel> articles = fehlerliste.keySet();
+							for (Artikel artikel : articles) {
+								System.out.println(artikel);
+							}
+						}
+
+						// cast Argument (Kunde) user
+						Rechnung rechnung = shop.kaufAbwickeln((Kunde) user);
+
+						System.out.println("R E C H N U N G");
+						System.out.println("");
+						System.out.println("Datum: " + rechnung.getDatum());
+						System.out.println("Gekauft von: " + user.getName());
+						System.out.println(((Kunde) user).getStrasse());
+						System.out.println(((Kunde) user).getPlz() + " "
+								+ ((Kunde) user).getWohnort());
+						System.out.println("");
+						System.out.println("Der Gesamtpreis betraegt: "
+								+ rechnung.getGesamtpreis());
+
+					} else if (kaufenJaNein.equals("n")) {
+						menueKunde();
+					} else {
+						System.out
+								.println("Bitte geben Sie nur j (Ja) oder n (Nein) ein.");
+					}
+				}
+				
+			// wenn als Mitarbeiter eingeloggt
+			} else
+				System.out
+						.println("Bitte loggen Sie sich fuer diesen Vorgang als Kunde ein!");
+		} else {
+			if (!line.equals("q"))
+				System.out
+						.println("Bitte geben Sie einen der aufgefuehrten Befehle ein.");
+		}
 	}
 
 	// Ausgabe des Warenkorbbestandes

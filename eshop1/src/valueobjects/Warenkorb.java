@@ -46,8 +46,4 @@ public class Warenkorb {
 	public void setWarenkorbInhalt(HashMap Inhalt) {
 		this.inhalt = Inhalt;
 	}
-
-	public void wirdGekauft() {
-
-	}
 }
