@@ -218,7 +218,6 @@ for (Artikel testArtikel : artikelBestand) {
 				return testArtikel;
 			}
 		}
-
 		throw new ArtikelExistiertNichtException(gesuchteNummer);
 
 	}

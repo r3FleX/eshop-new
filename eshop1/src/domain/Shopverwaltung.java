@@ -20,6 +20,7 @@ import valueobjects.Kunde;
 import valueobjects.Massengutartikel;
 import valueobjects.Mitarbeiter;
 import valueobjects.Rechnung;
+import valueobjects.Stats;
 import valueobjects.Warenkorb;
 
 
@@ -58,7 +59,10 @@ public class Shopverwaltung {
 		// -> an Artikelverwaltung
 		return meineArtikel.getArtikelBestand();
 	}
-	
+	public List<Stats> gibAlleStats() {
+		// -> an Artikelverwaltung
+		return meineStats.getStats();
+	}	
 	public boolean fuegeMassengutEin(String artname, int artnr, int artbestand, float artpreis, int packung) throws ArtikelExistiertBereitsException {
 
 		Massengutartikel a = new Massengutartikel(artname, artnr, artbestand, artpreis, packung);

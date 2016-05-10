@@ -82,8 +82,7 @@ public class FilePersistenceManager implements PersistenceManager {
 		zeile = liesDaten();
 		if (zeile == null) {
 			return null;
-		}
-		
+		}		
 		int bestand = Integer.parseInt(zeile);
 
 		// 4. Zeile: Preis
@@ -218,7 +217,6 @@ public class FilePersistenceManager implements PersistenceManager {
 		if (writer != null)
 			writer.println(daten);
 	}
-
 	public Stats ladeStats() throws IOException {
 		String zeile = null;		
 		// 1. Zeile: Artikelnummer
@@ -228,7 +226,7 @@ public class FilePersistenceManager implements PersistenceManager {
 			return null;   
 		}
 		int atklNummer = Integer.parseInt(zeile);
-		// 2. Zeile: Bestand
+		// 2. Zeile: Name
 		zeile = liesDaten();
 		if (zeile == null) {
 			return null;
@@ -259,7 +257,8 @@ public class FilePersistenceManager implements PersistenceManager {
 		this.schreibeDaten(new Integer(s.getArklnummer()).toString());
 		this.schreibeDaten(s.getAtklname());
 		this.schreibeDaten(new Integer(s.getBestand()).toString());
-		this.schreibeDaten(s.getDatum());			
+		this.schreibeDaten(s.getDatum());
+		this.schreibeDaten(s.getType());
 		return true;
 	}
 }

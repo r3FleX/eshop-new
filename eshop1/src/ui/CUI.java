@@ -13,6 +13,7 @@ import valueobjects.Artikel;
 import valueobjects.Kunde;
 import valueobjects.Mitarbeiter;
 import valueobjects.Rechnung;
+import valueobjects.Stats;
 import valueobjects.Warenkorb;
 import domain.Shopverwaltung;
 import domain.exceptions.AccountExistiertBereitsException;
@@ -188,7 +189,22 @@ public class CUI {
 			} else
 				System.out.println("Bitte loggen Sie ein!");
 		}
-
+		/** Befehl sd - Statistik debug funktionen 
+		 * 
+		 * 
+		 */
+		else if (line.equals("sd")) {		
+		}
+		else if (line.equals("sl")) {
+			List <Stats> alleStats = shop.gibAlleStats();
+			gibStatsAus(alleStats);
+		}
+		else if (line.equals("sa")) {
+		
+		}
+		else if (line.equals("sb")) {
+		
+		}
 		/**
 		 * Befehl d: Artikel wird entfernt, nur als Mitarbeiter
 		 * 
@@ -199,9 +215,7 @@ public class CUI {
 			if (user instanceof Mitarbeiter) {
 				List<Artikel> artikelListe = shop.gibAlleArtikel();
 				gibArtikellisteAus(artikelListe);
-
-				System.out
-						.println("Artikelnummer zum entfernen des Produktes:");
+				System.out.println("Artikelnummer zum entfernen des Produktes:");
 				System.out.println("Eingabe >");
 				String nummer = liesEingabe();
 				int artnr = Integer.parseInt(nummer);
@@ -564,7 +578,17 @@ public class CUI {
 			}
 		}
 	}
-
+	private void gibStatsAus(List<Stats> statslist) {
+		if (statslist.isEmpty()) {
+			System.out.println("Liste ist leer.");
+		} else {
+			Iterator<Stats> iter = statslist.iterator();
+			while (iter.hasNext()) {
+				Stats statslist2 = iter.next();
+				System.out.println(statslist2.toString());
+			}
+		}
+	}
 	public void run() throws IOException, ArtikelExistiertNichtException {
 		// Variable fuer Eingaben von der Konsole
 		String input = "";

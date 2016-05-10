@@ -4,12 +4,16 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
+import domain.exceptions.ArtikelExistiertNichtException;
 import domain.exceptions.StatExistiertBereitsException;
+import domain.exceptions.StatsExistiertNichtException;
 import persistence.FilePersistenceManager;
 import persistence.PersistenceManager;
 import valueobjects.Artikel;
@@ -51,6 +55,15 @@ public class StatsVerwaltung {
 		pm.close();
 	}
 	/**
+	 * Methode, die dalle Stats als Vector zurueckgibt.
+	 * 
+	 * @return Alle Stats als vecotr
+	 */
+	public List<Stats> getStats() {
+		return alleStats;
+	}
+	
+	/**
 	 * Methode zum Schreiben der Artikeldaten
 	 * 
 	 * @param datei Datei, in die der Artikelbestand geschrieben werden soll
@@ -68,15 +81,12 @@ public class StatsVerwaltung {
 		// Persistenz-Schnittstelle wieder schlieÃŸen
 		pm.close();
 	}
-	/**
-	 * Methode, die einen Artikel an das Ende der Artikeliste einfuegt.
-	 * 
-	 * @param einArtikel der einzufuegende Artikel
-	 * @throws ArtikelExistiertBereitsException wenn der Artikel bereits existiert
+	/** Fügt ein Statistikteil hinzu
+	 * @param artklnummer Nummer des Artikels	
+	 * @param name name des Artikels
+	 * @param bestand neuer bestand
+	 * @param type Welche art von statistik
 	 */
-	public void einfuegen(Stats eineStat) {
-		alleStats.add(eineStat);
-	}
 	public void statupdate(int artklnummer,String name, int bestand, String type) {
 		//statistik daten einfügen
 		//datum als string einfügen
@@ -85,5 +95,42 @@ public class StatsVerwaltung {
 		String datum = df.format(today);
 		Stats stat = new Stats(artklnummer,name, bestand,datum,type);
 		einfuegen(stat);
-	}	
+	}
+	/**
+	 * Methode zum Suchen von Statistikteilen
+	 * 
+	 * @param artikelnummer
+	 * @return
+	 * @throws ArtikelExistiertNichtException
+	 */
+
+	public Stats statsSuchen(int artikelnummer)
+			throws StatsExistiertNichtException {
+		for (Stats teststat : alleStats) {
+			if (teststat.getArklnummer() == artikelnummer) {
+				return teststat;
+			}
+		}
+		throw new StatsExistiertNichtException();
+	}
+	// nach Artikelnummer sortieren
+	public List<Stats> getSortierteArtikelnummern() {
+		Collections.sort(alleStats, new Comparator<Stats>() {
+			public int compare(Stats a1, Stats a2) {
+				return a1.getArklnummer() - a2.getArklnummer();
+			}
+		});
+		return alleStats;
+	}
+	
+	
+	/**
+	 * Methode, die eine Statistik an das Ende der Statistikliste einfuegt.
+	 * @param einStat die einzufügende Statistik
+	 */
+	public void einfuegen(Stats eineStat) {
+		alleStats.add(eineStat);
+	}
+	
+	
 }
