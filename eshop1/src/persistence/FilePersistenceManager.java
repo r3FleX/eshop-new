@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 
 import valueobjects.Artikel;
 import valueobjects.Kunde;
+import valueobjects.Massengutartikel;
 import valueobjects.Mitarbeiter;
 import valueobjects.Stats;
 
@@ -91,8 +92,45 @@ public class FilePersistenceManager implements PersistenceManager {
 			return null;
 		}		
 		float preis = Float.parseFloat(zeile);		
-		return new Artikel(artname, artikelNummer, bestand, preis);
+		
+		// 5. Zeile: Packungsgroesse
+		zeile = liesDaten();
+		if (zeile == null) {
+			return null;
+		}
+		
+		int packung = Integer.parseInt(zeile);
+		boolean massengut;
+		
+		if(packung > 0) {
+			massengut = true;
+		}
+		else {
+			massengut = false;
+		}
+		
+		// neues Artikel-Objekt anlegen und zurückgeben
+		
+		if (!massengut) {
+			return new Artikel(artname, artikelNummer, bestand, preis);
+		}
+		else {
+			return new Massengutartikel(artname, artikelNummer, bestand, preis, packung);
+		}
 	}
+		
+		
+		
+		
+		
+		/*
+		if(> 0) {
+			massengut = true;
+		}
+		else {
+			massengut = false;
+		}
+	*/
 	
 	/**
 	 * Methode zum Speichern eines Artikels

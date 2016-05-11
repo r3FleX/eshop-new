@@ -25,7 +25,7 @@ import domain.exceptions.StatExistiertBereitsException;
 
 public class CUI {
 
-	// Instanzierung der ben�igten Objekte
+	// Instanzierung der benoetigten Objekte
 	private Shopverwaltung shop;
 	private BufferedReader reader;
 	private Account user;
@@ -71,7 +71,7 @@ public class CUI {
 		System.out.println("Eingabe: ");
 		System.out.flush();
 	}
-	// Startmenue: interne (private) Methode zur Ausgabe des Menues f�r den Mitarbeiter
+	// Startmenue: interne (private) Methode zur Ausgabe des Menues fuer den Mitarbeiter
 	
 	private void menueMitarbeiter() {
 		System.out.println("\n[Mitarbeiterbereich]\n");
@@ -90,15 +90,16 @@ public class CUI {
 		return reader.readLine();
 	}
 	/**
-	 * Methode zum Verarbeiten der Eingabe im Men�
+	 * Methode zum Verarbeiten der Eingabe im Menue
 	 * 
 	 * @param line
 	 * @throws IOException
 	 * @throws ArtikelExistiertNichtException 
 	 */
+	
 	private void verarbeiteEingabe(String line) throws IOException, ArtikelExistiertNichtException {
 		//TODO @Daniel (bei Flascher Eingabe) Fehleingaben abfangen und fehlermeldung ausgeben 19.04
-		//TODO @Daniel Login fehlerhaft feedback
+		//TODO @Daniel Login fehlerhaft feedback, PW war falsch
 		//TODO @Manu Warenkorb befuellen texte erweitern
 		//TODO @stefan Artikelmenge aendern "z"
 		//TODO @alle bug fixen
