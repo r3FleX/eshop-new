@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 import valueobjects.Account;
@@ -144,6 +145,7 @@ public class CUI {
 
 				System.out.println("Einzelpreis > ");
 				String preis = liesEingabe();
+				preis = preis.replace(',','.');
 				float artpreis = Float.parseFloat(preis);
 				boolean ok;
 				
@@ -189,6 +191,27 @@ public class CUI {
 				gibArtikellisteAus(artikelListe);
 			} else
 				System.out.println("Bitte loggen Sie ein!");
+		}
+		else if (line.equals("adda")) {
+			Random zahl = new Random();
+			int b;
+			for(int i=0;i<30;i+=2) {
+				try {
+					b = (int) zahl.nextFloat()*100;
+					shop.fuegeArtikelEin("Artikel"+i, i, zahl.nextInt(100), (float)(b/100.0), 0);
+				} catch (ArtikelExistiertBereitsException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				try {
+					b = (int) zahl.nextFloat()*101;
+					shop.fuegeMassengutEin("Artikel"+(i+1), i+1, zahl.nextInt(101), (float)(b/100.0), zahl.nextInt(5));
+				} catch (ArtikelExistiertBereitsException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}			
+			shop.schreibeArtikeldaten();			
 		}
 		/** Befehl sd - Statistik debug funktionen 
 		 * 
@@ -287,7 +310,10 @@ public class CUI {
 		
 		//Artikel suchen
 		else if (line.equals("f")) {
-			
+			System.out.print("Artikelname > ");
+			String artname = liesEingabe();
+			List<Artikel> liste = shop.sucheNachArtikel(artname);
+			System.out.print(liste);
 		}
 
 		/**
@@ -334,8 +360,7 @@ public class CUI {
 					System.out.println(e1.getMessage());
 					System.out.println("Registrierungsvorgang wiederholen");
 				}
-
-			// Mitarbeiter m	
+			// Mitarbeiter m 
 			} else if (account.equals("m")) {
 				boolean ok;
 				try {
@@ -349,6 +374,7 @@ public class CUI {
 							System.out
 									.println("Mitarbeiter-Account wurde angelegt. Accountnummer: "
 											+ accnummer + ".");
+							menueStart();
 						} catch (AccountExistiertNichtException e) {
 							e.printStackTrace();
 						}
@@ -406,11 +432,11 @@ public class CUI {
 
 
 				} catch (AccountExistiertNichtException e) {
-
+					System.out.println("Der eingegebene Name ("+name+") und das Passwort stimmen nicht überein!");
 				}
-			} else
+			} else {
 				System.out.println("Sie sind bereits eingeloggt!");
-
+			}
 		}
 
 		/**

@@ -75,7 +75,16 @@ public class Shopverwaltung {
 		meineArtikel.einfuegen(a);
 		return true;
 	}
-	
+	/**
+	 * Methode zur Artikelsuche anhand des Artikelnamens
+	 * 
+	 * @param artname Bezeichnung des Artikels
+	 * @return Liste der Artikel, evtl. leer
+	 */
+	public List<Artikel> sucheNachArtikel(String artname) {
+		//delegieren an meineArtikel (Artikelverwaltung)
+		return meineArtikel.sucheArtikel(artname);
+	}
 	//F�ge Mitarbeiter Account ein	
 	public boolean fuegeMitarbeiterAccountEin(String name, String passwort) throws AccountExistiertBereitsException{
 			
@@ -130,10 +139,11 @@ public class Shopverwaltung {
 	
 	
 	//Artikel entfernen
-	public boolean entferneArtikel(int artnr) throws ArtikelExistiertNichtException {
+	public boolean entferneArtikel(int artnr) throws ArtikelExistiertNichtException, IOException {
 		// delegieren nach Artikelverwaltung
 		Artikel data = meineArtikel.artikelSuchen(artnr);
 		meineStats.statupdate(artnr,data.getName(), data.getBestand(), "Delete");
+		schreibeStatsdaten();
 		return meineArtikel.entfernen(artnr);
 	}
 

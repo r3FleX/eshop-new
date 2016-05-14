@@ -145,14 +145,17 @@ public class Accountverwaltung {
 	 */
 
 	public Account loginAccount(String name, String passwort)
-			throws AccountExistiertNichtException {
-
-		for (Account user : accountBestand) {
-			if (user.getName().equals(name)
-					&& user.getPasswort().equals(passwort)) {
-				return user;
+		throws AccountExistiertNichtException {	
+			String username;
+			for (Account user : accountBestand) {
+				// Alle strings (Eingabe, gespeicherte Daten) in Kleinbuchstaben umwandeln
+				name = name.toLowerCase();			
+				username = user.getName().toLowerCase();
+				if (username.equals(name)
+						&& user.getPasswort().equals(passwort)) {
+					return user;
+				}
 			}
-		}
 
 		throw new AccountExistiertNichtException(name, passwort);
 	}

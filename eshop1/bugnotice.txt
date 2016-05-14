@@ -1,8 +1,19 @@
 Fehler beim artikel in den warenkorb legen (leereingabe abfangen)
 
 
-bei falscheingaben fehlt das userfeedback (login etc)
+bei falscheingaben fehlt das userfeedback (login etc)  (fixed)
 
-Fehler artikel hinzufügen preißeingabe
+Fehler artikel hinzufügen preiseingabe (fixed)
+-> Funktion zum Löschen von Artikeln ist fehlerhaft beim Neu schreiben (Massengut)
 
 Shop_Mitarbeiter.txt darf nicht mit einer Zahl und oder Leerzeichen anfangen
+
+Artikelsuche führt nicht weiter, man bleibt im Kundenbereich (fixed)
+
+Möglichkeit zum Abbruch einbauen
+
+Nach Anlegen eines Mitarbeiter-Accounts wird weitere Navigation (Login, Account erstellen, etc.) nicht angezeigt (fixed)
+
+Beim Login ist der Vergleich zwischen der Eingabe des Namens und den gespeicherten Daten case sensitive (fixed)
+
+Bug: Bei Fehlermeldung muss das Programm neu gestartet werden
