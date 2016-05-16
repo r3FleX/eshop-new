@@ -24,7 +24,7 @@ public class Massengutartikel extends Artikel {
 	}
 	
 	public int getPackungsgroesse() {
-		return packungsgroesse;
+		return this.packungsgroesse;
 	}
 
 	public void setPackungsgroesse(int packungsgroesse) {

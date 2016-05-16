@@ -27,7 +27,12 @@ public class Stats {
 		this.bestand = bestand;
 		this.type = type;
 		this.datum = datum;
-	}	
+	}
+	public String toString() {
+		return ("\n Datum: " + this.datum + " Bestand: " + this.bestand);
+	}
+	
+	
 	public String getDatum() {
 		return this.datum;
 	}

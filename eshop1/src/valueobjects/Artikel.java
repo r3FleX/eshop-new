@@ -11,14 +11,9 @@ public class Artikel {
 	private int bestand;
 	private int nummer;
 	private float preis;
-	private int packung;
 	
-	public int getPackung() {
-		return packung;
-	}
-
-	public void setPackung(int packung) {
-		this.packung = packung;
+	public int getPackungsgroesse() {
+		return 0;
 	}
 
 	public boolean isMassengut() {

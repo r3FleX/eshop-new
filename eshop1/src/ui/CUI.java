@@ -195,17 +195,18 @@ public class CUI {
 		else if (line.equals("adda")) {
 			Random zahl = new Random();
 			int b;
-			for(int i=0;i<30;i+=2) {
+			int start = zahl.nextInt(10000000);
+			for(int i=start;i<(start + 30);i+=2) {
 				try {
 					b = (int) zahl.nextFloat()*100;
-					shop.fuegeArtikelEin("Artikel"+i, i, zahl.nextInt(100), (float)(b/100.0), 0);
+					shop.fuegeArtikelEin("Artikel_"+i, i, zahl.nextInt(100), (float)(b/100.0), 0);
 				} catch (ArtikelExistiertBereitsException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				try {
 					b = (int) zahl.nextFloat()*101;
-					shop.fuegeMassengutEin("Artikel"+(i+1), i+1, zahl.nextInt(101), (float)(b/100.0), zahl.nextInt(5));
+					shop.fuegeMassengutEin("MassengutArtikel_"+(i+1), i+1, zahl.nextInt(101), (float)(b/100.0), zahl.nextInt(5));
 				} catch (ArtikelExistiertBereitsException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -655,8 +656,12 @@ public class CUI {
 	}
 	private void gibStatsAus(List<Stats> statslist) {
 		if (statslist.isEmpty()) {
-			System.out.println("Liste ist leer.");
+			System.out.println("Keine Statistik zum Artikel");
 		} else {
+			//TODO sotieren
+			
+			
+			//TODO tabelle erzeugen
 			Iterator<Stats> iter = statslist.iterator();
 			while (iter.hasNext()) {
 				Stats statslist2 = iter.next();
