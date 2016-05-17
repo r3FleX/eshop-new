@@ -1,7 +1,7 @@
 Artikel_8927
 8927
-96
-0.0
+12
+10.0
 0
 MassengutArtikel_8928
 8928
@@ -130,7 +130,7 @@ MassengutArtikel_8952
 4
 Artikel_8953
 8953
-0
+2
 0.0
 0
 MassengutArtikel_8954

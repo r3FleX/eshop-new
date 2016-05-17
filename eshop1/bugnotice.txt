@@ -17,3 +17,36 @@ Nach Anlegen eines Mitarbeiter-Accounts wird weitere Navigation (Login, Account 
 Beim Login ist der Vergleich zwischen der Eingabe des Namens und den gespeicherten Daten case sensitive (fixed)
 
 Bug: Bei Fehlermeldung muss das Programm neu gestartet werden
+
+
+
+** GUI **
+
+* Mitgliederbereich *
+
+Artikel hinzufügen:
+- Eingabefeld zur Packungsgröße fehlt
+- Einfügen muss noch implementiert werden
+
+Bestand ändern: Artikelanzeige aktualisiert nicht automatisch
+
+Artikel löschen: noch nicht implementiert
+
+Ausloggen: Fenster im maximierten Zustand! wird nicht richtig gecleared
+
+
+* Kundenbereich *
+
+Hauptseite: Größe der Tabelle zur Artikel-Übersicht -> zu klein
+
+Ausloggen: Fenster im maximierten Zustand! wird nicht richtig gecleared
+
+
+* Login-Seite *
+
+Bestätigung fehlt, wenn Kunden-/Mitarbeiteraccount angelegt wurde
+
+
+
+
+ 

@@ -66,15 +66,15 @@ public class Artikel {
 
 	// Getter und Setter
 	public int getNummer() {
-		return nummer;
+		return this.nummer;
 	}
 
 	public String getName() {
-		return artname;
+		return this.artname;
 	}
 
 	public int getBestand() {
-		return bestand;
+		return this.bestand;
 	}
 
 	public void setBestand(int bestand) {
@@ -82,7 +82,7 @@ public class Artikel {
 	}
 
 	public float getPreis() {
-		return preis;
+		return this.preis;
 	}
 
 	public void setPreis(float preis) {

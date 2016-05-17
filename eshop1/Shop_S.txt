@@ -13,6 +13,11 @@ Kugelschreiber
 95
 05/14/2016 13:48:12
 Delete
+8953
+Artikel_8953
+235
+05/17/2016 21:40:34
+Artikel
 65555
 Wasser
 1
@@ -23,3 +28,13 @@ Puma
 15
 05/14/2016 13:57:36
 Delete
+8953
+Artikel_8953
+1
+05/17/2016 21:40:25
+Artikel
+8953
+Artikel_8953
+2
+05/17/2016 21:40:40
+Artikel

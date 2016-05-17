@@ -225,7 +225,11 @@ public class CUI {
 			gibStatsAus(alleStats);
 		}
 		else if (line.equals("sa")) {
-		
+			List <Stats> statszuartikel = shop.statsSuchen(8953);
+			gibStatsAus(statszuartikel);			
+			
+			
+			
 		}
 		else if (line.equals("sb")) {
 		

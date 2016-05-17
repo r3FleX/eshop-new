@@ -60,7 +60,7 @@ public class StatsVerwaltung {
 	 * @return Alle Stats als vecotr
 	 */
 	public List<Stats> getStats() {
-		return alleStats;
+		return getSortierteArtikelnummern();
 	}
 	
 	/**
@@ -104,14 +104,14 @@ public class StatsVerwaltung {
 	 * @throws ArtikelExistiertNichtException
 	 */
 
-	public Stats statsSuchen(int artikelnummer)
-			throws StatsExistiertNichtException {
-		for (Stats teststat : alleStats) {
-			if (teststat.getArklnummer() == artikelnummer) {
-				return teststat;
+	public List<Stats> statsSuchen(int artikelnummer) {
+		List<Stats> bestimmtestats = new Vector<Stats>();
+		for (Stats eineStat : alleStats) {
+			if (eineStat.getArklnummer() == artikelnummer) {
+				bestimmtestats.add(eineStat);
 			}
 		}
-		throw new StatsExistiertNichtException();
+		return bestimmtestats;
 	}
 	// nach Artikelnummer sortieren
 	public List<Stats> getSortierteArtikelnummern() {
@@ -131,6 +131,5 @@ public class StatsVerwaltung {
 	public void einfuegen(Stats eineStat) {
 		alleStats.add(eineStat);
 	}
-	
-	
+
 }

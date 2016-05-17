@@ -37,7 +37,7 @@ public class Shopverwaltung {
 	private String datei = "";
 
 	// Konstrukter
-	public Shopverwaltung(String datei) throws IOException, StatExistiertBereitsException {
+	public Shopverwaltung(String datei) throws IOException {
 		this.datei = datei;
 
 		//Artikelbestand einlesen
@@ -59,6 +59,11 @@ public class Shopverwaltung {
 		// -> an Artikelverwaltung
 		return meineArtikel.getArtikelBestand();
 	}
+	public List<Stats> statsSuchen(int artikelnummer) {
+		// -> an Artikelverwaltung
+		return meineStats.statsSuchen(artikelnummer);
+	}
+	
 	public List<Stats> gibAlleStats() {
 		// -> an Artikelverwaltung
 		return meineStats.getStats();

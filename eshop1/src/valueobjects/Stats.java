@@ -29,7 +29,7 @@ public class Stats {
 		this.datum = datum;
 	}
 	public String toString() {
-		return ("\n Datum: " + this.datum + " Bestand: " + this.bestand);
+		return ("\n ArtikelNummer: " + this.arklnummer + " Datum: " + this.datum + " Bestand: " + this.bestand);
 	}
 	
 	
