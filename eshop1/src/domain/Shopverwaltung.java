@@ -186,14 +186,14 @@ public class Shopverwaltung {
 	}
 
 	
-	//Bestand �ndern
+	//Bestand aendern
 	public int aendereBestand(int artklnummer, int newBestand1) throws ArtikelExistiertNichtException {
 		Artikel data = meineArtikel.artikelSuchen(artklnummer);
 		meineStats.statupdate(artklnummer,data.getName(), newBestand1, "Artikel");
 		return meineArtikel.aendereBestand(artklnummer, newBestand1);		
 	}
 	
-	//Warenkorn einf�gen
+	//Warenkorn einfuegen
 	public void inWarenkorbEinfuegen(Artikel art, int anzahl, Kunde kunde) throws BestandUeberschrittenException, ArtikelExistiertNichtException {
 		Warenkorb warenkorb = kunde.getWarenkorb();		
 		warenkorb.einfuegen(art, anzahl);
