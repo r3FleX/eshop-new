@@ -40,9 +40,10 @@ import valueobjects.Kunde;
 import valueobjects.Mitarbeiter;
 
 
-public abstract class GUI_2 extends JFrame implements ActionListener{
+public class GUI_2 extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
+	/*
 	private JPasswordField passwordField;
 	private JTextField textField;
 
@@ -56,7 +57,8 @@ public abstract class GUI_2 extends JFrame implements ActionListener{
 	private Vector spalten;
 	private JScrollPane scrollPane = null;
 	private JTable table;
-
+*/
+	private Shopverwaltung shop;
 	
 	public GUI_2(String datei) {
 		super("Shop");
@@ -73,9 +75,18 @@ public abstract class GUI_2 extends JFrame implements ActionListener{
 	private void initialize() {
 		setTitle("E-Shop");
 		//setSize(800, 600);
+		
+		//TOP PANEL
+		
+		JPanel toppanel = new JPanel();
+		toppanel.setSize(100, 600);
+		
+		
+		//BOTTOM PANEL
+		
+		JPanel bottompanel = new JPanel();
+		bottompanel.setPreferredSize(new Dimension(400, 600));
 	}
-	
-
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -87,6 +98,9 @@ public abstract class GUI_2 extends JFrame implements ActionListener{
 					e.printStackTrace();
 				}
 			}
-		})
+		});
+	}
+
+	public void actionPerformed(ActionEvent arg0) {
 	}
 }
