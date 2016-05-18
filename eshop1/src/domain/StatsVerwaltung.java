@@ -87,6 +87,7 @@ public class StatsVerwaltung {
 	 * @param name name des Artikels
 	 * @param bestand neuer bestand
 	 * @param type Welche art von statistik
+	 * 
 	 */
 	public void statupdate(int artklnummer,String name, int bestand, LagerEreignisTyp type) {
 		//statistik daten einfügen
