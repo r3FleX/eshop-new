@@ -189,7 +189,7 @@ public class Shopverwaltung {
 	//Bestand �ndern
 	public int aendereBestand(int artklnummer, int newBestand1) throws ArtikelExistiertNichtException {
 		Artikel data = meineArtikel.artikelSuchen(artklnummer);
-		meineStats.statupdate(artklnummer,data.getName(), newBestand1, "Artikel");
+		meineStats.statupdate(artklnummer,data.getName(), newBestand1, LagerEreignisTyp.BESTAND_VERAENDERT);
 		return meineArtikel.aendereBestand(artklnummer, newBestand1);		
 	}
 	
