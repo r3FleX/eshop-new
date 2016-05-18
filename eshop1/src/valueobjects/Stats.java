@@ -12,7 +12,7 @@ package valueobjects;
 public class Stats {
 	
 	public enum LagerEreignisTyp {
-		NEU, BESTAND_ERHOEHT, BESTAND_REDUZIERT, KAUF, GELOESCHT
+		NEU, BESTAND_VERAENDERT, GELOESCHT
 	}
 	
 	private int arklnummer;
@@ -57,7 +57,7 @@ public class Stats {
 		this.bestand = bestand;
 	}
 	public LagerEreignisTyp getType() {
-		return type;
+		return this.type;
 	}
 	public void setType(LagerEreignisTyp type) {
 		this.type = type;
