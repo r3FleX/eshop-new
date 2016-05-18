@@ -22,6 +22,7 @@ import valueobjects.Mitarbeiter;
 import valueobjects.Rechnung;
 import valueobjects.Stats;
 import valueobjects.Warenkorb;
+import valueobjects.Stats.LagerEreignisTyp;
 
 
 
@@ -147,7 +148,7 @@ public class Shopverwaltung {
 	public boolean entferneArtikel(int artnr) throws ArtikelExistiertNichtException, IOException {
 		// delegieren nach Artikelverwaltung
 		Artikel data = meineArtikel.artikelSuchen(artnr);
-		meineStats.statupdate(artnr,data.getName(), data.getBestand(), "Delete");
+		meineStats.statupdate(artnr,data.getName(), data.getBestand(), LagerEreignisTyp.GELOESCHT);
 		schreibeStatsdaten();
 		return meineArtikel.entfernen(artnr);
 	}

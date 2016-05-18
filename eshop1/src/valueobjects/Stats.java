@@ -10,18 +10,23 @@ package valueobjects;
  */
 
 public class Stats {
+	
+	public enum LagerEreignisTyp {
+		NEU, BESTAND_ERHOEHT, BESTAND_REDUZIERT, KAUF, GELOESCHT
+	}
+	
 	private int arklnummer;
 	private String Atklname;
 	private int bestand;
 	private String datum = null;
-	private String type = null;
+	private LagerEreignisTyp type = null;
 	
 	/** Erstellt ein Statistik objekt 
 	 * 
 	 * @param arklnummer
 	 * @param bestand
 	 */
-	public Stats(int arklnummer,String name, int bestand,String datum,String type) {
+	public Stats(int arklnummer,String name, int bestand,String datum, LagerEreignisTyp type) {
 		this.arklnummer = arklnummer;
 		this.Atklname = name;
 		this.bestand = bestand;
@@ -51,10 +56,10 @@ public class Stats {
 	public void setBestand(int bestand) {
 		this.bestand = bestand;
 	}
-	public String getType() {
+	public LagerEreignisTyp getType() {
 		return type;
 	}
-	public void setType(String type) {
+	public void setType(LagerEreignisTyp type) {
 		this.type = type;
 	}
 	public String getAtklname() {

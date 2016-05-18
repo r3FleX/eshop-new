@@ -1,53 +1,43 @@
 package ui;
 
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.table.TableModel;
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-
 import java.awt.GridLayout;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import javax.swing.JButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.HashMap;
+import java.io.IOException;
 import java.util.Vector;
 
+import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-
-import valueobjects.Account;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.TableModel;
 
 import domain.Shopverwaltung;
 import domain.exceptions.AccountExistiertBereitsException;
+import domain.exceptions.AccountExistiertNichtException;
 import domain.exceptions.ArtikelExistiertBereitsException;
 import domain.exceptions.ArtikelExistiertNichtException;
-import domain.exceptions.BestandUeberschrittenException;
 import domain.exceptions.StatExistiertBereitsException;
-
-import java.io.IOException;
+import valueobjects.Account;
 import valueobjects.Artikel;
 import valueobjects.Kunde;
 import valueobjects.Mitarbeiter;
-import valueobjects.Rechnung;
-import valueobjects.Warenkorb;
-import domain.exceptions.AccountExistiertNichtException;
-
-import ui.ArtikelTableModel;
 
 
 public class GUI extends JFrame implements ActionListener, MouseListener {
@@ -113,7 +103,7 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 	};
 	private void initialize() {
 		setTitle("E-Shop");
-		setSize(800, 600);
+//		setSize(800, 600);
 
 		// Menü definieren
 		JMenuBar menuBar = new JMenuBar();
@@ -148,6 +138,7 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 		leftpanel.setLayout(new GridLayout(2, 1));
 
 		JPanel rightpanel = new JPanel();
+		rightpanel.setPreferredSize(new Dimension(400, 600));
 		getContentPane().add(rightpanel);
 
 		// linke Spalte oben
@@ -220,6 +211,8 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 		rightpanel.add(scrollPane_1);
 		scrollPane_1.setBorder(BorderFactory.createTitledBorder("Artikel"));
 
+		this.pack();
+//		this.show();
 
 	}
 
@@ -367,6 +360,8 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 					// JTable-Objekt erzeugen und mit Datenmodell
 					// initialisieren:
 					ausgabeTabelle = new JTable(tModel);
+					ausgabeTabelle.setPreferredSize(new Dimension(400, 600));
+					
 					// JTable in ScrollPane platzieren:
 					scrollPane = new JScrollPane(ausgabeTabelle);
 					ausgabeTabelle.setAutoCreateRowSorter(true);
@@ -376,6 +371,8 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 					tModel.setDataVector(shop.gibAlleArtikel());
 
 					rechts_oben.add(scrollPane);
+					
+					pack();
 
 					/*JScrollPane scrollPane2 = new JScrollPane();
 

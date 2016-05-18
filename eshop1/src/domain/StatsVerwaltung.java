@@ -18,6 +18,7 @@ import persistence.FilePersistenceManager;
 import persistence.PersistenceManager;
 import valueobjects.Artikel;
 import valueobjects.Stats;
+import valueobjects.Stats.LagerEreignisTyp;
 
 public class StatsVerwaltung {
 	// Verwaltung des Artikelbestands als Liste
@@ -87,7 +88,7 @@ public class StatsVerwaltung {
 	 * @param bestand neuer bestand
 	 * @param type Welche art von statistik
 	 */
-	public void statupdate(int artklnummer,String name, int bestand, String type) {
+	public void statupdate(int artklnummer,String name, int bestand, LagerEreignisTyp type) {
 		//statistik daten einfügen
 		//datum als string einfügen
 		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
