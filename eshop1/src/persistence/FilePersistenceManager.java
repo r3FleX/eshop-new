@@ -13,6 +13,7 @@ import valueobjects.Kunde;
 import valueobjects.Massengutartikel;
 import valueobjects.Mitarbeiter;
 import valueobjects.Stats;
+import valueobjects.Stats.LagerEreignisTyp;
 
 
 /**
@@ -287,7 +288,7 @@ public class FilePersistenceManager implements PersistenceManager {
 		if (zeile == null) {
 			return null;
 		}
-		String type = zeile;				
+		LagerEreignisTyp type = zeile;				
 		return new Stats(atklNummer, name, bestand, date, type);
 	}
 
@@ -296,7 +297,7 @@ public class FilePersistenceManager implements PersistenceManager {
 		this.schreibeDaten(s.getAtklname());
 		this.schreibeDaten(new Integer(s.getBestand()).toString());
 		this.schreibeDaten(s.getDatum());
-		this.schreibeDaten(s.getType());
+		this.schreibeDaten(new String(s.getType()).toString());
 		return true;
 	}
 }
