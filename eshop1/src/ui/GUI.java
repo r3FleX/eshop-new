@@ -82,6 +82,7 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 	/**
 	 * Launch the application.
 	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -743,9 +744,10 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 		else if (command.equals("\u00DCber...")) {
 			JOptionPane.showMessageDialog(null, "Entwickler: \n"
 					+ "Stefan Meyer\n"
+					+ "Daniel Böckmann\n"
+					+ "Immanuel Zimmermann\n"
 					+ " \n" + "\n"
-					+ "\n"
-					+ "forgeofempires.com");
+					+ "\n");
 		}
 
 		else if (command.equals("Ausloggen")) {
