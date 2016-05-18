@@ -29,9 +29,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.TableModel;
-
-//import bib.local.domain.Bibliothek;
-//import bib.local.ui.gui.swing.BibClientGUI.SearchActionListener;
 import domain.Shopverwaltung;
 import domain.exceptions.AccountExistiertBereitsException;
 import domain.exceptions.AccountExistiertNichtException;
@@ -47,28 +44,14 @@ import valueobjects.Mitarbeiter;
 public class GUI_2 extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
-	/*
-	private JPasswordField passwordField;
-	private JTextField textField;
-
-	private Container hauptscreen = null;
-	private JTable ausgabeTabelle = null;
 
 	private Shopverwaltung shop;
-	private Account user;
-	private Vector<Artikel> alleArtikel;
-	
-	private Vector spalten;
-	private JScrollPane scrollPane = null;
-	private JTable table;
-*/
-	private Shopverwaltung shop;
-	//private shop bib = null;
-	
 	private JButton addButton;
 	private JTextField titleField;
 	private JTextField numberField;
 	private JTextField searchTextField;
+	private JTextField nameTextField;
+	private JPasswordField passTextField;
 	private JList<String> buecherListe;
 	private JTable buecherTabelle;
 	
@@ -87,29 +70,41 @@ public class GUI_2 extends JFrame implements ActionListener{
 	private void initialize() {
 		setTitle("E-Shop");
 		setSize(800, 600);
-		//this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		//TOP PANEL
 		
 
-		// NORTH / Suchleiste
-		JPanel suchPanel = new JPanel();
-		suchPanel.setLayout(new GridLayout(1, 3));
-		suchPanel.add(new JLabel("Suchbegriff: "));
-		searchTextField = new JTextField();
-		searchTextField.setToolTipText("Suchbegriff hier eintragen!");
-		suchPanel.add(searchTextField);
-		JButton suchButton = new JButton("Such!");
-		suchPanel.add(suchButton);
+		//TOP PANEL (LOGIN PANEL)
+		JPanel loginPanel = new JPanel();
 		
-		suchPanel.setBorder(BorderFactory.createTitledBorder("Suchen"));
+		loginPanel.setLayout(new GridLayout(2, 3));
+		loginPanel.add(new JLabel("Name"));
+		loginPanel.add(new JLabel("Passwort"));
+		loginPanel.add(new JLabel(""));
+		
+		nameTextField = new JTextField();
+		passTextField = new JPasswordField();
+		loginPanel.add(nameTextField);
+		loginPanel.add(passTextField);
+		
+		//LoginButton
+		JButton loginButton = new JButton("Login");
+		loginPanel.add(loginButton);
+		
+		loginPanel.setBorder(BorderFactory.createTitledBorder("Login"));
+		
+		
+		//MAIN PANEL
+		JPanel mainPanel = new JPanel();
+		
+		
 		
 		
 		// Inhalt des Frames zusammenbauen
 		setLayout(new BorderLayout());
-		add(suchPanel, BorderLayout.NORTH);
+		add(loginPanel, BorderLayout.NORTH);
 
-		setVisible(true);	
+		//setVisible(true);	
 	}
+	
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
