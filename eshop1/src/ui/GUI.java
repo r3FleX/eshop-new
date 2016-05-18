@@ -100,7 +100,7 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 
 		}
 		this.initialize();
-	};
+	}
 	private void initialize() {
 		setTitle("E-Shop");
 //		setSize(800, 600);

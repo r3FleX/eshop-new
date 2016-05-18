@@ -40,10 +40,9 @@ import valueobjects.Kunde;
 import valueobjects.Mitarbeiter;
 
 
-public class GUI_2 extends JFrame implements ActionListener{
+public abstract class GUI_2 extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
-
 	private JPasswordField passwordField;
 	private JTextField textField;
 
@@ -54,24 +53,29 @@ public class GUI_2 extends JFrame implements ActionListener{
 	private Account user;
 	private Vector<Artikel> alleArtikel;
 	
-	@SuppressWarnings("rawtypes")
 	private Vector spalten;
 	private JScrollPane scrollPane = null;
 	private JTable table;
 
-	JTextField nummerFeld = new JTextField();
-	JTextField bezeichnungsFeld = new JTextField();
-	JTextField preisFeld = new JTextField();
-	JTextField bestandFeld = new JTextField();
-	JRadioButton ja = new JRadioButton("Ja");
-	JRadioButton nein = new JRadioButton("Nein", true);
-	ButtonGroup istMassenartikel = new ButtonGroup();
-	JButton einfuegeButton = new JButton("Einfügen");
-
 	
-	/**
-	 * Launch the application.
-	 */
+	public GUI_2(String datei) {
+		super("Shop");
+
+		try {
+			shop = new Shopverwaltung(datei);
+
+		} catch (IOException e2) {
+
+		}
+		this.initialize();
+	}
+	
+	private void initialize() {
+		setTitle("E-Shop");
+		//setSize(800, 600);
+	}
+	
+
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -83,22 +87,6 @@ public class GUI_2 extends JFrame implements ActionListener{
 					e.printStackTrace();
 				}
 			}
-		});
-	}
-	/**
-	 * Create the frame.
-	 * @throws StatExistiertBereitsException 
-	 */
-	public GUI_2(String datei) {
-		super("Shop");
-
-		try {
-			shop = new Shopverwaltung(datei);
-			//gebeBestandAus();
-
-		} catch (IOException e2) {
-
-		}
-		this.initialize();
+		})
 	}
 }
