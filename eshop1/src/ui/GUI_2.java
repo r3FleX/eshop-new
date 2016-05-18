@@ -1,5 +1,6 @@
 package ui;
 
+import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -16,6 +17,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -28,6 +30,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.TableModel;
 
+//import bib.local.domain.Bibliothek;
+//import bib.local.ui.gui.swing.BibClientGUI.SearchActionListener;
 import domain.Shopverwaltung;
 import domain.exceptions.AccountExistiertBereitsException;
 import domain.exceptions.AccountExistiertNichtException;
@@ -59,6 +63,14 @@ public class GUI_2 extends JFrame implements ActionListener{
 	private JTable table;
 */
 	private Shopverwaltung shop;
+	//private shop bib = null;
+	
+	private JButton addButton;
+	private JTextField titleField;
+	private JTextField numberField;
+	private JTextField searchTextField;
+	private JList<String> buecherListe;
+	private JTable buecherTabelle;
 	
 	public GUI_2(String datei) {
 		super("Shop");
@@ -74,18 +86,29 @@ public class GUI_2 extends JFrame implements ActionListener{
 	
 	private void initialize() {
 		setTitle("E-Shop");
-		//setSize(800, 600);
-		
+		setSize(800, 600);
+		//this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		//TOP PANEL
 		
-		JPanel toppanel = new JPanel();
-		toppanel.setSize(100, 600);
+
+		// NORTH / Suchleiste
+		JPanel suchPanel = new JPanel();
+		suchPanel.setLayout(new GridLayout(1, 3));
+		suchPanel.add(new JLabel("Suchbegriff: "));
+		searchTextField = new JTextField();
+		searchTextField.setToolTipText("Suchbegriff hier eintragen!");
+		suchPanel.add(searchTextField);
+		JButton suchButton = new JButton("Such!");
+		suchPanel.add(suchButton);
+		
+		suchPanel.setBorder(BorderFactory.createTitledBorder("Suchen"));
 		
 		
-		//BOTTOM PANEL
-		
-		JPanel bottompanel = new JPanel();
-		bottompanel.setPreferredSize(new Dimension(400, 600));
+		// Inhalt des Frames zusammenbauen
+		setLayout(new BorderLayout());
+		add(suchPanel, BorderLayout.NORTH);
+
+		setVisible(true);	
 	}
 	
 	public static void main(String[] args) {
