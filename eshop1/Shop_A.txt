@@ -145,6 +145,6 @@ Artikel_8955
 0
 MassengutArtikel_8956
 8956
-21
+12
 0.0
 1

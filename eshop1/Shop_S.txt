@@ -1,40 +1,10 @@
+8956
+MassengutArtikel_8956
+45
+05/18/2016 12:55:28
+BESTAND_VERAENDERT
+8956
+MassengutArtikel_8956
 12
-Döner Kebab
-2000
-05/14/2016 13:46:30
-Delete
-123
-Maus
-100
-05/14/2016 13:47:07
-Artikel
-24256
-Kugelschreiber
-95
-05/14/2016 13:48:12
-Delete
-8953
-Artikel_8953
-235
-05/17/2016 21:40:34
-Artikel
-65555
-Wasser
-1
-05/14/2016 13:48:44
-Artikel
-3
-Puma
-15
-05/14/2016 13:57:36
-Delete
-8953
-Artikel_8953
-1
-05/17/2016 21:40:25
-Artikel
-8953
-Artikel_8953
-2
-05/17/2016 21:40:40
-Artikel
+05/18/2016 12:55:38
+BESTAND_VERAENDERT

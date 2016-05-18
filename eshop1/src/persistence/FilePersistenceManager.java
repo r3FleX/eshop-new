@@ -288,7 +288,8 @@ public class FilePersistenceManager implements PersistenceManager {
 		if (zeile == null) {
 			return null;
 		}
-		LagerEreignisTyp type = zeile;				
+		LagerEreignisTyp type = LagerEreignisTyp.valueOf(zeile);
+		//LagerEreignisTyp
 		return new Stats(atklNummer, name, bestand, date, type);
 	}
 
@@ -297,7 +298,7 @@ public class FilePersistenceManager implements PersistenceManager {
 		this.schreibeDaten(s.getAtklname());
 		this.schreibeDaten(new Integer(s.getBestand()).toString());
 		this.schreibeDaten(s.getDatum());
-		this.schreibeDaten(new String(s.getType()).toString());
+		this.schreibeDaten(s.getType().toString());
 		return true;
 	}
 }
