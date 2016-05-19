@@ -37,6 +37,7 @@ import domain.exceptions.AccountExistiertNichtException;
 import domain.exceptions.ArtikelExistiertBereitsException;
 import domain.exceptions.ArtikelExistiertNichtException;
 import domain.exceptions.StatExistiertBereitsException;
+import ui.GuiModule.Gui_suchepanel;
 import valueobjects.Account;
 import valueobjects.Artikel;
 import valueobjects.Kunde;
@@ -56,8 +57,11 @@ public class GUI_2 extends JFrame implements ActionListener{
 	private JPasswordField passTextField;
 
 	public GUI_2(String datei) {
-		super("Shop");
-
+		setTitle("E-Shop");
+		setSize(800, 600); //fenstergröße
+		setResizable(false);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
 		try {
 			shop = new Shopverwaltung(datei);
 
@@ -68,29 +72,10 @@ public class GUI_2 extends JFrame implements ActionListener{
 	}
 	
 	private void initialize() {
-		setTitle("E-Shop");
-		setSize(800, 600);
-		
-
-		//TOP PANEL (LOGIN PANEL)
-		JPanel loginPanel = new JPanel();
-		
-		loginPanel.setLayout(new GridLayout(2, 3));
-		loginPanel.add(new JLabel("Name"));
-		loginPanel.add(new JLabel("Passwort"));
-		loginPanel.add(new JLabel(""));
-		
-		nameTextField = new JTextField();
-		passTextField = new JPasswordField();
-		loginPanel.add(nameTextField);
-		loginPanel.add(passTextField);
-		
-		//LoginButton
-		JButton loginButton = new JButton("Login");
-		loginPanel.add(loginButton);
-		
-		loginPanel.setBorder(BorderFactory.createTitledBorder("Login"));
-		
+		//Inhalt der Startseite festlegen
+		setLayout(new BorderLayout());
+		Gui_suchepanel suchPanel = new Gui_suchepanel();
+		add(suchPanel.getSuchPanel(), BorderLayout.NORTH);	
 		
 		//MAIN PANEL
 		JPanel mainPanel = new JPanel();
@@ -134,8 +119,6 @@ public class GUI_2 extends JFrame implements ActionListener{
 
 		artikelPanel.add(scrollPane);
 		
-		// Inhalt des Frames zusammenbauen	
-		add(loginPanel, BorderLayout.NORTH);
 		add(artikelPanel, BorderLayout.CENTER);
 		//artikelPanel.setLayout(new GridLayout(1,2));
 		
