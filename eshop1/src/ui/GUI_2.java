@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -52,9 +53,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 	private JTextField searchTextField;
 	private JTextField nameTextField;
 	private JPasswordField passTextField;
-	private JList<String> buecherListe;
-	private JTable buecherTabelle;
-	
+
 	public GUI_2(String datei) {
 		super("Shop");
 
@@ -95,13 +94,54 @@ public class GUI_2 extends JFrame implements ActionListener{
 		//MAIN PANEL
 		JPanel mainPanel = new JPanel();
 		
+		//Artikel
+		JPanel artikelPanel = new JPanel();
+		artikelPanel.setBorder(BorderFactory.createTitledBorder("Artikel"));
 		
+		Vector spalten = new Vector();
+		spalten.add("Nummer");
+		spalten.add("Name");
+		spalten.add("Bestand");
+		spalten.add("Preis");
+		spalten.add("Packungsgröße");
+		spalten.add("Massengut");
+		
+		// TableModel als "Datencontainer" anlegen:
+		ArtikelTableModel tModel = new ArtikelTableModel(new Vector<Artikel>(), spalten);
+		
+		// JTable-Objekt erzeugen und mit Datenmodell // initialisieren:
+		JTable ausgabeTabelle = new JTable(tModel);
+		
+		// JTable in ScrollPane platzieren:
+		JScrollPane scrollPane = new JScrollPane(ausgabeTabelle);
+		ausgabeTabelle.setAutoCreateRowSorter(true);
+		//scrollPane.setViewportView(ausgabeTabelle);
+
+		tModel.setDataVector(shop.gibAlleArtikel());
+		
+		ausgabeTabelle = new JTable(tModel);
+		//ausgabeTabelle.setPreferredSize(new Dimension(400, 600));
+		
+		// JTable in ScrollPane platzieren:
+		scrollPane = new JScrollPane(ausgabeTabelle);
+		ausgabeTabelle.setAutoCreateRowSorter(true);
+		scrollPane.setViewportView(ausgabeTabelle);
+
+		// Anzeige der Artikelliste auch in der Kunden-Ansicht
+		tModel.setDataVector(shop.gibAlleArtikel());
+
+		artikelPanel.add(scrollPane);
+		
+		//pack();
 		
 		
 		// Inhalt des Frames zusammenbauen
 		setLayout(new BorderLayout());
+		
 		add(loginPanel, BorderLayout.NORTH);
-
+		add(artikelPanel, BorderLayout.CENTER);
+		//add(artikelPanel, FlowLayout());
+		//artikelPanel.setLayout(new FlowLayout());
 		//setVisible(true);	
 	}
 	
