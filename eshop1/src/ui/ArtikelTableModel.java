@@ -19,12 +19,6 @@ public class ArtikelTableModel extends DefaultTableModel {
 	private float gesamtpreis = 0.0f;
 	private int anzahl = 0;
 	
-	/**
-	 * Konstruktor
-	 * 
-	 * @param articles
-	 * @param columnNames
-	 */
 	
 	public ArtikelTableModel(List<Artikel> articles, Vector columnNames) {
 		// Ober-Objekt der Klasse DefaultTableModel initialisieren
@@ -37,14 +31,7 @@ public class ArtikelTableModel extends DefaultTableModel {
 		setDataVector(articles);
 	}
 	
-	
-	/**
-	 * Tabellendaten hinzufügen
-	 * 
-	 * @param articles
-	 */
-	
-	
+	// Tabellendaten hinzufügen
 	public void setDataVector(List<Artikel> articles) {
 		// Bücher aus Liste aufbereiten:
 		// DefaultTableModel erwartet Repräsentation der Tabellendaten

@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -107,44 +108,43 @@ public class GUI_2 extends JFrame implements ActionListener{
 		spalten.add("Massengut");
 		
 		// TableModel als "Datencontainer" anlegen:
-		ArtikelTableModel tModel = new ArtikelTableModel(new Vector<Artikel>(), spalten);
+		ArtikelTableModel artikeltable = new ArtikelTableModel(new Vector<Artikel>(), spalten);
 		
-		// JTable-Objekt erzeugen und mit Datenmodell // initialisieren:
-		JTable ausgabeTabelle = new JTable(tModel);
+		// JTable-Objekt erzeugen und mit Datenmodell initialisieren:
+		JTable ausgabeTabelle = new JTable(artikeltable);
 		
 		// JTable in ScrollPane platzieren:
 		JScrollPane scrollPane = new JScrollPane(ausgabeTabelle);
-		ausgabeTabelle.setAutoCreateRowSorter(true);
+		/********
+		//ausgabeTabelle.setAutoCreateRowSorter(true);
 		//scrollPane.setViewportView(ausgabeTabelle);
 
-		tModel.setDataVector(shop.gibAlleArtikel());
+		//tModel.setDataVector(shop.gibAlleArtikel());
 		
-		ausgabeTabelle = new JTable(tModel);
+		//ausgabeTabelle = new JTable(tModel);
 		//ausgabeTabelle.setPreferredSize(new Dimension(400, 600));
 		
 		// JTable in ScrollPane platzieren:
-		scrollPane = new JScrollPane(ausgabeTabelle);
-		ausgabeTabelle.setAutoCreateRowSorter(true);
-		scrollPane.setViewportView(ausgabeTabelle);
-
+		//scrollPane = new JScrollPane(ausgabeTabelle);
+		//ausgabeTabelle.setAutoCreateRowSorter(true);
+		//scrollPane.setViewportView(ausgabeTabelle);
+		********/
 		// Anzeige der Artikelliste auch in der Kunden-Ansicht
-		tModel.setDataVector(shop.gibAlleArtikel());
+		artikeltable.setDataVector(shop.gibAlleArtikel());
 
 		artikelPanel.add(scrollPane);
 		
-		//pack();
-		
-		
-		// Inhalt des Frames zusammenbauen
-		setLayout(new BorderLayout());
-		
+		// Inhalt des Frames zusammenbauen	
 		add(loginPanel, BorderLayout.NORTH);
 		add(artikelPanel, BorderLayout.CENTER);
-		//add(artikelPanel, FlowLayout());
-		//artikelPanel.setLayout(new FlowLayout());
-		//setVisible(true);	
+		//artikelPanel.setLayout(new GridLayout(1,2));
+		
+		/*String [][] inhalt = { {"Beatles","Help"}, {"Beatwatt","Is That All"}, {"ABBA","Waterloo"} };
+	    //String[] titel = {"Interpret", "Titel"};
+		//JTable table = new JTable(inhalt, titel);
+		add(new JScrollPane(table)); 
+		*/
 	}
-	
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
