@@ -36,8 +36,6 @@ public class Gui_suchepanel implements ActionListener {
 	public void setSuchPanel(JPanel suchPanel) {
 		this.suchPanel = suchPanel;
 	}
-
-	
 	
 	
 	@Override
@@ -45,6 +43,4 @@ public class Gui_suchepanel implements ActionListener {
 		System.out.println("Some tests");
 		
 	}	
-	
-
 }
