@@ -37,6 +37,7 @@ import domain.exceptions.AccountExistiertNichtException;
 import domain.exceptions.ArtikelExistiertBereitsException;
 import domain.exceptions.ArtikelExistiertNichtException;
 import domain.exceptions.StatExistiertBereitsException;
+import ui.GuiModule.Gui_artikelpanel;
 import ui.GuiModule.Gui_suchepanel;
 import valueobjects.Account;
 import valueobjects.Artikel;
@@ -72,61 +73,16 @@ public class GUI_2 extends JFrame implements ActionListener{
 	}
 	
 	private void initialize() {
-		//Inhalt der Startseite festlegen
-		setLayout(new BorderLayout());
-		Gui_suchepanel suchPanel = new Gui_suchepanel();
-		add(suchPanel.getSuchPanel(), BorderLayout.NORTH);	
-		
 		//MAIN PANEL
 		JPanel mainPanel = new JPanel();
-		
-		//Artikel
-		JPanel artikelPanel = new JPanel();
-		artikelPanel.setBorder(BorderFactory.createTitledBorder("Artikel"));
-		
-		Vector spalten = new Vector();
-		spalten.add("Nummer");
-		spalten.add("Name");
-		spalten.add("Bestand");
-		spalten.add("Preis");
-		spalten.add("Packungsgröße");
-		spalten.add("Massengut");
-		
-		// TableModel als "Datencontainer" anlegen:
-		ArtikelTableModel artikeltable = new ArtikelTableModel(new Vector<Artikel>(), spalten);
-		
-		// JTable-Objekt erzeugen und mit Datenmodell initialisieren:
-		JTable ausgabeTabelle = new JTable(artikeltable);
-		
-		// JTable in ScrollPane platzieren:
-		JScrollPane scrollPane = new JScrollPane(ausgabeTabelle);
-		/********
-		//ausgabeTabelle.setAutoCreateRowSorter(true);
-		//scrollPane.setViewportView(ausgabeTabelle);
-
-		//tModel.setDataVector(shop.gibAlleArtikel());
-		
-		//ausgabeTabelle = new JTable(tModel);
-		//ausgabeTabelle.setPreferredSize(new Dimension(400, 600));
-		
-		// JTable in ScrollPane platzieren:
-		//scrollPane = new JScrollPane(ausgabeTabelle);
-		//ausgabeTabelle.setAutoCreateRowSorter(true);
-		//scrollPane.setViewportView(ausgabeTabelle);
-		********/
-		// Anzeige der Artikelliste auch in der Kunden-Ansicht
-		artikeltable.setDataVector(shop.gibAlleArtikel());
-
-		artikelPanel.add(scrollPane);
-		
-		add(artikelPanel, BorderLayout.CENTER);
-		//artikelPanel.setLayout(new GridLayout(1,2));
-		
-		/*String [][] inhalt = { {"Beatles","Help"}, {"Beatwatt","Is That All"}, {"ABBA","Waterloo"} };
-	    //String[] titel = {"Interpret", "Titel"};
-		//JTable table = new JTable(inhalt, titel);
-		add(new JScrollPane(table)); 
-		*/
+		setLayout(new BorderLayout());
+		//Inhalt der Startseite festlegen
+		//suche
+		Gui_suchepanel suchPanel = new Gui_suchepanel();
+		add(suchPanel.getSuchPanel(), BorderLayout.NORTH);	
+		//Artikelliste
+		Gui_artikelpanel artikelPanel = new Gui_artikelpanel(shop.gibAlleArtikel());			
+		add(artikelPanel.getArtikelPanel(), BorderLayout.CENTER);
 	}
 	
 	public static void main(String[] args) {
