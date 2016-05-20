@@ -1,6 +1,7 @@
 package ui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -38,6 +39,7 @@ import domain.exceptions.ArtikelExistiertBereitsException;
 import domain.exceptions.ArtikelExistiertNichtException;
 import domain.exceptions.StatExistiertBereitsException;
 import ui.GuiModule.Gui_artikelpanel;
+import ui.GuiModule.Gui_loginpanel;
 import ui.GuiModule.Gui_suchepanel;
 import valueobjects.Account;
 import valueobjects.Artikel;
@@ -73,16 +75,35 @@ public class GUI_2 extends JFrame implements ActionListener{
 	}
 	
 	private void initialize() {
-		//MAIN PANEL
+		//LayoutPanel
 		JPanel mainPanel = new JPanel();
-		setLayout(new BorderLayout());
-		//Inhalt der Startseite festlegen
+		JPanel navframe = new JPanel();		
+		JPanel contentframe = new JPanel();
+		//
+		mainPanel.setLayout(new BorderLayout());
+		navframe.setLayout(new BorderLayout());
+		contentframe.setLayout(new BorderLayout());
+		
+		//standart anzeige Laden
+		// Login + account erstellen
+		//TODO login + account integrieren
+		Gui_loginpanel loginPanel = new Gui_loginpanel();
+		navframe.add(loginPanel.getloginPanel(), BorderLayout.NORTH);			
+		
+		//content frame 		
 		//suche
 		Gui_suchepanel suchPanel = new Gui_suchepanel();
-		add(suchPanel.getSuchPanel(), BorderLayout.NORTH);	
+		contentframe.add(suchPanel.getSuchPanel(), BorderLayout.NORTH);	
 		//Artikelliste
 		Gui_artikelpanel artikelPanel = new Gui_artikelpanel(shop.gibAlleArtikel());			
-		add(artikelPanel.getArtikelPanel(), BorderLayout.CENTER);
+		contentframe.add(artikelPanel.getArtikelPanel(), BorderLayout.CENTER);
+		
+		//zusammenbasteln
+		
+		mainPanel.add(navframe,BorderLayout.NORTH);
+		mainPanel.add(contentframe,BorderLayout.CENTER);
+		//ausgeben
+		add(mainPanel);
 	}
 	
 	public static void main(String[] args) {
