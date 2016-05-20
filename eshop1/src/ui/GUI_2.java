@@ -94,7 +94,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 		JMenu mnHilfe = new JMenu("Hilfe");
 		menuBar.add(mnHilfe);
 
-		JMenuItem menuItem = new JMenuItem("Artikel kaufen?");
+		JMenuItem menuItem = new JMenuItem("Wie Artikel kaufen?");
 		mnHilfe.add(menuItem);
 		menuItem.addActionListener(this);
 
@@ -162,22 +162,10 @@ public class GUI_2 extends JFrame implements ActionListener{
 		//PANELS ANLEGEN
 		add(loginPanel, BorderLayout.NORTH); //LoginPanel
 		add(suchPanel, BorderLayout.SOUTH); //SuchPanel
+	
 		add(new JScrollPane(artikelPanel));	//ArtikelPanel	
 		artikelPanel.add(scrollPane);
 		artikelPanel.setLayout(new GridLayout());
-	}
-	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GUI_2 frame = new GUI_2("Shop");
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -257,7 +245,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 			}
 		}
 		//Für Menü Button "Artikel kaufen?"
-		else if (command.equals("Artikel kaufen?")) {
+		else if (command.equals("Wie Artikel kaufen?")) {
 			JOptionPane.showMessageDialog(null,
 				"Willkommen im E-Shop. \n Wenn Sie Artikel kaufen wollen, dann registrieren"
 				+ "Sie sich und loggen Sie sich ein! \n Anschließend können Sie die gewünschten "
@@ -271,5 +259,17 @@ public class GUI_2 extends JFrame implements ActionListener{
 					+ "Daniel Böckmann \n\n" 
 					+ "HS Bremen, Prog 2, SS 2016");
 		}
+	}
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					GUI_2 frame = new GUI_2("Shop");
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 }
