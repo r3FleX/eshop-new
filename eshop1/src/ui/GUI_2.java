@@ -87,6 +87,10 @@ public class GUI_2 extends JFrame implements ActionListener{
 		JMenu mnAccount = new JMenu("Account");
 		menuBar.add(mnAccount);
 		
+		JMenuItem mnLogin = new JMenuItem("Einloggen");
+		mnAccount.add(mnLogin);
+		mnLogin.addActionListener(this);
+		
 		JMenuItem mnReg = new JMenuItem("Registrieren");
 		mnReg.addActionListener(this);
 		mnAccount.add(mnReg);
@@ -102,24 +106,6 @@ public class GUI_2 extends JFrame implements ActionListener{
 		mnHilfe.add(mntmber);
 		mntmber.addActionListener(this);
 
-		//Login Bereich
-		JPanel loginPanel = new JPanel();
-		
-		loginPanel.setLayout(new GridLayout(2, 3));
-		loginPanel.add(new JLabel("Name"));
-		loginPanel.add(new JLabel("Passwort"));
-		loginPanel.add(new JLabel(""));
-		
-		nameTextField = new JTextField();
-		passTextField = new JPasswordField();
-		loginPanel.add(nameTextField);
-		loginPanel.add(passTextField);
-
-		JButton loginButton = new JButton("Login");
-		loginPanel.add(loginButton);
-		loginButton.addActionListener(this);
-		loginPanel.setBorder(BorderFactory.createTitledBorder("Login")); //Überschrift Login
-		
 		//Such Bereich
 		JPanel suchPanel = new JPanel();
 		suchPanel.setLayout(new GridLayout(1, 2));
@@ -160,8 +146,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 		artikeltable.setDataVector(shop.gibAlleArtikel());
 		
 		//PANELS ANLEGEN
-		add(loginPanel, BorderLayout.NORTH); //LoginPanel
-		add(suchPanel, BorderLayout.SOUTH); //SuchPanel
+		add(suchPanel, BorderLayout.NORTH); //SuchPanel
 	
 		add(new JScrollPane(artikelPanel));	//ArtikelPanel	
 		artikelPanel.add(scrollPane);
@@ -217,10 +202,30 @@ public class GUI_2 extends JFrame implements ActionListener{
 			registrieren.setVisible(true);
 		}
 		//Für Login Button
-		else if (command.equals("Login")) {
+		else if (command.equals("Einloggen")){
 
-			String name = nameTextField.getText();
-			String passwort = String.valueOf(passTextField.getPassword());
+			final JFrame login = new JFrame("Einloggen");
+
+			login.setSize(400, 300);
+			login.getContentPane().setLayout(new GridLayout(11, 1));
+
+			JLabel labelname = new JLabel("Name:");
+			login.getContentPane().add(labelname);
+
+			final JTextField nameFeld = new JTextField();
+			login.getContentPane().add(nameFeld);
+
+			JLabel labelpasswort = new JLabel("Passwort:");
+			login.getContentPane().add(labelpasswort);
+
+			final JPasswordField passwortFeld = new JPasswordField();
+			login.getContentPane().add(passwortFeld);
+			
+			login.setVisible(true);
+			
+			String name = nameFeld.getText();
+			String passwort = String.valueOf(passwortFeld.getPassword());
+			
 			try {
 				user = shop.loginAccount(name, passwort);
 			}
@@ -228,7 +233,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 				JOptionPane.showMessageDialog(null, ex.getMessage());
 			}
 			if (user instanceof Kunde) {
-
+				
 				JFrame kundeEingeloggt = new JFrame();
 
 				this.hauptscreen = this.getContentPane();
@@ -242,6 +247,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 
 				panel.setBorder(BorderFactory.createTitledBorder("Kundenbereich - Willkommen "+ user.getName() + "!"));
 				panel.setLayout(new GridLayout(1, 2));
+			
 			}
 		}
 		//Für Menü Button "Artikel kaufen?"
