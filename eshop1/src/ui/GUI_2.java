@@ -53,6 +53,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 	private JTextField numberField;
 	private JTextField searchTextField;
 	private JTextField nameTextField;
+	private JTextField suchenTextField;
 	private JPasswordField passTextField;
 	private JTextField textField;
 	private Account user;
@@ -101,7 +102,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 		mnHilfe.add(mntmber);
 		mntmber.addActionListener(this);
 
-		//TOP PANEL (LOGIN PANEL)
+		//Login Bereich
 		JPanel loginPanel = new JPanel();
 		
 		loginPanel.setLayout(new GridLayout(2, 3));
@@ -113,12 +114,23 @@ public class GUI_2 extends JFrame implements ActionListener{
 		passTextField = new JPasswordField();
 		loginPanel.add(nameTextField);
 		loginPanel.add(passTextField);
-		
-		//Login Bereich
+
 		JButton loginButton = new JButton("Login");
 		loginPanel.add(loginButton);
 		loginButton.addActionListener(this);
 		loginPanel.setBorder(BorderFactory.createTitledBorder("Login")); //Überschrift Login
+		
+		//Such Bereich
+		JPanel suchPanel = new JPanel();
+		suchPanel.setLayout(new GridLayout(1, 2));
+		
+		suchenTextField = new JTextField();
+		suchPanel.add(suchenTextField);
+		
+		JButton suchButton = new JButton("Suchen");
+		suchPanel.add(suchButton);
+		suchButton.addActionListener(this);
+		suchPanel.setBorder(BorderFactory.createTitledBorder("Suchen")); //Überschrift Suchen
 		
 		//MAIN PANEL
 		JPanel mainPanel = new JPanel();
@@ -147,10 +159,11 @@ public class GUI_2 extends JFrame implements ActionListener{
 		// Anzeige der Artikelliste auch in der Kunden-Ansicht
 		artikeltable.setDataVector(shop.gibAlleArtikel());
 		
-		add(loginPanel, BorderLayout.NORTH);
-		add(new JScrollPane(artikelPanel));
+		//PANELS ANLEGEN
+		add(loginPanel, BorderLayout.NORTH); //LoginPanel
+		add(suchPanel, BorderLayout.SOUTH); //SuchPanel
+		add(new JScrollPane(artikelPanel));	//ArtikelPanel	
 		artikelPanel.add(scrollPane);
-		//add(artikelPanel, BorderLayout.CENTER);
 		artikelPanel.setLayout(new GridLayout());
 	}
 	
