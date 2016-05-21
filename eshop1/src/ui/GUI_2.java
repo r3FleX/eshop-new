@@ -174,7 +174,6 @@ public class GUI_2 extends JFrame implements ActionListener{
 
 			JButton loginButton = new JButton("Login");
 			login.add(loginButton);
-			loginButton.addActionListener(this);;
 			
 			login.setVisible(true);
 			
@@ -193,6 +192,8 @@ public class GUI_2 extends JFrame implements ActionListener{
 				
 				if (user instanceof Kunde) {
 					System.out.println("Kunde eingeloggt");
+					JOptionPane.showMessageDialog(null,"Erfolgreich als Kunde eingeloggt!");
+					login.setVisible(false);
 					//loginPanel.setBorder(BorderFactory.createTitledBorder("Kundenbereich - Willkommen "+ user.getName() + "!"));
 				}
 				else if (user instanceof Mitarbeiter){
@@ -241,10 +242,38 @@ public class GUI_2 extends JFrame implements ActionListener{
 			final JTextField ortFeld = new JTextField();
 			registrieren.getContentPane().add(ortFeld);
 
-			JButton regis = new JButton("Registrieren");
-			registrieren.getContentPane().add(regis);
+			JButton regButton = new JButton("Registrieren");
+			registrieren.getContentPane().add(regButton);
 			
-			registrieren.setVisible(true);
+			//Für Menü Account -> Registrieren -> Registrieren Button
+			regButton.addActionListener(new ActionListener() { 
+				
+				int plz;
+				
+				public void actionPerformed(ActionEvent arg0) {
+					//hole Name, Passwort, Starsse, PLZ und Ort aus Textfelder
+					String name = nameFeld.getText();
+					String passwort = String.valueOf(passwortFeld.getPassword());
+					String strasse = adressFeld.getText();
+					plz = Integer.parseInt(plzFeld.getText());
+					String ort = ortFeld.getText();
+
+					try {
+						shop.fuegeKundenAccountEin(name, passwort, strasse, plz, ort);
+						try {
+							shop.schreibeKundendaten();
+							registrieren.setVisible(false);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					} catch (AccountExistiertBereitsException e1) {
+						JOptionPane.showMessageDialog(null, e1.getMessage());
+
+					}
+				}
+			});
+			
+			registrieren.setVisible(true);	
 		}
 		//Für Menü Hilfe -> Artikel kaufen?
 		else if (command.equals("Wie Artikel kaufen?")) {
