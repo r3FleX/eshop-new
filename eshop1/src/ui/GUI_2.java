@@ -171,16 +171,18 @@ public class GUI_2 extends JFrame implements ActionListener{
 
 			final JPasswordField passwortFeld = new JPasswordField();
 			login.add(passwortFeld);
-			
+
 			JButton loginButton = new JButton("Login");
 			login.add(loginButton);
 			loginButton.addActionListener(this);;
 			
 			login.setVisible(true);
-		}
-		//Für Menü Account -> Einloggen -> Login Button
-		else if (command.equals("Login")){
 			
+			//Für Menü Account -> Einloggen -> Login Button
+			loginButton.addActionListener(new ActionListener() { 
+				
+			public void actionPerformed(ActionEvent arg0) {
+				
 			//hole Name und Passwort aus Textfelder
 			String name = nameFeld.getText();
 			String passwort = String.valueOf(passwortFeld.getPassword());
@@ -200,6 +202,8 @@ public class GUI_2 extends JFrame implements ActionListener{
 				JOptionPane.showMessageDialog(null, ex.getMessage());
 			}
 	    }
+	  });
+	}
 		//Für Menü Account -> Registrieren Button
 		else if (command.equals("Registrieren")){
 			final JFrame registrieren = new JFrame("Kunde registrieren");
