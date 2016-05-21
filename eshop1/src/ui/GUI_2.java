@@ -242,15 +242,14 @@ public class GUI_2 extends JFrame implements ActionListener{
 			
 			registrieren.setVisible(true);
 		}
-		
-		//Für Menü Button "Artikel kaufen?"
+		//Für Menü Hilfe -> Artikel kaufen?
 		else if (command.equals("Wie Artikel kaufen?")) {
 			JOptionPane.showMessageDialog(null,
 				"Willkommen im E-Shop. \n Wenn Sie Artikel kaufen wollen, dann registrieren"
 				+ "Sie sich und loggen Sie sich ein! \n Anschließend können Sie die gewünschten "
 			    + "Artikel kaufen.");
 		}
-		//Für Menü Button "Über uns"
+		//Für Menü Hilfe -> Über uns
 		else if (command.equals("\u00DCber uns")) {
 			JOptionPane.showMessageDialog(null, "Entwickler: \n\n"
 					+ "Immanuel Zimmermann \n" 
