@@ -50,18 +50,10 @@ public class GUI_2 extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 1L;
 
 	private Shopverwaltung shop;
-	private JButton addButton;
-	private JTextField titleField;
-	private JTextField numberField;
-	private JTextField searchTextField;
-	private JTextField nameTextField;
 	private JTextField suchenTextField;
 	private JPasswordField passwortFeld;
 	private JTextField nameFeld;
-	private JPasswordField passwordField;
-	//private JTextField textField;
 	private Account user;
-	private Container hauptscreen = null;
 
 	public GUI_2(String datei) {
 		try {
@@ -75,9 +67,9 @@ public class GUI_2 extends JFrame implements ActionListener{
 	
 	private void initialize() {
 		setTitle("E-Shop");
-		setSize(800, 600);
+		setSize(800, 600); //Fenstergröße
 		
-		//Menü definieren
+		//Menü Bereich
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
@@ -121,9 +113,6 @@ public class GUI_2 extends JFrame implements ActionListener{
 		suchPanel.add(suchButton);
 		suchButton.addActionListener(this);
 		suchPanel.setBorder(BorderFactory.createTitledBorder("Suchen")); //Überschrift Suchen
-		
-		//MAIN PANEL
-		JPanel mainPanel = new JPanel();
 		
 		//Artikel Bereich
 		JPanel artikelPanel = new JPanel();
