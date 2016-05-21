@@ -153,7 +153,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 		artikelPanel.add(scrollPane);
 		artikelPanel.setLayout(new GridLayout());
 	}
-
+	
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
 		
@@ -229,25 +229,25 @@ public class GUI_2 extends JFrame implements ActionListener{
 			
 			login.setVisible(true);
 			
-		    if (command.equals("Login")){
-				System.out.println("Kunde eingeloggt");
-				String name = nameFeld.getText();
-				String passwort = String.valueOf(passwortFeld.getPassword());
-			
-				try {
-					user = shop.loginAccount(name, passwort);
-	
-					if (user instanceof Kunde) {
-						System.out.println("Kunde eingeloggt");
-					}
-					else if (user instanceof Mitarbeiter){
-						System.out.println("Mitarbeiter eingeloggt");
-					}
-				} catch (AccountExistiertNichtException ex) {
-					JOptionPane.showMessageDialog(null, ex.getMessage());
+			if (command.equals("Login")){
+			System.out.println("Kunde eingeloggt");
+			String name = nameFeld.getText();
+			String passwort = String.valueOf(passwortFeld.getPassword());
+		
+			try {
+				user = shop.loginAccount(name, passwort);
+
+				if (user instanceof Kunde) {
+					System.out.println("Kunde eingeloggt");
 				}
-		    }
-		}
+				else if (user instanceof Mitarbeiter){
+					System.out.println("Mitarbeiter eingeloggt");
+				}
+			} catch (AccountExistiertNichtException ex) {
+				JOptionPane.showMessageDialog(null, ex.getMessage());
+			}
+		  }
+	    }
 		//Für Menü Button "Artikel kaufen?"
 		else if (command.equals("Wie Artikel kaufen?")) {
 			JOptionPane.showMessageDialog(null,
