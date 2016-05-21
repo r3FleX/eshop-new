@@ -56,8 +56,10 @@ public class GUI_2 extends JFrame implements ActionListener{
 	private JTextField searchTextField;
 	private JTextField nameTextField;
 	private JTextField suchenTextField;
-	private JPasswordField passTextField;
-	private JTextField textField;
+	private JPasswordField passwortFeld;
+	private JTextField nameFeld;
+	private JPasswordField passwordField;
+	//private JTextField textField;
 	private Account user;
 	private Container hauptscreen = null;
 
@@ -157,11 +159,59 @@ public class GUI_2 extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
 		
-		//Für Beenden Button
+		//Für Menü Datei -> Beenden Button
 		if (command.equals("Beenden")) {
 			System.exit(0);
 		}
-		//Für Account Registrieren
+		//Für Menü Account -> Einloggen Button
+		else if(command.equals("Einloggen")){
+
+			final JFrame login = new JFrame("Einloggen");
+
+			login.setSize(200, 300);
+			login.getContentPane().setLayout(new GridLayout(7, 1));
+
+			JLabel labelname = new JLabel("Name:");
+			login.getContentPane().add(labelname);
+
+			final JTextField nameFeld = new JTextField();
+			login.getContentPane().add(nameFeld);
+
+			JLabel labelpasswort = new JLabel("Passwort:");
+			login.getContentPane().add(labelpasswort);
+
+			final JPasswordField passwortFeld = new JPasswordField();
+			login.getContentPane().add(passwortFeld);
+			
+			JButton loginButton = new JButton("Login");
+			login.add(loginButton);
+			loginButton.addActionListener(this);;
+			
+			login.setVisible(true);
+		}
+		//Für Menü Account -> Einloggen -> Login Button
+		else if (command.equals("Login")){
+			
+			//hole Name und Passwort aus Textfelder
+			String name = nameFeld.getText();
+			String passwort = String.valueOf(passwortFeld.getPassword());
+	
+			//überprüfe ob Kunde oder Mitarbeiter
+			try {
+				user = shop.loginAccount(name, passwort);
+				
+				if (user instanceof Kunde) {
+					System.out.println("Kunde eingeloggt");
+					//loginPanel.setBorder(BorderFactory.createTitledBorder("Kundenbereich - Willkommen "+ user.getName() + "!"));
+				}
+				else if (user instanceof Mitarbeiter){
+					System.out.println("Mitarbeiter eingeloggt");
+				}
+			} catch (AccountExistiertNichtException ex) {
+				JOptionPane.showMessageDialog(null, ex.getMessage());
+			}
+	    }
+		//Für Menü Account -> Registrieren Button
 		else if (command.equals("Registrieren")){
 			final JFrame registrieren = new JFrame("Kunde registrieren");
 
@@ -203,51 +253,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 			
 			registrieren.setVisible(true);
 		}
-		//Für Einloggen 
-		else if (command.equals("Einloggen")){
-
-			final JFrame login = new JFrame("Einloggen");
-
-			login.setSize(200, 300);
-			login.getContentPane().setLayout(new GridLayout(7, 1));
-
-			JLabel labelname = new JLabel("Name:");
-			login.getContentPane().add(labelname);
-
-			final JTextField nameFeld = new JTextField();
-			login.getContentPane().add(nameFeld);
-
-			JLabel labelpasswort = new JLabel("Passwort:");
-			login.getContentPane().add(labelpasswort);
-
-			final JPasswordField passwortFeld = new JPasswordField();
-			login.getContentPane().add(passwortFeld);
-			
-			JButton loginButton = new JButton("Login");
-			login.add(loginButton);
-			loginButton.addActionListener(this);;
-			
-			login.setVisible(true);
-			
-			if (command.equals("Login")){
-			System.out.println("Kunde eingeloggt");
-			String name = nameFeld.getText();
-			String passwort = String.valueOf(passwortFeld.getPassword());
 		
-			try {
-				user = shop.loginAccount(name, passwort);
-
-				if (user instanceof Kunde) {
-					System.out.println("Kunde eingeloggt");
-				}
-				else if (user instanceof Mitarbeiter){
-					System.out.println("Mitarbeiter eingeloggt");
-				}
-			} catch (AccountExistiertNichtException ex) {
-				JOptionPane.showMessageDialog(null, ex.getMessage());
-			}
-		  }
-	    }
 		//Für Menü Button "Artikel kaufen?"
 		else if (command.equals("Wie Artikel kaufen?")) {
 			JOptionPane.showMessageDialog(null,
