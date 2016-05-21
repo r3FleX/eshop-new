@@ -10,6 +10,6 @@ public class AccountExistiertNichtException extends Exception {
 	private static final long serialVersionUID = 1L;
 
 	public AccountExistiertNichtException(String name, String pwd) {
-		super("Account mit Name " + name + " oder Passwort nicht gefunden!");
+		super("Account mit Name" + name + " oder Passwort nicht gefunden!");
 	}
 }

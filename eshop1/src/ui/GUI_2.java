@@ -37,6 +37,7 @@ import domain.exceptions.AccountExistiertBereitsException;
 import domain.exceptions.AccountExistiertNichtException;
 import domain.exceptions.ArtikelExistiertBereitsException;
 import domain.exceptions.ArtikelExistiertNichtException;
+import domain.exceptions.RegistrierenFehlerhaftException;
 import domain.exceptions.StatExistiertBereitsException;
 import ui.GuiModule.Gui_suchepanel;
 import valueobjects.Account;
@@ -209,57 +210,56 @@ public class GUI_2 extends JFrame implements ActionListener{
 	}
 		//Für Menü Account -> Registrieren Button
 		else if (command.equals("Registrieren")){
-			final JFrame registrieren = new JFrame("Kunde registrieren");
+			final JFrame registrieren = new JFrame();
 
 			registrieren.setSize(400, 300);
-			registrieren.getContentPane().setLayout(new GridLayout(11, 1));
+			registrieren.setLayout(new GridLayout(11, 1));
 
 			JLabel name = new JLabel("Name:");
-			registrieren.getContentPane().add(name);
+			registrieren.add(name);
 
 			final JTextField nameFeld = new JTextField();
-			registrieren.getContentPane().add(nameFeld);
+			registrieren.add(nameFeld);
 
 			JLabel passwort = new JLabel("Passwort:");
-			registrieren.getContentPane().add(passwort);
+			registrieren.add(passwort);
 
 			final JPasswordField passwortFeld = new JPasswordField();
-			registrieren.getContentPane().add(passwortFeld);
+			registrieren.add(passwortFeld);
 
 			JLabel adresse = new JLabel("Adresse:");
-			registrieren.getContentPane().add(adresse);
+			registrieren.add(adresse);
 
 			final JTextField adressFeld = new JTextField();
-			registrieren.getContentPane().add(adressFeld);
+			registrieren.add(adressFeld);
 
 			JLabel plz = new JLabel("Postleitzahl:");
-			registrieren.getContentPane().add(plz);
+			registrieren.add(plz);
 
 			final JTextField plzFeld = new JTextField();
-			registrieren.getContentPane().add(plzFeld);
+			registrieren.add(plzFeld);
 
 			JLabel wohnort = new JLabel("Ort:");
-			registrieren.getContentPane().add(wohnort);
+			registrieren.add(wohnort);
 
 			final JTextField ortFeld = new JTextField();
-			registrieren.getContentPane().add(ortFeld);
+			registrieren.add(ortFeld);
 
 			JButton regButton = new JButton("Registrieren");
-			registrieren.getContentPane().add(regButton);
+			registrieren.add(regButton);
 			
 			//Für Menü Account -> Registrieren -> Registrieren Button
 			regButton.addActionListener(new ActionListener() { 
-				
-				int plz;
-				
+		
 				public void actionPerformed(ActionEvent arg0) {
+						
 					//hole Name, Passwort, Starsse, PLZ und Ort aus Textfelder
 					String name = nameFeld.getText();
 					String passwort = String.valueOf(passwortFeld.getPassword());
 					String strasse = adressFeld.getText();
-					plz = Integer.parseInt(plzFeld.getText());
+					int plz = Integer.parseInt(plzFeld.getText());
 					String ort = ortFeld.getText();
-
+					
 					try {
 						shop.fuegeKundenAccountEin(name, passwort, strasse, plz, ort);
 						try {
@@ -270,12 +270,10 @@ public class GUI_2 extends JFrame implements ActionListener{
 						}
 					} catch (AccountExistiertBereitsException e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage());
-
 					}
 				}
 			});
-			
-			registrieren.setVisible(true);	
+			registrieren.setVisible(true);
 		}
 		//Für Menü Hilfe -> Artikel kaufen?
 		else if (command.equals("Wie Artikel kaufen?")) {
