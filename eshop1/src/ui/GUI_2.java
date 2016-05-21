@@ -155,22 +155,22 @@ public class GUI_2 extends JFrame implements ActionListener{
 		//Für Menü Account -> Einloggen Button
 		else if(command.equals("Einloggen")){
 
-			final JFrame login = new JFrame("Einloggen");
+			final JFrame login = new JFrame();
 
 			login.setSize(200, 300);
-			login.getContentPane().setLayout(new GridLayout(7, 1));
+			login.setLayout(new GridLayout(7, 1));
 
 			JLabel labelname = new JLabel("Name:");
-			login.getContentPane().add(labelname);
+			login.add(labelname);
 
 			final JTextField nameFeld = new JTextField();
-			login.getContentPane().add(nameFeld);
+			login.add(nameFeld);
 
 			JLabel labelpasswort = new JLabel("Passwort:");
-			login.getContentPane().add(labelpasswort);
+			login.add(labelpasswort);
 
 			final JPasswordField passwortFeld = new JPasswordField();
-			login.getContentPane().add(passwortFeld);
+			login.add(passwortFeld);
 			
 			JButton loginButton = new JButton("Login");
 			login.add(loginButton);
