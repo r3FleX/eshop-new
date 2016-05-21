@@ -193,11 +193,13 @@ public class GUI_2 extends JFrame implements ActionListener{
 				if (user instanceof Kunde) {
 					System.out.println("Kunde eingeloggt");
 					JOptionPane.showMessageDialog(null,"Erfolgreich als Kunde eingeloggt!");
-					login.setVisible(false);
+					login.setVisible(false); //Login Eingabefenster schlieﬂen
 					//loginPanel.setBorder(BorderFactory.createTitledBorder("Kundenbereich - Willkommen "+ user.getName() + "!"));
 				}
 				else if (user instanceof Mitarbeiter){
 					System.out.println("Mitarbeiter eingeloggt");
+					JOptionPane.showMessageDialog(null,"Erfolgreich als Mitarbeiter eingeloggt!");
+					login.setVisible(false); //Login Eingabefenster schlieﬂen
 				}
 			} catch (AccountExistiertNichtException ex) {
 				JOptionPane.showMessageDialog(null, ex.getMessage());
