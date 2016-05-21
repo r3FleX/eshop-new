@@ -16,6 +16,7 @@ import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -42,6 +43,7 @@ import valueobjects.Account;
 import valueobjects.Artikel;
 import valueobjects.Kunde;
 import valueobjects.Mitarbeiter;
+import valueobjects.Warenkorb;
 
 public class GUI_2 extends JFrame implements ActionListener{
 
@@ -147,7 +149,6 @@ public class GUI_2 extends JFrame implements ActionListener{
 		
 		//PANELS ANLEGEN
 		add(suchPanel, BorderLayout.NORTH); //SuchPanel
-	
 		add(new JScrollPane(artikelPanel));	//ArtikelPanel	
 		artikelPanel.add(scrollPane);
 		artikelPanel.setLayout(new GridLayout());
@@ -155,6 +156,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
+		
 		//Für Beenden Button
 		if (command.equals("Beenden")) {
 			System.exit(0);
@@ -201,13 +203,13 @@ public class GUI_2 extends JFrame implements ActionListener{
 			
 			registrieren.setVisible(true);
 		}
-		//Für Login Button
+		//Für Einloggen 
 		else if (command.equals("Einloggen")){
 
 			final JFrame login = new JFrame("Einloggen");
 
-			login.setSize(400, 300);
-			login.getContentPane().setLayout(new GridLayout(11, 1));
+			login.setSize(200, 300);
+			login.getContentPane().setLayout(new GridLayout(7, 1));
 
 			JLabel labelname = new JLabel("Name:");
 			login.getContentPane().add(labelname);
@@ -221,34 +223,30 @@ public class GUI_2 extends JFrame implements ActionListener{
 			final JPasswordField passwortFeld = new JPasswordField();
 			login.getContentPane().add(passwortFeld);
 			
+			JButton loginButton = new JButton("Login");
+			login.add(loginButton);
+			loginButton.addActionListener(this);;
+			
 			login.setVisible(true);
 			
-			String name = nameFeld.getText();
-			String passwort = String.valueOf(passwortFeld.getPassword());
+		    if (command.equals("Login")){
+				System.out.println("Kunde eingeloggt");
+				String name = nameFeld.getText();
+				String passwort = String.valueOf(passwortFeld.getPassword());
 			
-			try {
-				user = shop.loginAccount(name, passwort);
-			}
-			catch (AccountExistiertNichtException ex) {
-				JOptionPane.showMessageDialog(null, ex.getMessage());
-			}
-			if (user instanceof Kunde) {
-				
-				JFrame kundeEingeloggt = new JFrame();
-
-				this.hauptscreen = this.getContentPane();
-
-				Container container = kundeEingeloggt.getContentPane();
-				setContentPane(container);
-				container.setLayout(new GridLayout(1, 2));
-
-				JPanel panel = new JPanel();
-				container.add(panel);
-
-				panel.setBorder(BorderFactory.createTitledBorder("Kundenbereich - Willkommen "+ user.getName() + "!"));
-				panel.setLayout(new GridLayout(1, 2));
-			
-			}
+				try {
+					user = shop.loginAccount(name, passwort);
+	
+					if (user instanceof Kunde) {
+						System.out.println("Kunde eingeloggt");
+					}
+					else if (user instanceof Mitarbeiter){
+						System.out.println("Mitarbeiter eingeloggt");
+					}
+				} catch (AccountExistiertNichtException ex) {
+					JOptionPane.showMessageDialog(null, ex.getMessage());
+				}
+		    }
 		}
 		//Für Menü Button "Artikel kaufen?"
 		else if (command.equals("Wie Artikel kaufen?")) {

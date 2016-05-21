@@ -91,7 +91,7 @@ public class Shopverwaltung {
 		//delegieren an meineArtikel (Artikelverwaltung)
 		return meineArtikel.sucheArtikel(artname);
 	}
-	//F�ge Mitarbeiter Account ein	
+	//Fuege Mitarbeiter Account ein	
 	public boolean fuegeMitarbeiterAccountEin(String name, String passwort) throws AccountExistiertBereitsException{
 			
 			// Accountnummer wird zugewiesen (AccountBestand + 1)
@@ -106,7 +106,7 @@ public class Shopverwaltung {
 			return true;
 		}
 	
-	//F�ge Kunden Account ein	
+	//Fuege Kunden Account ein	
 	public boolean fuegeKundenAccountEin(String name, String passwort, String strasse, int plz, String ort) throws AccountExistiertBereitsException {
 		
 		// Accountnummer wird zugewiesen (AccountBestand + 1)
@@ -122,7 +122,7 @@ public class Shopverwaltung {
 	}
 	
 	
-	//Methode zur �berpr�fung des Warenkorbs zum Kauf (Bestandsabfragen etc.)
+	//Methode zur Ueberpruefung des Warenkorbs zum Kauf (Bestandsabfragen etc.)
 	
 	
 	public HashMap<Artikel, Integer> pruefeKauf(Kunde user) {
@@ -134,7 +134,7 @@ public class Shopverwaltung {
 	//Methode zur Kaufabwicklung
 	public Rechnung kaufAbwickeln(Kunde kaeufer) throws IOException{
 		
-		// aus Lager abbuchen (prüfen!)
+		// aus Lager abbuchen (pruefen!)
 		
 		Rechnung rechnung = new Rechnung(kaeufer);
 
