@@ -163,6 +163,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 		
 		//PANELS ANLEGEN
 		add(suchPanel, BorderLayout.NORTH); //SuchPanel
+											
 		add(new JScrollPane(artikelPanel));	//ArtikelPanel	
 		artikelPanel.add(scrollPane);
 		artikelPanel.setLayout(new GridLayout());
