@@ -1,6 +1,7 @@
 package ui.GuiModule;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.util.List;
 import java.util.Vector;
 
@@ -16,10 +17,12 @@ public class Gui_artikelpanel {
 	
 	private JPanel artikelPanel;
 	public Gui_artikelpanel(List<Artikel> artikelliste) {
-		//Artikel
-		artikelPanel = new JPanel();
-		artikelPanel.setBorder(BorderFactory.createTitledBorder("Artikel"));		
-		Vector spalten = new Vector();
+		//Artikel Bereich
+		JPanel artikelPanel = new JPanel();
+		artikelPanel.setLayout(new GridLayout());
+		artikelPanel.setBorder(BorderFactory.createTitledBorder("Artikel")); //Überschrift Artikel
+				
+		Vector spalten = new Vector();		
 		spalten.add("Nummer");
 		spalten.add("Name");
 		spalten.add("Bestand");
@@ -35,23 +38,11 @@ public class Gui_artikelpanel {
 		
 		// JTable in ScrollPane platzieren:
 		JScrollPane scrollPane = new JScrollPane(ausgabeTabelle);
-		/********
-		//ausgabeTabelle.setAutoCreateRowSorter(true);
-		//scrollPane.setViewportView(ausgabeTabelle);
-	
-		//tModel.setDataVector(shop.gibAlleArtikel());
-		
-		//ausgabeTabelle = new JTable(tModel);
-		//ausgabeTabelle.setPreferredSize(new Dimension(400, 600));
-		
-		// JTable in ScrollPane platzieren:
-		//scrollPane = new JScrollPane(ausgabeTabelle);
-		//ausgabeTabelle.setAutoCreateRowSorter(true);
-		//scrollPane.setViewportView(ausgabeTabelle);
-		********/
+				
 		// Anzeige der Artikelliste auch in der Kunden-Ansicht
 		artikeltable.setDataVector(artikelliste);
 		artikelPanel.add(scrollPane);
+		
 		setArtikelPanel(artikelPanel);
 	}
 	public JPanel getArtikelPanel() {

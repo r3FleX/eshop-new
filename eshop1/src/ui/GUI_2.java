@@ -42,7 +42,10 @@ import domain.exceptions.ArtikelExistiertNichtException;
 import domain.exceptions.BestandUeberschrittenException;
 import domain.exceptions.RegistrierenFehlerhaftException;
 import domain.exceptions.StatExistiertBereitsException;
+import ui.GuiModule.Gui_artikelpanel;
+import ui.GuiModule.Gui_loginpanel;
 import ui.GuiModule.Gui_suchepanel;
+import ui.GuiModule.Gui_warenkorbpanel;
 import valueobjects.Account;
 import valueobjects.Artikel;
 import valueobjects.Kunde;
@@ -62,6 +65,11 @@ public class GUI_2 extends JFrame implements ActionListener{
 	JLabel gesamt = new JLabel();
 
 	public GUI_2(String datei) {
+		setTitle("E-Shop");
+		setSize(800, 600); //Fenstergröße
+		setResizable(false);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
 		try {
 			shop = new Shopverwaltung(datei);
 
@@ -72,8 +80,6 @@ public class GUI_2 extends JFrame implements ActionListener{
 	}
 	
 	private void initialize() {
-		setTitle("E-Shop");
-		setSize(800, 600); //Fenstergröße
 		
 		//Menü Bereich
 		JMenuBar menuBar = new JMenuBar();
@@ -107,67 +113,40 @@ public class GUI_2 extends JFrame implements ActionListener{
 		JMenuItem mntmber = new JMenuItem("\u00DCber uns");
 		mnHilfe.add(mntmber);
 		mntmber.addActionListener(this);
-
-		//Such Bereich
-		JPanel suchPanel = new JPanel();
-		suchPanel.setLayout(new GridLayout(1, 2));
 		
-		suchenTextField = new JTextField();
-		suchPanel.add(suchenTextField);
+		//LayoutPanel
+		JPanel mainPanel = new JPanel();
+		JPanel navframe = new JPanel();		
+		JPanel contentframe = new JPanel();
+		//
+		mainPanel.setLayout(new BorderLayout());
+		navframe.setLayout(new BorderLayout());
+		contentframe.setLayout(new BorderLayout());
 		
-		JButton suchButton = new JButton("Suchen");
-		suchPanel.add(suchButton);
-		suchButton.addActionListener(this);
-		suchPanel.setBorder(BorderFactory.createTitledBorder("Suchen")); //Überschrift Suchen
+		//standart anzeige Laden
+		// Login + account erstellen
+		//TODO login + account integrieren
+		Gui_loginpanel loginPanel = new Gui_loginpanel();
+	//	navframe.add(loginPanel.getloginPanel(), BorderLayout.NORTH);			
 		
-		//Artikel Bereich
-		JPanel artikelPanel = new JPanel();
-		artikelPanel.setBorder(BorderFactory.createTitledBorder("Artikel")); //Überschrift Artikel
+		//content frame 		
+		//suche
+		Gui_suchepanel suchPanel = new Gui_suchepanel(shop);
+		contentframe.add(suchPanel.getSuchPanel(), BorderLayout.NORTH);	
+		//Artikelliste
+		Gui_artikelpanel artikelPanel = new Gui_artikelpanel(shop.gibAlleArtikel());			
+		contentframe.add(artikelPanel.getArtikelPanel(), BorderLayout.CENTER);
 		
-		Vector spalten = new Vector();
+		//warenkorb
+		Gui_warenkorbpanel warenkorbpanel = new Gui_warenkorbpanel();			
+		contentframe.add(warenkorbpanel.getWarenkorbPanel(), BorderLayout.SOUTH);		
 		
-		spalten.add("Nummer");
-		spalten.add("Name");
-		spalten.add("Bestand");
-		spalten.add("Preis");
-		spalten.add("Packungsgröße");
-		spalten.add("Massengut");
+		//zusammenbasteln		
 		
-		// TableModel als "Datencontainer" anlegen:
-		ArtikelTableModel artikeltable = new ArtikelTableModel(new Vector<Artikel>(), spalten);
-		
-		// JTable-Objekt erzeugen und mit Datenmodell initialisieren:
-		JTable ausgabeTabelle = new JTable(artikeltable);
-		
-		// JTable in ScrollPane platzieren:
-		JScrollPane scrollPane = new JScrollPane(ausgabeTabelle);
-		
-		// Anzeige der Artikelliste auch in der Kunden-Ansicht
-		artikeltable.setDataVector(shop.gibAlleArtikel());
-		
-		//Warenkorb Bereich
-		JPanel warenKorbPanel = new JPanel();
-		warenKorbPanel.setLayout(new GridLayout(1, 3));
-		
-		JButton inWarenKorbLegenButton = new JButton("in Warenkorb legen");
-		warenKorbPanel.add(inWarenKorbLegenButton);
-		inWarenKorbLegenButton.addActionListener(this);
-		
-		warenKorbPanel.add(new JLabel()); //Platzhalter
-		
-		JButton zumWarenKorbButton = new JButton("zum Warenkorb");
-		warenKorbPanel.add(zumWarenKorbButton);
-		zumWarenKorbButton.addActionListener(this);
-		
-		warenKorbPanel.setBorder(BorderFactory.createTitledBorder("Warenkorb")); //Überschrift Warenkorb
-		
-		//PANELS ANLEGEN
-		add(suchPanel, BorderLayout.NORTH); //SuchPanel
-											
-		add(new JScrollPane(artikelPanel));	//ArtikelPanel	
-		artikelPanel.add(scrollPane);
-		artikelPanel.setLayout(new GridLayout());
-		add(warenKorbPanel, BorderLayout.SOUTH); //SuchPanel
+		mainPanel.add(navframe,BorderLayout.NORTH);
+		mainPanel.add(contentframe,BorderLayout.CENTER);
+		//ausgeben
+		add(mainPanel);		
 	}
 	
 	public void actionPerformed(ActionEvent e) {
