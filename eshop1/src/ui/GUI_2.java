@@ -334,6 +334,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 			for (Artikel b: suchErgebnis) {
 				artikelListe.add(b.toString());
 			}
+			
 		}
 		//Für Suchen Button
 		else if (command.equals("in Warenkorb legen")) {

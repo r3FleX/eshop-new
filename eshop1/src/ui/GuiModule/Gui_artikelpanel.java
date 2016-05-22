@@ -53,8 +53,6 @@ public class Gui_artikelpanel {
 		artikeltable.setDataVector(artikelliste);
 		artikelPanel.add(scrollPane);
 		setArtikelPanel(artikelPanel);
-		
-		//add(artikelPanel, BorderLayout.CENTER);
 	}
 	public JPanel getArtikelPanel() {
 		return this.artikelPanel;
