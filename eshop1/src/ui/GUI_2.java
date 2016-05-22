@@ -39,6 +39,7 @@ import domain.exceptions.AccountExistiertBereitsException;
 import domain.exceptions.AccountExistiertNichtException;
 import domain.exceptions.ArtikelExistiertBereitsException;
 import domain.exceptions.ArtikelExistiertNichtException;
+import domain.exceptions.BestandUeberschrittenException;
 import domain.exceptions.RegistrierenFehlerhaftException;
 import domain.exceptions.StatExistiertBereitsException;
 import ui.GuiModule.Gui_suchepanel;
@@ -54,11 +55,11 @@ public class GUI_2 extends JFrame implements ActionListener{
 
 	private Shopverwaltung shop;
 	private JTextField suchenTextField;
-	private JPasswordField passwortFeld;
-	private JTextField nameFeld;
 	private Account user;
-	private JTable ausgabeTabelle = null;
 	private List artikelListe = new List();
+	private JTable ausgabeTabelle = null;
+	private JTable warenkorbTabelle = null;
+	JLabel gesamt = new JLabel();
 
 	public GUI_2(String datei) {
 		try {
@@ -124,6 +125,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 		artikelPanel.setBorder(BorderFactory.createTitledBorder("Artikel")); //Überschrift Artikel
 		
 		Vector spalten = new Vector();
+		
 		spalten.add("Nummer");
 		spalten.add("Name");
 		spalten.add("Bestand");
@@ -143,11 +145,28 @@ public class GUI_2 extends JFrame implements ActionListener{
 		// Anzeige der Artikelliste auch in der Kunden-Ansicht
 		artikeltable.setDataVector(shop.gibAlleArtikel());
 		
+		//Warenkorb Bereich
+		JPanel warenKorbPanel = new JPanel();
+		warenKorbPanel.setLayout(new GridLayout(1, 3));
+		
+		JButton inWarenKorbLegenButton = new JButton("in Warenkorb legen");
+		warenKorbPanel.add(inWarenKorbLegenButton);
+		inWarenKorbLegenButton.addActionListener(this);
+		
+		warenKorbPanel.add(new JLabel()); //Platzhalter
+		
+		JButton zumWarenKorbButton = new JButton("zum Warenkorb");
+		warenKorbPanel.add(zumWarenKorbButton);
+		zumWarenKorbButton.addActionListener(this);
+		
+		warenKorbPanel.setBorder(BorderFactory.createTitledBorder("Warenkorb")); //Überschrift Warenkorb
+		
 		//PANELS ANLEGEN
 		add(suchPanel, BorderLayout.NORTH); //SuchPanel
 		add(new JScrollPane(artikelPanel));	//ArtikelPanel	
 		artikelPanel.add(scrollPane);
 		artikelPanel.setLayout(new GridLayout());
+		add(warenKorbPanel, BorderLayout.SOUTH); //SuchPanel
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -315,6 +334,56 @@ public class GUI_2 extends JFrame implements ActionListener{
 			for (Artikel b: suchErgebnis) {
 				artikelListe.add(b.toString());
 			}
+		}
+		//Für Suchen Button
+		else if (command.equals("in Warenkorb legen")) {
+			try {
+
+				JLabel anz = new JLabel("Wie oft wollen Sie den Artikel kaufen?");
+				final JTextField anzahl1 = new JTextField();
+				JButton ok = new JButton("In den Warenkorb");
+
+				final JFrame wieViele = new JFrame();
+				wieViele.getContentPane().setLayout(new GridLayout(2, 1));
+				wieViele.setSize(450, 100);
+				wieViele.getContentPane().add(anz);
+				wieViele.getContentPane().add(anzahl1);
+				wieViele.getContentPane().add(ok);
+				ok.addActionListener(new ActionListener() {
+
+					public void actionPerformed(ActionEvent arg0) {
+						try {
+							shop.inWarenkorbEinfuegen(shop.artikelSuchen(Integer.parseInt((ausgabeTabelle.getValueAt(ausgabeTabelle.getSelectedRow(),0)).toString())),Integer.parseInt(anzahl1.getText()),(Kunde) user);
+							wieViele.setVisible(false);
+						} catch (NumberFormatException e) {
+							e.printStackTrace();
+						} catch (BestandUeberschrittenException e) {
+							JOptionPane.showMessageDialog(null, e.getMessage());
+						} catch (ArtikelExistiertNichtException e) {
+							JOptionPane.showMessageDialog(null, e.getMessage());
+						}
+					}
+				});
+
+				wieViele.setVisible(true);
+
+			} catch (NumberFormatException e1) {
+				e1.printStackTrace();
+			}	
+		}
+		//Für Suchen Button
+		else if (command.equals("zum Warenkorb")) {
+			Warenkorb suchErgebnis;
+			Kunde kunde = (Kunde) user;
+
+			suchErgebnis = kunde.getWarenkorb();
+
+			ArtikelTableModel tModel = (ArtikelTableModel) warenkorbTabelle.getModel();
+			tModel.setDataVector2(suchErgebnis);
+
+			float gesamtpreis = 0.0f;
+
+			gesamt.setText("Gesampreis: " + gesamtpreis + "€");
 		}
 	}
 	public static void main(String[] args) {
