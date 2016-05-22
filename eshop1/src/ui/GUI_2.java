@@ -1,49 +1,41 @@
 package ui;
 import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.Dimension;
+
 import java.awt.EventQueue;
-import java.awt.FlowLayout;
+
 import java.awt.GridLayout;
-import java.awt.LayoutManager;
+
 import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.io.IOException;
-import java.util.Vector;
 
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
+import java.io.IOException;
+
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
+
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.table.TableModel;
+
 
 import domain.Shopverwaltung;
 import domain.exceptions.AccountExistiertBereitsException;
 import domain.exceptions.AccountExistiertNichtException;
-import domain.exceptions.ArtikelExistiertBereitsException;
+
 import domain.exceptions.ArtikelExistiertNichtException;
 import domain.exceptions.BestandUeberschrittenException;
-import domain.exceptions.RegistrierenFehlerhaftException;
-import domain.exceptions.StatExistiertBereitsException;
+
 import ui.GuiModule.Gui_artikelpanel;
-import ui.GuiModule.Gui_loginpanel;
+
 import ui.GuiModule.Gui_suchepanel;
 import ui.GuiModule.Gui_warenkorbpanel;
 import valueobjects.Account;
@@ -81,7 +73,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 	
 	private void initialize() {
 		
-		//Menü Bereich
+	/*	//Menü Bereich
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
@@ -112,7 +104,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 
 		JMenuItem mntmber = new JMenuItem("\u00DCber uns");
 		mnHilfe.add(mntmber);
-		mntmber.addActionListener(this);
+		mntmber.addActionListener(this);*/
 		
 		//LayoutPanel
 		JPanel mainPanel = new JPanel();
@@ -126,7 +118,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 		//standart anzeige Laden
 		// Login + account erstellen
 		//TODO login + account integrieren
-		Gui_loginpanel loginPanel = new Gui_loginpanel();
+	//	Gui_loginpanel loginPanel = new Gui_loginpanel();
 	//	navframe.add(loginPanel.getloginPanel(), BorderLayout.NORTH);			
 		
 		//content frame 		
