@@ -33,7 +33,6 @@ public class ArtikelTableModel extends DefaultTableModel {
 	
 	// Tabellendaten hinzufügen
 	public void setDataVector(List<Artikel> articles) {
-		// Bücher aus Liste aufbereiten:
 		// DefaultTableModel erwartet Repräsentation der Tabellendaten
 		// als Vector von Vectoren
 		Vector rows = new Vector();

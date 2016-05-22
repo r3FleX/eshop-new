@@ -24,8 +24,6 @@ import valueobjects.Stats;
 import valueobjects.Warenkorb;
 import valueobjects.Stats.LagerEreignisTyp;
 
-
-
 public class Shopverwaltung {
 
 	// Verwaltungsklassen fuer Artikel, Accounts etc.
@@ -81,16 +79,23 @@ public class Shopverwaltung {
 		meineArtikel.einfuegen(a);
 		return true;
 	}
+	
 	/**
 	 * Methode zur Artikelsuche anhand des Artikelnamens
-	 * 
-	 * @param artname Bezeichnung des Artikels
-	 * @return Liste der Artikel, evtl. leer
 	 */
 	public List<Artikel> sucheNachArtikel(String artname) {
 		//delegieren an meineArtikel (Artikelverwaltung)
 		return meineArtikel.sucheArtikel(artname);
 	}
+	
+	/**
+	 * Methode zur Artikelsuche anhand des Artikelnamens
+	 */
+	public List<Artikel> sucheNachArtikelNummer(String artnummer) {
+		//delegieren an meineArtikel (Artikelverwaltung)
+		return meineArtikel.sucheArtikel(artnummer);
+	}
+	
 	//Fuege Mitarbeiter Account ein	
 	public boolean fuegeMitarbeiterAccountEin(String name, String passwort) throws AccountExistiertBereitsException{
 			
@@ -121,15 +126,12 @@ public class Shopverwaltung {
 		return true;
 	}
 	
-	
 	//Methode zur Ueberpruefung des Warenkorbs zum Kauf (Bestandsabfragen etc.)
-	
 	
 	public HashMap<Artikel, Integer> pruefeKauf(Kunde user) {
 		HashMap<Artikel, Integer> fehlerliste = new HashMap<Artikel, Integer>();	
 		return fehlerliste;
 	}
-
 
 	//Methode zur Kaufabwicklung
 	public Rechnung kaufAbwickeln(Kunde kaeufer) throws IOException{
@@ -142,7 +144,6 @@ public class Shopverwaltung {
 
 		return rechnung;
 	}
-	
 	
 	//Artikel entfernen
 	public boolean entferneArtikel(int artnr) throws ArtikelExistiertNichtException, IOException {

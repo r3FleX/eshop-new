@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -32,6 +33,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.TableModel;
+
 import domain.Shopverwaltung;
 import domain.exceptions.AccountExistiertBereitsException;
 import domain.exceptions.AccountExistiertNichtException;
@@ -55,6 +57,8 @@ public class GUI_2 extends JFrame implements ActionListener{
 	private JPasswordField passwortFeld;
 	private JTextField nameFeld;
 	private Account user;
+	private JTable ausgabeTabelle = null;
+	private List artikelListe = new List();
 
 	public GUI_2(String datei) {
 		try {
@@ -181,31 +185,31 @@ public class GUI_2 extends JFrame implements ActionListener{
 			//Für Menü Account -> Einloggen -> Login Button
 			loginButton.addActionListener(new ActionListener() { 
 				
-			public void actionPerformed(ActionEvent arg0) {
-				
-			//hole Name und Passwort aus Textfelder
-			String name = nameFeld.getText();
-			String passwort = String.valueOf(passwortFeld.getPassword());
-	
-			//überprüfe ob Kunde oder Mitarbeiter
-			try {
-				user = shop.loginAccount(name, passwort);
-				
-				if (user instanceof Kunde) {
-					System.out.println("Kunde eingeloggt");
-					JOptionPane.showMessageDialog(null,"Erfolgreich als Kunde eingeloggt!");
-					login.setVisible(false); //Login Eingabefenster schließen
-					//loginPanel.setBorder(BorderFactory.createTitledBorder("Kundenbereich - Willkommen "+ user.getName() + "!"));
-				}
-				else if (user instanceof Mitarbeiter){
-					System.out.println("Mitarbeiter eingeloggt");
-					JOptionPane.showMessageDialog(null,"Erfolgreich als Mitarbeiter eingeloggt!");
-					login.setVisible(false); //Login Eingabefenster schließen
-				}
-			} catch (AccountExistiertNichtException ex) {
-				JOptionPane.showMessageDialog(null, ex.getMessage());
-			}
-	    }
+				public void actionPerformed(ActionEvent arg0) {
+					
+					//hole Name und Passwort aus Textfelder
+					String name = nameFeld.getText();
+					String passwort = String.valueOf(passwortFeld.getPassword());
+			
+					//überprüfe ob Kunde oder Mitarbeiter
+					try {
+						user = shop.loginAccount(name, passwort);
+						
+						if (user instanceof Kunde) {
+							System.out.println("Kunde eingeloggt");
+							JOptionPane.showMessageDialog(null,"Erfolgreich als Kunde eingeloggt!");
+							login.setVisible(false); //Login Eingabefenster schließen
+							//loginPanel.setBorder(BorderFactory.createTitledBorder("Kundenbereich - Willkommen "+ user.getName() + "!"));
+						}
+						else if (user instanceof Mitarbeiter){
+							System.out.println("Mitarbeiter eingeloggt");
+							JOptionPane.showMessageDialog(null,"Erfolgreich als Mitarbeiter eingeloggt!");
+							login.setVisible(false); //Login Eingabefenster schließen
+						}
+					} catch (AccountExistiertNichtException ex) {
+						JOptionPane.showMessageDialog(null, ex.getMessage());
+					}
+		    }
 	  });
 	}
 		//Für Menü Account -> Registrieren Button
@@ -264,6 +268,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 						shop.fuegeKundenAccountEin(name, passwort, strasse, plz, ort);
 						try {
 							shop.schreibeKundendaten();
+							JOptionPane.showMessageDialog(null,"Erfolgreich als Kunde registriert!");
 							registrieren.setVisible(false);
 						} catch (IOException e) {
 							e.printStackTrace();
@@ -275,20 +280,41 @@ public class GUI_2 extends JFrame implements ActionListener{
 			});
 			registrieren.setVisible(true);
 		}
-		//Für Menü Hilfe -> Artikel kaufen?
+		//Für Menü Hilfe -> Artikel kaufen? Button
 		else if (command.equals("Wie Artikel kaufen?")) {
 			JOptionPane.showMessageDialog(null,
 				"Willkommen im E-Shop. \n Wenn Sie Artikel kaufen wollen, dann registrieren"
 				+ "Sie sich und loggen Sie sich ein! \n Anschließend können Sie die gewünschten "
 			    + "Artikel kaufen.");
 		}
-		//Für Menü Hilfe -> Über uns
+		//Für Menü Hilfe -> Über uns Button
 		else if (command.equals("\u00DCber uns")) {
 			JOptionPane.showMessageDialog(null, "Entwickler: \n\n"
 					+ "Immanuel Zimmermann \n" 
 					+ "Stefan Meyer \n"
 					+ "Daniel Böckmann \n\n" 
 					+ "HS Bremen, Prog 2, SS 2016");
+		}
+		//Für Suchen Button
+		else if (command.equals("Suchen")) {
+			
+			System.out.println("Test Suchen");
+			
+			String suche = suchenTextField.getText();
+			java.util.List<Artikel> suchErgebnis;
+			
+			if (suche.isEmpty()) {
+				suchErgebnis = shop.gibAlleArtikel();
+			} else {
+				suchErgebnis = shop.sucheNachArtikel(suche);
+				//suchErgebnis = shop.sucheNachArtikelNummer(suche);	
+			}
+			//ArtikelTableModel artikeltable = (ArtikelTableModel) ausgabeTabelle.getModel();
+			//artikeltable.setDataVector(suchErgebnis);
+			artikelListe.removeAll();
+			for (Artikel b: suchErgebnis) {
+				artikelListe.add(b.toString());
+			}
 		}
 	}
 	public static void main(String[] args) {
