@@ -23,7 +23,7 @@ import valueobjects.Mitarbeiter;
 public class Gui_loginpanel implements ActionListener{
 
 	private JPanel loginPanel;	
-	private Account user;
+	//private Account user;
 
 	public Gui_loginpanel(Shopverwaltung shop) {
 		
@@ -31,7 +31,7 @@ public class Gui_loginpanel implements ActionListener{
 		loginPanel.setLayout(new GridLayout(1, 2));
 		//loginPanel.setVisible(false);
 		
-		//loginPanel.setBorder(BorderFactory.createTitledBorder("Kundenbereich - Willkommen "+ user.getName() + "!")); //Überschrift Login
+		loginPanel.setBorder(BorderFactory.createTitledBorder("Kundenbereich - Willkommen "+ user.getName() + "!")); //Überschrift Login
 		
 		setloginPanel(loginPanel);
 	}
