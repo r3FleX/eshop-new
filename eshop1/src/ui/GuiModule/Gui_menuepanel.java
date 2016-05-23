@@ -2,18 +2,24 @@ package ui.GuiModule;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
+
+import domain.Shopverwaltung;
+
 
 public class Gui_menuepanel implements ActionListener{
 
 	private JPanel menuepanel;
 	
+	public Gui_menuepanel(Shopverwaltung shop){
+		
+	}
+	
 	//Menü Bereich
 	JMenuBar menuBar = new JMenuBar();
 	setJMenuBar(menuBar);
-
+	/*
 	JMenu mnDatei = new JMenu("Datei");
 	menuBar.add(mnDatei);
 
@@ -42,8 +48,14 @@ public class Gui_menuepanel implements ActionListener{
 	JMenuItem mntmber = new JMenuItem("\u00DCber uns");
 	mnHilfe.add(mntmber);
 	mntmber.addActionListener(this);
-	
-	public void actionPerformed(ActionEvent e) {
+	*/
+	//Für Menü Datei -> Beenden Button
+	public void actionPerformed(ActionEvent arg0) {
+		String command = arg0.getActionCommand();
 		
+		//Für Menü Datei -> Beenden Button
+		if (command.equals("Beenden")) {
+			System.exit(0);
+		}
 	}
 }

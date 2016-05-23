@@ -21,12 +21,16 @@ public class Gui_suchepanel implements ActionListener {
 		
 		JPanel suchPanel = new JPanel();
 		suchPanel.setLayout(new GridLayout(1, 2));
+		
 		JTextField suchenTextField = new JTextField();
 		suchPanel.add(suchenTextField);
+		
 		JButton suchButton = new JButton("Suchen");
 		suchPanel.add(suchButton);
 		suchButton.addActionListener(this);
+		
 		suchPanel.setBorder(BorderFactory.createTitledBorder("Suchen")); //Überschrift Suchen
+		
 		setSuchPanel(suchPanel);
 	}
 
@@ -38,8 +42,6 @@ public class Gui_suchepanel implements ActionListener {
 		this.suchPanel = suchPanel;
 	}
 	
-	
-	@Override
 	public void actionPerformed(ActionEvent arg0) {		
 		System.out.println("Test Suchen");		
 		AbstractButton suchenTextField;

@@ -60,7 +60,6 @@ public class GUI_2 extends JFrame implements ActionListener{
 		setTitle("E-Shop");
 		setSize(800, 600); //Fenstergröße
 		setResizable(false);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		try {
 			shop = new Shopverwaltung(datei);
@@ -73,10 +72,10 @@ public class GUI_2 extends JFrame implements ActionListener{
 	
 	private void initialize() {
 		
-	/*	//Menü Bereich
+	//Menü Bereich
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
-
+		/*	
 		JMenu mnDatei = new JMenu("Datei");
 		menuBar.add(mnDatei);
 
@@ -120,11 +119,12 @@ public class GUI_2 extends JFrame implements ActionListener{
 		//TODO login + account integrieren
 	//	Gui_loginpanel loginPanel = new Gui_loginpanel();
 	//	navframe.add(loginPanel.getloginPanel(), BorderLayout.NORTH);			
-		
+	
 		//content frame 		
 		//suche
 		Gui_suchepanel suchPanel = new Gui_suchepanel(shop);
 		contentframe.add(suchPanel.getSuchPanel(), BorderLayout.NORTH);	
+		
 		//Artikelliste
 		Gui_artikelpanel artikelPanel = new Gui_artikelpanel(shop.gibAlleArtikel());			
 		contentframe.add(artikelPanel.getArtikelPanel(), BorderLayout.CENTER);
@@ -138,7 +138,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 		mainPanel.add(navframe,BorderLayout.NORTH);
 		mainPanel.add(contentframe,BorderLayout.CENTER);
 		//ausgeben
-		add(mainPanel);		
+		add(mainPanel);	
 	}
 	
 	public void actionPerformed(ActionEvent e) {

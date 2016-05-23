@@ -54,7 +54,6 @@ public class Gui_loginpanel implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent arg0) {
-		System.out.println("Some tests");
-		
+		System.out.println("Some tests");	
 	}
 }
