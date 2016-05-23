@@ -58,7 +58,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 
 	public GUI_2(String datei) {
 		setTitle("E-Shop");
-		setSize(800, 600); //Fenstergröße
+		setSize(800, 600); //Fenstergrï¿½ï¿½e
 		setResizable(false);
 		
 		try {
@@ -72,10 +72,10 @@ public class GUI_2 extends JFrame implements ActionListener{
 	
 	private void initialize() {
 		
-	//Menü Bereich
+	//Menï¿½ Bereich
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
-		/*	
+			
 		JMenu mnDatei = new JMenu("Datei");
 		menuBar.add(mnDatei);
 
@@ -93,6 +93,10 @@ public class GUI_2 extends JFrame implements ActionListener{
 		JMenuItem mnReg = new JMenuItem("Registrieren");
 		mnReg.addActionListener(this);
 		mnAccount.add(mnReg);
+		
+		JMenuItem mnLogout = new JMenuItem("Ausloggen");
+		mnAccount.add(mnLogout);
+		mnLogout.addActionListener(this);
 
 		JMenu mnHilfe = new JMenu("Hilfe");
 		menuBar.add(mnHilfe);
@@ -103,7 +107,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 
 		JMenuItem mntmber = new JMenuItem("\u00DCber uns");
 		mnHilfe.add(mntmber);
-		mntmber.addActionListener(this);*/
+		mntmber.addActionListener(this);
 		
 		//LayoutPanel
 		JPanel mainPanel = new JPanel();
@@ -144,11 +148,11 @@ public class GUI_2 extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
 		
-		//Für Menü Datei -> Beenden Button
+		//Fï¿½r Menï¿½ Datei -> Beenden Button
 		if (command.equals("Beenden")) {
 			System.exit(0);
 		}
-		//Für Menü Account -> Einloggen Button
+		//Fï¿½r Menï¿½ Account -> Einloggen Button
 		else if(command.equals("Einloggen")){
 
 			final JFrame login = new JFrame();
@@ -173,7 +177,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 			
 			login.setVisible(true);
 			
-			//Für Menü Account -> Einloggen -> Login Button
+			//Fï¿½r Menï¿½ Account -> Einloggen -> Login Button
 			loginButton.addActionListener(new ActionListener() { 
 				
 				public void actionPerformed(ActionEvent arg0) {
@@ -182,20 +186,20 @@ public class GUI_2 extends JFrame implements ActionListener{
 					String name = nameFeld.getText();
 					String passwort = String.valueOf(passwortFeld.getPassword());
 			
-					//überprüfe ob Kunde oder Mitarbeiter
+					//ï¿½berprï¿½fe ob Kunde oder Mitarbeiter
 					try {
 						user = shop.loginAccount(name, passwort);
 						
 						if (user instanceof Kunde) {
 							System.out.println("Kunde eingeloggt");
 							JOptionPane.showMessageDialog(null,"Erfolgreich als Kunde eingeloggt!");
-							login.setVisible(false); //Login Eingabefenster schließen
+							login.setVisible(false); //Login Eingabefenster schlieï¿½en
 							//loginPanel.setBorder(BorderFactory.createTitledBorder("Kundenbereich - Willkommen "+ user.getName() + "!"));
 						}
 						else if (user instanceof Mitarbeiter){
 							System.out.println("Mitarbeiter eingeloggt");
 							JOptionPane.showMessageDialog(null,"Erfolgreich als Mitarbeiter eingeloggt!");
-							login.setVisible(false); //Login Eingabefenster schließen
+							login.setVisible(false); //Login Eingabefenster schlieï¿½en
 						}
 					} catch (AccountExistiertNichtException ex) {
 						JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -203,7 +207,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 		    }
 	  });
 	}
-		//Für Menü Account -> Registrieren Button
+		//Fï¿½r Menï¿½ Account -> Registrieren Button
 		else if (command.equals("Registrieren")){
 			final JFrame registrieren = new JFrame();
 
@@ -243,7 +247,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 			JButton regButton = new JButton("Registrieren");
 			registrieren.add(regButton);
 			
-			//Für Menü Account -> Registrieren -> Registrieren Button
+			//Fï¿½r Menï¿½ Account -> Registrieren -> Registrieren Button
 			regButton.addActionListener(new ActionListener() { 
 		
 				public void actionPerformed(ActionEvent arg0) {
@@ -271,22 +275,28 @@ public class GUI_2 extends JFrame implements ActionListener{
 			});
 			registrieren.setVisible(true);
 		}
-		//Für Menü Hilfe -> Artikel kaufen? Button
+		else if(command.equals("Ausloggen")){
+			user = shop.logoutAccount(user.getName(), user.getPasswort());
+			gesamt.setVisible(true);
+			//this.setContentPane(this.hauptscreen);
+			System.out.println("TschÃ¼ss!");
+		}
+		//Fï¿½r Menï¿½ Hilfe -> Artikel kaufen? Button
 		else if (command.equals("Wie Artikel kaufen?")) {
 			JOptionPane.showMessageDialog(null,
 				"Willkommen im E-Shop. \n Wenn Sie Artikel kaufen wollen, dann registrieren"
-				+ "Sie sich und loggen Sie sich ein! \n Anschließend können Sie die gewünschten "
+				+ "Sie sich und loggen Sie sich ein! \n Anschlieï¿½end kï¿½nnen Sie die gewï¿½nschten "
 			    + "Artikel kaufen.");
 		}
-		//Für Menü Hilfe -> Über uns Button
+		//Fï¿½r Menï¿½ Hilfe -> ï¿½ber uns Button
 		else if (command.equals("\u00DCber uns")) {
 			JOptionPane.showMessageDialog(null, "Entwickler: \n\n"
 					+ "Immanuel Zimmermann \n" 
 					+ "Stefan Meyer \n"
-					+ "Daniel Böckmann \n\n" 
+					+ "Daniel Bï¿½ckmann \n\n" 
 					+ "HS Bremen, Prog 2, SS 2016");
 		}
-		//Für Suchen Button
+		//Fï¿½r Suchen Button
 		else if (command.equals("Suchen")) {
 			
 			System.out.println("Test Suchen");
@@ -308,7 +318,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 			}
 			
 		}
-		//Für Suchen Button
+		//Fï¿½r Suchen Button
 		else if (command.equals("in Warenkorb legen")) {
 			try {
 
@@ -344,7 +354,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 				e1.printStackTrace();
 			}	
 		}
-		//Für Suchen Button
+		//Fï¿½r Suchen Button
 		else if (command.equals("zum Warenkorb")) {
 			Warenkorb suchErgebnis;
 			Kunde kunde = (Kunde) user;
@@ -356,7 +366,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 
 			float gesamtpreis = 0.0f;
 
-			gesamt.setText("Gesampreis: " + gesamtpreis + "€");
+			gesamt.setText("Gesampreis: " + gesamtpreis + "ï¿½");
 		}
 	}
 	public static void main(String[] args) {
