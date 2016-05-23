@@ -17,12 +17,20 @@ public class Gui_loginpanel implements ActionListener{
 	private JPanel loginPanel;	
 
 	public Gui_loginpanel() {
-	
+		
+		JPanel loginPanel = new JPanel();
+		loginPanel.setLayout(new GridLayout(1, 2));
+		
+		loginPanel.setBorder(BorderFactory.createTitledBorder("Login")); //Überschrift Login
+		
+		setloginPanel(loginPanel);
+		/*
 		JPanel loginPanel = new JPanel();
 		loginPanel.setLayout(new GridLayout(1, 3));
 		// Rahmen mit Text
 		loginPanel.setBorder(BorderFactory.createTitledBorder("Login"));
 	
+		
 		loginPanel.setLayout(new GridLayout(4, 1));
 	
 		JLabel lblName = new JLabel("Name:");
@@ -43,14 +51,14 @@ public class Gui_loginpanel implements ActionListener{
 		login.addActionListener(this);	
 		loginPanel.add(login);
 		setloginPanel(loginPanel);	
-	
+	*/
 	}
 	public JPanel getloginPanel() {
 		return loginPanel;
 	}
 
-	public void setloginPanel(JPanel suchPanel) {
-		this.loginPanel = suchPanel;
+	public void setloginPanel(JPanel loginPanel) {
+		this.loginPanel = loginPanel;
 	}
 	
 	public void actionPerformed(ActionEvent arg0) {

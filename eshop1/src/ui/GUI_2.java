@@ -35,7 +35,7 @@ import domain.exceptions.ArtikelExistiertNichtException;
 import domain.exceptions.BestandUeberschrittenException;
 
 import ui.GuiModule.Gui_artikelpanel;
-
+import ui.GuiModule.Gui_loginpanel;
 import ui.GuiModule.Gui_suchepanel;
 import ui.GuiModule.Gui_warenkorbpanel;
 import valueobjects.Account;
@@ -58,7 +58,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 
 	public GUI_2(String datei) {
 		setTitle("E-Shop");
-		setSize(800, 600); //Fenstergrï¿½ï¿½e
+		setSize(800, 600); //Fenstergröße
 		setResizable(false);
 		
 		try {
@@ -116,18 +116,17 @@ public class GUI_2 extends JFrame implements ActionListener{
 		//
 		mainPanel.setLayout(new BorderLayout());
 		navframe.setLayout(new BorderLayout());
-		contentframe.setLayout(new BorderLayout());
-		
-		//standart anzeige Laden
-		// Login + account erstellen
-		//TODO login + account integrieren
-	//	Gui_loginpanel loginPanel = new Gui_loginpanel();
-	//	navframe.add(loginPanel.getloginPanel(), BorderLayout.NORTH);			
+		contentframe.setLayout(new BorderLayout());		
 	
 		//content frame 		
 		//suche
 		Gui_suchepanel suchPanel = new Gui_suchepanel(shop);
-		contentframe.add(suchPanel.getSuchPanel(), BorderLayout.NORTH);	
+		contentframe.add(suchPanel.getSuchPanel(), BorderLayout.NORTH);
+		
+		//login
+		Gui_loginpanel loginPanel = new Gui_loginpanel();
+		navframe.add(loginPanel.getloginPanel(), BorderLayout.NORTH);	
+		//loginPanel.setVisible(false);
 		
 		//Artikelliste
 		Gui_artikelpanel artikelPanel = new Gui_artikelpanel(shop.gibAlleArtikel());			
@@ -194,6 +193,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 							System.out.println("Kunde eingeloggt");
 							JOptionPane.showMessageDialog(null,"Erfolgreich als Kunde eingeloggt!");
 							login.setVisible(false); //Login Eingabefenster schlieï¿½en
+							//suchPanel.setVisible(false);
 							//loginPanel.setBorder(BorderFactory.createTitledBorder("Kundenbereich - Willkommen "+ user.getName() + "!"));
 						}
 						else if (user instanceof Mitarbeiter){
