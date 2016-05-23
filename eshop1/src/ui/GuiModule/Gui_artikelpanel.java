@@ -1,6 +1,5 @@
 package ui.GuiModule;
 
-import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.util.List;
 import java.util.Vector;

@@ -12,7 +12,6 @@ import javax.swing.JPanel;
 public class Gui_warenkorbpanel implements ActionListener {
 
 	private JPanel warenkorbPanel;
-	
 
 
 	public Gui_warenkorbpanel() {	

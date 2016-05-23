@@ -23,15 +23,16 @@ import valueobjects.Mitarbeiter;
 public class Gui_loginpanel implements ActionListener{
 
 	private JPanel loginPanel;	
-	//private Account user;
+	private Shopverwaltung shop;
 
 	public Gui_loginpanel(Shopverwaltung shop) {
-		
+		this.shop = shop;
 		JPanel loginPanel = new JPanel();
 		loginPanel.setLayout(new GridLayout(1, 2));
 		//loginPanel.setVisible(false);
 		
-		loginPanel.setBorder(BorderFactory.createTitledBorder("Kundenbereich - Willkommen "+ user.getName() + "!")); //Überschrift Login
+		
+		//loginPanel.setBorder(BorderFactory.createTitledBorder("Kundenbereich - Willkommen "+ user.getName() + "!")); //Überschrift Login
 		
 		setloginPanel(loginPanel);
 	}
@@ -76,7 +77,7 @@ public class Gui_loginpanel implements ActionListener{
 	
 			//ï¿½berprï¿½fe ob Kunde oder Mitarbeiter
 			try {
-				user = shop.loginAccount(name, passwort);
+				Account user = this.shop.loginAccount(name, passwort);
 				
 				if (user instanceof Kunde) {
 					//loginPanel.setVisible(true);

@@ -1,47 +1,34 @@
 package ui;
 import java.awt.BorderLayout;
-
 import java.awt.EventQueue;
-
 import java.awt.GridLayout;
-
 import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.io.IOException;
-
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-
 import javax.swing.JTable;
 import javax.swing.JTextField;
-
-
 import domain.Shopverwaltung;
 import domain.exceptions.AccountExistiertBereitsException;
-import domain.exceptions.AccountExistiertNichtException;
-
 import domain.exceptions.ArtikelExistiertNichtException;
 import domain.exceptions.BestandUeberschrittenException;
-
 import ui.GuiModule.Gui_artikelpanel;
 import ui.GuiModule.Gui_loginpanel;
+import ui.GuiModule.Gui_menuepanel;
 import ui.GuiModule.Gui_suchepanel;
 import ui.GuiModule.Gui_warenkorbpanel;
 import valueobjects.Account;
 import valueobjects.Artikel;
 import valueobjects.Kunde;
-import valueobjects.Mitarbeiter;
 import valueobjects.Warenkorb;
 
 public class GUI_2 extends JFrame implements ActionListener{
@@ -68,46 +55,11 @@ public class GUI_2 extends JFrame implements ActionListener{
 
 		}
 		this.initialize();
-	}
-	
+	}	
 	private void initialize() {
-		
-	//Menï¿½ Bereich
-		JMenuBar menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
-			
-		JMenu mnDatei = new JMenu("Datei");
-		menuBar.add(mnDatei);
-
-		JMenuItem mntmBeenden = new JMenuItem("Beenden");
-		mntmBeenden.addActionListener(this);
-		mnDatei.add(mntmBeenden);
-		
-		JMenu mnAccount = new JMenu("Account");
-		menuBar.add(mnAccount);
-		
-		JMenuItem mnLogin = new JMenuItem("Einloggen");
-		mnAccount.add(mnLogin);
-		mnLogin.addActionListener(this);
-		
-		JMenuItem mnReg = new JMenuItem("Registrieren");
-		mnReg.addActionListener(this);
-		mnAccount.add(mnReg);
-		
-		JMenuItem mnLogout = new JMenuItem("Ausloggen");
-		mnAccount.add(mnLogout);
-		mnLogout.addActionListener(this);
-
-		JMenu mnHilfe = new JMenu("Hilfe");
-		menuBar.add(mnHilfe);
-
-		JMenuItem menuItem = new JMenuItem("Wie Artikel kaufen?");
-		mnHilfe.add(menuItem);
-		menuItem.addActionListener(this);
-
-		JMenuItem mntmber = new JMenuItem("\u00DCber uns");
-		mnHilfe.add(mntmber);
-		mntmber.addActionListener(this);
+		//menübar
+		Gui_menuepanel menuBar = new Gui_menuepanel(shop);		
+		setJMenuBar(menuBar.getMenue());
 		
 		//LayoutPanel
 		JPanel mainPanel = new JPanel();
@@ -117,7 +69,6 @@ public class GUI_2 extends JFrame implements ActionListener{
 		mainPanel.setLayout(new BorderLayout());
 		navframe.setLayout(new BorderLayout());
 		contentframe.setLayout(new BorderLayout());		
-	
 		//content frame 		
 		//suche
 		Gui_suchepanel suchPanel = new Gui_suchepanel(shop);
@@ -148,7 +99,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 		
 		//Fï¿½r Menï¿½ Datei -> Beenden Button
 		if (command.equals("Beenden")) {
-			System.exit(0);
+		//	System.exit(0);
 		}
 		
 		//Fï¿½r Menï¿½ Account -> Registrieren Button
