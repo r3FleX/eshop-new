@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 
 import java.io.IOException;
 
-
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -124,9 +124,9 @@ public class GUI_2 extends JFrame implements ActionListener{
 		contentframe.add(suchPanel.getSuchPanel(), BorderLayout.NORTH);
 		
 		//login
-		Gui_loginpanel loginPanel = new Gui_loginpanel();
+		Gui_loginpanel loginPanel = new Gui_loginpanel(shop);
 		navframe.add(loginPanel.getloginPanel(), BorderLayout.NORTH);	
-		//loginPanel.setVisible(false);
+		
 		
 		//Artikelliste
 		Gui_artikelpanel artikelPanel = new Gui_artikelpanel(shop.gibAlleArtikel());			
@@ -151,62 +151,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 		if (command.equals("Beenden")) {
 			System.exit(0);
 		}
-		//F�r Men� Account -> Einloggen Button
-		else if(command.equals("Einloggen")){
-
-			final JFrame login = new JFrame();
-
-			login.setSize(200, 300);
-			login.setLayout(new GridLayout(7, 1));
-
-			JLabel labelname = new JLabel("Name:");
-			login.add(labelname);
-
-			final JTextField nameFeld = new JTextField();
-			login.add(nameFeld);
-
-			JLabel labelpasswort = new JLabel("Passwort:");
-			login.add(labelpasswort);
-
-			final JPasswordField passwortFeld = new JPasswordField();
-			login.add(passwortFeld);
-
-			JButton loginButton = new JButton("Login");
-			login.add(loginButton);
-			
-			login.setVisible(true);
-			
-			//F�r Men� Account -> Einloggen -> Login Button
-			loginButton.addActionListener(new ActionListener() { 
-				
-				public void actionPerformed(ActionEvent arg0) {
-					
-					//hole Name und Passwort aus Textfelder
-					String name = nameFeld.getText();
-					String passwort = String.valueOf(passwortFeld.getPassword());
-			
-					//�berpr�fe ob Kunde oder Mitarbeiter
-					try {
-						user = shop.loginAccount(name, passwort);
-						
-						if (user instanceof Kunde) {
-							System.out.println("Kunde eingeloggt");
-							JOptionPane.showMessageDialog(null,"Erfolgreich als Kunde eingeloggt!");
-							login.setVisible(false); //Login Eingabefenster schlie�en
-							//suchPanel.setVisible(false);
-							//loginPanel.setBorder(BorderFactory.createTitledBorder("Kundenbereich - Willkommen "+ user.getName() + "!"));
-						}
-						else if (user instanceof Mitarbeiter){
-							System.out.println("Mitarbeiter eingeloggt");
-							JOptionPane.showMessageDialog(null,"Erfolgreich als Mitarbeiter eingeloggt!");
-							login.setVisible(false); //Login Eingabefenster schlie�en
-						}
-					} catch (AccountExistiertNichtException ex) {
-						JOptionPane.showMessageDialog(null, ex.getMessage());
-					}
-		    }
-	  });
-	}
+		
 		//F�r Men� Account -> Registrieren Button
 		else if (command.equals("Registrieren")){
 			final JFrame registrieren = new JFrame();

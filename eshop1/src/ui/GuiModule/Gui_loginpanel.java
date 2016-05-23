@@ -7,52 +7,35 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import domain.Shopverwaltung;
+import domain.exceptions.AccountExistiertNichtException;
+import valueobjects.Account;
+import valueobjects.Kunde;
+import valueobjects.Mitarbeiter;
+
 public class Gui_loginpanel implements ActionListener{
 
 	private JPanel loginPanel;	
+	private Account user;
 
-	public Gui_loginpanel() {
+	public Gui_loginpanel(Shopverwaltung shop) {
 		
 		JPanel loginPanel = new JPanel();
 		loginPanel.setLayout(new GridLayout(1, 2));
+		//loginPanel.setVisible(false);
 		
-		loginPanel.setBorder(BorderFactory.createTitledBorder("Login")); //Überschrift Login
+		//loginPanel.setBorder(BorderFactory.createTitledBorder("Kundenbereich - Willkommen "+ user.getName() + "!")); //Überschrift Login
 		
 		setloginPanel(loginPanel);
-		/*
-		JPanel loginPanel = new JPanel();
-		loginPanel.setLayout(new GridLayout(1, 3));
-		// Rahmen mit Text
-		loginPanel.setBorder(BorderFactory.createTitledBorder("Login"));
-	
-		
-		loginPanel.setLayout(new GridLayout(4, 1));
-	
-		JLabel lblName = new JLabel("Name:");
-		loginPanel.add(lblName);
-	
-		JTextField textField = new JTextField();
-		loginPanel.add(textField);
-	
-		JLabel lblPasswort = new JLabel("Passwort:");
-		loginPanel.add(lblPasswort);
-	
-		JPasswordField passwordField = new JPasswordField();
-		loginPanel.add(passwordField);
-	
-		loginPanel.setLayout(new GridLayout(2, 2));
-	
-		JButton login = new JButton("Login");
-		login.addActionListener(this);	
-		loginPanel.add(login);
-		setloginPanel(loginPanel);	
-	*/
 	}
+	
 	public JPanel getloginPanel() {
 		return loginPanel;
 	}
@@ -62,6 +45,53 @@ public class Gui_loginpanel implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent arg0) {
-		System.out.println("Some tests");	
+		String command = arg0.getActionCommand();
+		
+		if(command.equals("Einloggen")){
+			
+			final JFrame login = new JFrame();
+	
+			login.setSize(200, 300);
+			login.setLayout(new GridLayout(7, 1));
+	
+			JLabel labelname = new JLabel("Name:");
+			login.add(labelname);
+	
+			final JTextField nameFeld = new JTextField();
+			login.add(nameFeld);
+	
+			JLabel labelpasswort = new JLabel("Passwort:");
+			login.add(labelpasswort);
+	
+			final JPasswordField passwortFeld = new JPasswordField();
+			login.add(passwortFeld);
+	
+			JButton loginButton = new JButton("Login");
+			login.add(loginButton);
+			
+			login.setVisible(true);
+			//hole Name und Passwort aus Textfelder
+			String name = nameFeld.getText();
+			String passwort = String.valueOf(passwortFeld.getPassword());
+	
+			//ï¿½berprï¿½fe ob Kunde oder Mitarbeiter
+			try {
+				user = shop.loginAccount(name, passwort);
+				
+				if (user instanceof Kunde) {
+					//loginPanel.setVisible(true);
+					System.out.println("Kunde eingeloggt");
+					JOptionPane.showMessageDialog(null,"Erfolgreich als Kunde eingeloggt!");
+					
+				}
+				else if (user instanceof Mitarbeiter){
+					System.out.println("Mitarbeiter eingeloggt");
+					JOptionPane.showMessageDialog(null,"Erfolgreich als Mitarbeiter eingeloggt!");
+					login.setVisible(false); //Login Eingabefenster schlieï¿½en
+				}
+			} catch (AccountExistiertNichtException ex) {
+				JOptionPane.showMessageDialog(null, ex.getMessage());
+			}
+		}
 	}
 }
