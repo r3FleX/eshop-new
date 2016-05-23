@@ -1,31 +1,31 @@
 package ui.GuiModule;
 
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import domain.Shopverwaltung;
-
+import valueobjects.Account;
+import ui.GUI_2;
 
 public class Gui_menuepanel implements ActionListener{
 
 	private JMenuBar menuBar;
+	private Shopverwaltung shop;
+	private Account user;
+	JLabel gesamt = new JLabel();
 	
-	public JMenuBar getMenue() {
-		return this.menuBar;
-	}
-
-	public void setMenue(JMenuBar menue) {
-		this.menuBar = menue;
-	}
-
-	public Gui_menuepanel(Shopverwaltung shop){
-		//Menï¿½ Bereich
-		JMenuBar menueBar = new JMenuBar();		
+	public Gui_menuepanel(Shopverwaltung shop) {
+		this.shop = shop;
+		
+JMenuBar menueBar = new JMenuBar();		
 		
 		JMenu mnDatei = new JMenu("Datei");
 		menueBar.add(mnDatei);
@@ -47,7 +47,7 @@ public class Gui_menuepanel implements ActionListener{
 		
 		JMenuItem mnLogout = new JMenuItem("Ausloggen");
 //TODO trigger 
-		mnLogout.setEnabled(false);                                // <---- so deaktiviert man einträge
+		mnLogout.setEnabled(false);                                // <---- so deaktiviert man eintrï¿½ge
 		mnAccount.add(mnLogout);
 		mnLogout.addActionListener(this);
 
@@ -62,6 +62,20 @@ public class Gui_menuepanel implements ActionListener{
 		mnHilfe.add(mntmber);
 		mntmber.addActionListener(this);
 		setMenue(menueBar);
+	
+	}
+	
+	public JMenuBar getMenue() {
+		return this.menuBar;
+	}
+	
+	public void setMenue(JMenuBar menue) {
+		this.menuBar = menue;
+	}
+
+	public void initialize() {
+		//Menï¿½ Bereich
+		
 		
 	}
 
@@ -73,9 +87,29 @@ public class Gui_menuepanel implements ActionListener{
 		if (command.equals("Beenden")) {
 			System.exit(0);
 		}
+		else if(command.equals("Ausloggen")){
+			user = shop.logoutAccount(user.getName(), user.getPasswort());
+			gesamt.setVisible(true);
+			//this.setContentPane(this.hauptscreen);
+			System.out.println("TschÃ¼ss!");
+		}
+		//Fï¿½r Menï¿½ Hilfe -> Artikel kaufen? Button
+		else if (command.equals("Wie Artikel kaufen?")) {
+			JOptionPane.showMessageDialog(null,
+				"Willkommen im E-Shop. \n Wenn Sie Artikel kaufen wollen, dann registrieren"
+				+ "Sie sich und loggen Sie sich ein! \n Anschlieï¿½end kï¿½nnen Sie die gewï¿½nschten "
+			    + "Artikel kaufen.");
+		}
+		//Fï¿½r Menï¿½ Hilfe -> ï¿½ber uns Button
+		else if (command.equals("\u00DCber uns")) {
+			JOptionPane.showMessageDialog(null, "Entwickler: \n\n"
+					+ "Immanuel Zimmermann \n" 
+					+ "Stefan Meyer \n"
+					+ "Daniel Bï¿½ckmann \n\n" 
+					+ "HS Bremen, Prog 2, SS 2016");
+		}
 		
 		
-		
-		System.out.println("menuepanel aktion ausgeführt");
+		System.out.println("menuepanel aktion ausgefuehrt");
 	}
 }

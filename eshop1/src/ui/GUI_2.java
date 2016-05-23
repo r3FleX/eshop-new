@@ -45,7 +45,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 
 	public GUI_2(String datei) {
 		setTitle("E-Shop");
-		setSize(800, 600); //Fenstergröße
+		setSize(800, 600); //Fenstergrï¿½ï¿½e
 		setResizable(false);
 		
 		try {
@@ -57,7 +57,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 		this.initialize();
 	}	
 	private void initialize() {
-		//menübar
+		//menï¿½bar
 		Gui_menuepanel menuBar = new Gui_menuepanel(shop);		
 		setJMenuBar(menuBar.getMenue());
 		
@@ -170,27 +170,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 			});
 			registrieren.setVisible(true);
 		}
-		else if(command.equals("Ausloggen")){
-			user = shop.logoutAccount(user.getName(), user.getPasswort());
-			gesamt.setVisible(true);
-			//this.setContentPane(this.hauptscreen);
-			System.out.println("TschÃ¼ss!");
-		}
-		//Fï¿½r Menï¿½ Hilfe -> Artikel kaufen? Button
-		else if (command.equals("Wie Artikel kaufen?")) {
-			JOptionPane.showMessageDialog(null,
-				"Willkommen im E-Shop. \n Wenn Sie Artikel kaufen wollen, dann registrieren"
-				+ "Sie sich und loggen Sie sich ein! \n Anschlieï¿½end kï¿½nnen Sie die gewï¿½nschten "
-			    + "Artikel kaufen.");
-		}
-		//Fï¿½r Menï¿½ Hilfe -> ï¿½ber uns Button
-		else if (command.equals("\u00DCber uns")) {
-			JOptionPane.showMessageDialog(null, "Entwickler: \n\n"
-					+ "Immanuel Zimmermann \n" 
-					+ "Stefan Meyer \n"
-					+ "Daniel Bï¿½ckmann \n\n" 
-					+ "HS Bremen, Prog 2, SS 2016");
-		}
+		
 		//Fï¿½r Suchen Button
 		else if (command.equals("Suchen")) {
 			
