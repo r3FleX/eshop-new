@@ -20,7 +20,7 @@ public class Gui_warenkorbpanel implements ActionListener {
 		JPanel warenKorbPanel = new JPanel();
 		warenKorbPanel.setLayout(new GridLayout(1, 3));
 		
-		JButton inWarenKorbLegenButton = new JButton("in Warenkorb legen");
+		/*JButton inWarenKorbLegenButton = new JButton("in Warenkorb legen");
 		warenKorbPanel.add(inWarenKorbLegenButton);
 		inWarenKorbLegenButton.addActionListener(this);
 		
@@ -28,9 +28,9 @@ public class Gui_warenkorbpanel implements ActionListener {
 		
 		JButton zumWarenKorbButton = new JButton("zum Warenkorb");
 		warenKorbPanel.add(zumWarenKorbButton);
-		zumWarenKorbButton.addActionListener(this);
+		zumWarenKorbButton.addActionListener(this);*/
 		
-		warenKorbPanel.setBorder(BorderFactory.createTitledBorder("Warenkorb")); //Überschrift Warenkorb
+		warenKorbPanel.setBorder(BorderFactory.createTitledBorder("Warenkorb")); //ï¿½berschrift Warenkorb
 		setWarenkorbPanel(warenKorbPanel);		
 	}
 	
@@ -43,7 +43,7 @@ public class Gui_warenkorbpanel implements ActionListener {
 	}	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		System.out.println("Warenkorb aktion ausgeführt");
+		System.out.println("Warenkorb aktion ausgefï¿½hrt");
 		
 	}		
 	

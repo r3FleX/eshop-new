@@ -17,10 +17,12 @@ import valueobjects.Artikel;
 public class Gui_suchepanel implements ActionListener {
 	private JPanel suchPanel;
 	
+	private JPanel warenkorbPanel;
+	
 	public Gui_suchepanel(Shopverwaltung shop) {
 		
 		JPanel suchPanel = new JPanel();
-		suchPanel.setLayout(new GridLayout(1, 2));
+		suchPanel.setLayout(new GridLayout(1, 4));
 		
 		JTextField suchenTextField = new JTextField();
 		suchPanel.add(suchenTextField);
@@ -29,7 +31,19 @@ public class Gui_suchepanel implements ActionListener {
 		suchPanel.add(suchButton);
 		suchButton.addActionListener(this);
 		
-		suchPanel.setBorder(BorderFactory.createTitledBorder("Suchen")); //Überschrift Suchen
+		//suchPanel.add(new JLabel()); //Platzhalter
+		
+		suchPanel.setLayout(new GridLayout(1, 4));
+		
+		JButton inWarenKorbLegenButton = new JButton("in Warenkorb legen");
+		suchPanel.add(inWarenKorbLegenButton);
+		inWarenKorbLegenButton.addActionListener(this);
+		
+		JButton zumWarenKorbButton = new JButton("zum Warenkorb");
+		suchPanel.add(zumWarenKorbButton);
+		zumWarenKorbButton.addActionListener(this);
+		
+		suchPanel.setBorder(BorderFactory.createTitledBorder("Shop")); //ï¿½berschrift Suchen
 		
 		setSuchPanel(suchPanel);
 	}
