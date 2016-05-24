@@ -43,7 +43,7 @@ public class Gui_warenkorbpanel implements ActionListener {
 	}	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		System.out.println("Warenkorb aktion ausgef�hrt");
+		System.out.println("Warenkorb aktion ausgefuehrt");
 		
 	}		
 	

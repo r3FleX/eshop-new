@@ -97,7 +97,7 @@ JMenuBar menueBar = new JMenuBar();
 		else if (command.equals("Wie Artikel kaufen?")) {
 			JOptionPane.showMessageDialog(null,
 				"Willkommen im E-Shop. \n Wenn Sie Artikel kaufen wollen, dann registrieren"
-				+ "Sie sich und loggen Sie sich ein! \n Anschlie�end k�nnen Sie die gew�nschten "
+				+ "Sie sich und loggen Sie sich ein! \n Anschliessend koennen Sie die gewuenschten "
 			    + "Artikel kaufen.");
 		}
 		//F�r Men� Hilfe -> �ber uns Button
@@ -105,7 +105,7 @@ JMenuBar menueBar = new JMenuBar();
 			JOptionPane.showMessageDialog(null, "Entwickler: \n\n"
 					+ "Immanuel Zimmermann \n" 
 					+ "Stefan Meyer \n"
-					+ "Daniel B�ckmann \n\n" 
+					+ "Daniel Boeckmann \n\n" 
 					+ "HS Bremen, Prog 2, SS 2016");
 		}
 		

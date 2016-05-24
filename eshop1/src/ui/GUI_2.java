@@ -241,7 +241,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 
 			float gesamtpreis = 0.0f;
 
-			gesamt.setText("Gesampreis: " + gesamtpreis + "�");
+			gesamt.setText("Gesampreis: " + gesamtpreis + "Euro");
 		}
 	}
 	public static void main(String[] args) {
