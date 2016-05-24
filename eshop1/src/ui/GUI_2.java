@@ -6,6 +6,8 @@ import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,6 +19,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+
 import domain.Shopverwaltung;
 import domain.exceptions.AccountExistiertBereitsException;
 import domain.exceptions.ArtikelExistiertNichtException;
@@ -36,7 +40,6 @@ public class GUI_2 extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 1L;
 
 	private Shopverwaltung shop;
-	JFrame mainframe = new JFrame(); 
 	JPanel mainPanel = new JPanel();
 	//men�bar
 	Gui_menuepanel menuBar = new Gui_menuepanel(shop);		
@@ -45,7 +48,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 	JPanel navframe = new JPanel();		
 	JPanel contentframe = new JPanel();	
 	
-	private JTextField suchenTextField;
+	
 	private Account user;
 	private List artikelListe = new List();
 	private JTable ausgabeTabelle = null;
@@ -77,32 +80,15 @@ public class GUI_2 extends JFrame implements ActionListener{
 		//login
 		Gui_loginpanel loginPanel = new Gui_loginpanel(shop);
 		this.navframe.add(loginPanel.getloginPanel(), BorderLayout.NORTH);	
-		
-		//Artikelliste
-		//Gui_artikelpanel artikelPanel = new Gui_artikelpanel(shop.gibAlleArtikel());			
-		//this.contentframe.add(artikelPanel.getArtikelPanel(), BorderLayout.CENTER);		
-		// GUI setzen
-		updateGUI(this.menuBar, this.navframe, this.contentframe);
-		
-	}
-	private void updateGUI(Gui_menuepanel menuBar, JPanel navframe, JPanel contentframe) {
-
-        System.out.println("--");
 		setJMenuBar(menuBar.getMenue());	
-		this.mainPanel.add(navframe,BorderLayout.NORTH);
-		this.mainPanel.add(contentframe,BorderLayout.CENTER);
-		//ausgeben
+		//Artikelliste
+		Gui_artikelpanel artikelPanel = new Gui_artikelpanel(shop.gibAlleArtikel());			
+		this.contentframe.add(artikelPanel.getArtikelPanel(), BorderLayout.CENTER);		
+		// GUI setzen
+		this.mainPanel.add(this.navframe,BorderLayout.NORTH);
+		this.mainPanel.add(this.contentframe,BorderLayout.CENTER);	
 		add(this.mainPanel);
-	
-	}
-	public void updateGUImenue(Gui_menuepanel menuBar) {
-		updateGUI(menuBar, this.navframe, this.contentframe);	
-	}	
-	public void updateGUInav(JPanel navframe) {
-		updateGUI(this.menuBar, navframe, this.contentframe);	
-	}
-	public void updateGUIcontent(JPanel contentframe) {	
-		updateGUI(this.menuBar, new JPanel(), contentframe);
+		
 	}	
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
@@ -184,23 +170,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 		//F�r Suchen Button
 		else if (command.equals("Suchen")) {
 			
-			System.out.println("Test Suchen");
-			
-			String suche = suchenTextField.getText();
-			java.util.List<Artikel> suchErgebnis;
-			
-			if (suche.isEmpty()) {
-				suchErgebnis = shop.gibAlleArtikel();
-			} else {
-				suchErgebnis = shop.sucheNachArtikel(suche);
-				//suchErgebnis = shop.sucheNachArtikelNummer(suche);	
-			}
-			//ArtikelTableModel artikeltable = (ArtikelTableModel) ausgabeTabelle.getModel();
-			//artikeltable.setDataVector(suchErgebnis);
-			artikelListe.removeAll();
-			for (Artikel b: suchErgebnis) {
-				artikelListe.add(b.toString());
-			}
+
 			
 		}
 		//F�r Suchen Button
