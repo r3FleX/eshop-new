@@ -36,10 +36,12 @@ public class Gui_suchepanel implements ActionListener {
 		suchPanel.setLayout(new GridLayout(1, 4));
 		
 		JButton inWarenKorbLegenButton = new JButton("in Warenkorb legen");
+		inWarenKorbLegenButton.setEnabled(false);
 		suchPanel.add(inWarenKorbLegenButton);
 		inWarenKorbLegenButton.addActionListener(this);
 		
 		JButton zumWarenKorbButton = new JButton("zum Warenkorb");
+		zumWarenKorbButton.setEnabled(false);
 		suchPanel.add(zumWarenKorbButton);
 		zumWarenKorbButton.addActionListener(this);
 		

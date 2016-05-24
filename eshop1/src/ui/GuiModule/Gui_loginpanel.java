@@ -32,7 +32,7 @@ public class Gui_loginpanel implements ActionListener{
 		//loginPanel.setVisible(false);
 		
 		
-		//loginPanel.setBorder(BorderFactory.createTitledBorder("Kundenbereich - Willkommen "+ user.getName() + "!")); //Überschrift Login
+		//loginPanel.setBorder(BorderFactory.createTitledBorder("Kundenbereich - Willkommen "+ user.getName() + "!")); //ï¿½berschrift Login
 		
 		setloginPanel(loginPanel);
 	}
@@ -57,6 +57,7 @@ public class Gui_loginpanel implements ActionListener{
 	
 			JLabel labelname = new JLabel("Name:");
 			login.add(labelname);
+			
 	
 			final JTextField nameFeld = new JTextField();
 			login.add(nameFeld);

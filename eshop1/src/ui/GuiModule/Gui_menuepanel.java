@@ -25,7 +25,7 @@ public class Gui_menuepanel implements ActionListener{
 	public Gui_menuepanel(Shopverwaltung shop) {
 		this.shop = shop;
 		
-JMenuBar menueBar = new JMenuBar();		
+		JMenuBar menueBar = new JMenuBar();		
 		
 		JMenu mnDatei = new JMenu("Datei");
 		menueBar.add(mnDatei);
