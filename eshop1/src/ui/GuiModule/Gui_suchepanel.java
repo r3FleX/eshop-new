@@ -1,5 +1,7 @@
 package ui.GuiModule;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,15 +14,17 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import domain.Shopverwaltung;
+import ui.GUI_2;
 import valueobjects.Artikel;
 
 public class Gui_suchepanel implements ActionListener {
+	private GUI_2 GUI;
 	private JPanel suchPanel;
 	
 	private JPanel warenkorbPanel;
 	
-	public Gui_suchepanel(Shopverwaltung shop) {
-		
+	public Gui_suchepanel(GUI_2 GUI) {
+		this.GUI = GUI;
 		JPanel suchPanel = new JPanel();
 		suchPanel.setLayout(new GridLayout(1, 4));
 		
@@ -57,7 +61,14 @@ public class Gui_suchepanel implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent arg0) {		
-		System.out.println("Test Suchen");		
+		System.out.println("Test Suchen");
+		JPanel contentframe = new JPanel();	
+		Gui_artikelpanel artikelPanel = new Gui_artikelpanel(this.GUI.getShop().gibAlleArtikel());			
+		contentframe.add(artikelPanel.getArtikelPanel(), BorderLayout.CENTER);	
+	
+		this.GUI.updateGUIcontent(contentframe);
+		
+		
 		AbstractButton suchenTextField;
 /*		String suche = suchenTextField.getText();
 		java.util.List<Artikel> suchErgebnis;

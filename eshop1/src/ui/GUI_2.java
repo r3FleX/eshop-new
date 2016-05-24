@@ -36,6 +36,15 @@ public class GUI_2 extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 1L;
 
 	private Shopverwaltung shop;
+	JFrame mainframe = new JFrame(); 
+	JPanel mainPanel = new JPanel();
+	//men�bar
+	Gui_menuepanel menuBar = new Gui_menuepanel(shop);		
+	
+	//LayoutPanel
+	JPanel navframe = new JPanel();		
+	JPanel contentframe = new JPanel();	
+	
 	private JTextField suchenTextField;
 	private Account user;
 	private List artikelListe = new List();
@@ -57,43 +66,44 @@ public class GUI_2 extends JFrame implements ActionListener{
 		this.initialize();
 	}	
 	private void initialize() {
-		//men�bar
-		Gui_menuepanel menuBar = new Gui_menuepanel(shop);		
-		setJMenuBar(menuBar.getMenue());
+
+		this.mainPanel.setLayout(new BorderLayout());
+		this.navframe.setLayout(new BorderLayout());
+		this.contentframe.setLayout(new BorderLayout());	
 		
-		//LayoutPanel
-		JPanel mainPanel = new JPanel();
-		JPanel navframe = new JPanel();		
-		JPanel contentframe = new JPanel();
-		//
-		mainPanel.setLayout(new BorderLayout());
-		navframe.setLayout(new BorderLayout());
-		contentframe.setLayout(new BorderLayout());		
-		//content frame 		
-		//suche
-		Gui_suchepanel suchPanel = new Gui_suchepanel(shop);
-		contentframe.add(suchPanel.getSuchPanel(), BorderLayout.NORTH);
+		Gui_suchepanel suchPanel = new Gui_suchepanel(this);
+		this.contentframe.add(suchPanel.getSuchPanel(), BorderLayout.NORTH);
 		
 		//login
 		Gui_loginpanel loginPanel = new Gui_loginpanel(shop);
-		navframe.add(loginPanel.getloginPanel(), BorderLayout.NORTH);	
+		this.navframe.add(loginPanel.getloginPanel(), BorderLayout.NORTH);	
 		
 		//Artikelliste
-		Gui_artikelpanel artikelPanel = new Gui_artikelpanel(shop.gibAlleArtikel());			
-		contentframe.add(artikelPanel.getArtikelPanel(), BorderLayout.CENTER);
+		//Gui_artikelpanel artikelPanel = new Gui_artikelpanel(shop.gibAlleArtikel());			
+		//this.contentframe.add(artikelPanel.getArtikelPanel(), BorderLayout.CENTER);		
+		// GUI setzen
+		updateGUI(this.menuBar, this.navframe, this.contentframe);
 		
-		//warenkorb
-		/*Gui_warenkorbpanel warenkorbpanel = new Gui_warenkorbpanel();			
-		contentframe.add(warenkorbpanel.getWarenkorbPanel(), BorderLayout.SOUTH);*/
-		
-		//zusammenbasteln		
-		
-		mainPanel.add(navframe,BorderLayout.NORTH);
-		mainPanel.add(contentframe,BorderLayout.CENTER);
-		//ausgeben
-		add(mainPanel);	
 	}
+	private void updateGUI(Gui_menuepanel menuBar, JPanel navframe, JPanel contentframe) {
+
+        System.out.println("--");
+		setJMenuBar(menuBar.getMenue());	
+		this.mainPanel.add(navframe,BorderLayout.NORTH);
+		this.mainPanel.add(contentframe,BorderLayout.CENTER);
+		//ausgeben
+		add(this.mainPanel);
 	
+	}
+	public void updateGUImenue(Gui_menuepanel menuBar) {
+		updateGUI(menuBar, this.navframe, this.contentframe);	
+	}	
+	public void updateGUInav(JPanel navframe) {
+		updateGUI(this.menuBar, navframe, this.contentframe);	
+	}
+	public void updateGUIcontent(JPanel contentframe) {	
+		updateGUI(this.menuBar, new JPanel(), contentframe);
+	}	
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
 		
@@ -243,6 +253,9 @@ public class GUI_2 extends JFrame implements ActionListener{
 
 			gesamt.setText("Gesampreis: " + gesamtpreis + "Euro");
 		}
+	}
+	public Shopverwaltung getShop() {
+		return shop;
 	}
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
