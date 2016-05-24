@@ -31,7 +31,7 @@ public class Gui_suchepanel implements ActionListener {
 		suchPanel.add(suchButton);
 		suchButton.addActionListener(this);
 		
-		//suchPanel.add(new JLabel()); //Platzhalter
+		suchPanel.add(new JLabel()); //Platzhalter
 		
 		suchPanel.setLayout(new GridLayout(1, 4));
 		
