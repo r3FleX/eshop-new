@@ -42,19 +42,25 @@ public class GUI_2 extends JFrame implements ActionListener{
 	private Shopverwaltung shop;
 	JPanel mainPanel = new JPanel();
 	//men�bar
-	Gui_menuepanel menuBar = new Gui_menuepanel(shop);		
+	Gui_menuepanel menuBar;	
 	
 	//LayoutPanel
 	JPanel navframe = new JPanel();		
 	JPanel contentframe = new JPanel();	
-	
 	
 	private Account user;
 	private List artikelListe = new List();
 	private JTable ausgabeTabelle = null;
 	private JTable warenkorbTabelle = null;
 	JLabel gesamt = new JLabel();
+	private Gui_artikelpanel artikelPanel;
 
+	public Gui_artikelpanel getArtikelPanel() {
+		return artikelPanel;
+	}
+	public void setArtikelPanel(Gui_artikelpanel artikelPanel) {
+		this.artikelPanel = artikelPanel;
+	}
 	public GUI_2(String datei) {
 		setTitle("E-Shop");
 		setSize(800, 600); //Fenstergr��e
@@ -62,7 +68,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 		
 		try {
 			shop = new Shopverwaltung(datei);
-
+			menuBar = new Gui_menuepanel(shop);	
 		} catch (IOException e2) {
 
 		}
@@ -82,7 +88,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 		this.navframe.add(loginPanel.getloginPanel(), BorderLayout.NORTH);	
 		setJMenuBar(menuBar.getMenue());	
 		//Artikelliste
-		Gui_artikelpanel artikelPanel = new Gui_artikelpanel(shop.gibAlleArtikel());			
+		artikelPanel = new Gui_artikelpanel(shop.gibAlleArtikel());			
 		this.contentframe.add(artikelPanel.getArtikelPanel(), BorderLayout.CENTER);		
 		// GUI setzen
 		this.mainPanel.add(this.navframe,BorderLayout.NORTH);
@@ -95,77 +101,11 @@ public class GUI_2 extends JFrame implements ActionListener{
 		
 		//F�r Men� Datei -> Beenden Button
 		if (command.equals("Beenden")) {
-		//	System.exit(0);
+			System.exit(0);
 		}
 		
 		//F�r Men� Account -> Registrieren Button
-		else if (command.equals("Registrieren")){
-			final JFrame registrieren = new JFrame();
-
-			registrieren.setSize(400, 300);
-			registrieren.setLayout(new GridLayout(11, 1));
-
-			JLabel name = new JLabel("Name:");
-			registrieren.add(name);
-
-			final JTextField nameFeld = new JTextField();
-			registrieren.add(nameFeld);
-
-			JLabel passwort = new JLabel("Passwort:");
-			registrieren.add(passwort);
-
-			final JPasswordField passwortFeld = new JPasswordField();
-			registrieren.add(passwortFeld);
-
-			JLabel adresse = new JLabel("Adresse:");
-			registrieren.add(adresse);
-
-			final JTextField adressFeld = new JTextField();
-			registrieren.add(adressFeld);
-
-			JLabel plz = new JLabel("Postleitzahl:");
-			registrieren.add(plz);
-
-			final JTextField plzFeld = new JTextField();
-			registrieren.add(plzFeld);
-
-			JLabel wohnort = new JLabel("Ort:");
-			registrieren.add(wohnort);
-
-			final JTextField ortFeld = new JTextField();
-			registrieren.add(ortFeld);
-
-			JButton regButton = new JButton("Registrieren");
-			registrieren.add(regButton);
-			
-			//F�r Men� Account -> Registrieren -> Registrieren Button
-			regButton.addActionListener(new ActionListener() { 
 		
-				public void actionPerformed(ActionEvent arg0) {
-						
-					//hole Name, Passwort, Starsse, PLZ und Ort aus Textfelder
-					String name = nameFeld.getText();
-					String passwort = String.valueOf(passwortFeld.getPassword());
-					String strasse = adressFeld.getText();
-					int plz = Integer.parseInt(plzFeld.getText());
-					String ort = ortFeld.getText();
-					
-					try {
-						shop.fuegeKundenAccountEin(name, passwort, strasse, plz, ort);
-						try {
-							shop.schreibeKundendaten();
-							JOptionPane.showMessageDialog(null,"Erfolgreich als Kunde registriert!");
-							registrieren.setVisible(false);
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					} catch (AccountExistiertBereitsException e1) {
-						JOptionPane.showMessageDialog(null, e1.getMessage());
-					}
-				}
-			});
-			registrieren.setVisible(true);
-		}
 		
 		//F�r Suchen Button
 		else if (command.equals("Suchen")) {

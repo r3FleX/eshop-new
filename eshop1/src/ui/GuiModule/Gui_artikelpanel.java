@@ -15,6 +15,7 @@ import valueobjects.Artikel;
 public class Gui_artikelpanel {
 	
 	private JPanel artikelPanel;
+	private ArtikelTableModel artikeltable;
 	public Gui_artikelpanel(List<Artikel> artikelliste) {
 		//Artikel Bereich
 		JPanel artikelPanel = new JPanel();
@@ -30,7 +31,7 @@ public class Gui_artikelpanel {
 		spalten.add("Massengut");
 		
 		// TableModel als "Datencontainer" anlegen:
-		ArtikelTableModel artikeltable = new ArtikelTableModel(new Vector<Artikel>(), spalten);
+		artikeltable = new ArtikelTableModel(new Vector<Artikel>(), spalten);
 		
 		// JTable-Objekt erzeugen und mit Datenmodell initialisieren:
 		JTable ausgabeTabelle = new JTable(artikeltable);
@@ -43,6 +44,12 @@ public class Gui_artikelpanel {
 		artikelPanel.add(scrollPane);
 		
 		setArtikelPanel(artikelPanel);
+	}
+	public ArtikelTableModel getArtikeltable() {
+		return artikeltable;
+	}
+	public void setArtikeltable(ArtikelTableModel artikeltable) {
+		this.artikeltable = artikeltable;
 	}
 	public JPanel getArtikelPanel() {
 		return this.artikelPanel;

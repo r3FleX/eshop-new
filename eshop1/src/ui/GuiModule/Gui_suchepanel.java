@@ -15,23 +15,24 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import domain.Shopverwaltung;
+import ui.ArtikelTableModel;
 import ui.GUI_2;
 import valueobjects.Artikel;
 
 public class Gui_suchepanel implements ActionListener {
-	private GUI_2 GUI;
+	private GUI_2 gui;
 	private Shopverwaltung shop;
 	private JPanel suchPanel;
 	private JPanel warenkorbPanel;
 	private List artikelListe;
+	private JTextField suchenTextField;
 	
 	public Gui_suchepanel(GUI_2 GUI) {
-		this.GUI = GUI;
+		this.gui = GUI;
 		this.shop = GUI.getShop();
 		JPanel suchPanel = new JPanel();
 		suchPanel.setLayout(new GridLayout(1, 4));
-		
-		JTextField suchenTextField = new JTextField();
+		suchenTextField = new JTextField();		
 		suchPanel.add(suchenTextField);
 		
 		JButton suchButton = new JButton("Suchen");
@@ -66,17 +67,17 @@ public class Gui_suchepanel implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {		
 		System.out.println("Test Suchen");	
 		Gui_artikelpanel artikelPanel;
-		JTextField suchenTextField = new JTextField();
 		String suche = suchenTextField.getText();
 		java.util.List<Artikel> suchErgebnis;
+		System.out.println(suche);
 		
 		if (suche.isEmpty()) {
 			suchErgebnis = this.shop.gibAlleArtikel();
 		} else {
 			suchErgebnis = shop.sucheNachArtikelNummer(suche);
 		}
-	
-		
+		// TODO: keine Gui_artikelpanel
+		gui.setArtikelPanel(new Gui_artikelpanel(suchErgebnis));	
 
 	}		
 }

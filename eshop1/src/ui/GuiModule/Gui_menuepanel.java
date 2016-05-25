@@ -39,10 +39,11 @@ public class Gui_menuepanel implements ActionListener{
 		
 		JMenuItem mnLogin = new JMenuItem("Einloggen");
 		mnAccount.add(mnLogin);
-		mnLogin.addActionListener(this);
+		Gui_loginpanel gui_loginpanel = new Gui_loginpanel(shop);
+		mnLogin.addActionListener(gui_loginpanel);
 		
 		JMenuItem mnReg = new JMenuItem("Registrieren");
-		mnReg.addActionListener(this);
+		mnReg.addActionListener(gui_loginpanel);
 		mnAccount.add(mnReg);
 		
 		JMenuItem mnLogout = new JMenuItem("Ausloggen");
