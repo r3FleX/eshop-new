@@ -1,32 +1,23 @@
 package ui;
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.Vector;
-
 import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -49,6 +40,7 @@ public class GUI_3 extends JFrame implements ActionListener{
 	private Shopverwaltung shop;
 	private JTextField nameTextField;
 	private JPasswordField passTextField;
+	private JTable ausgabeTabelle = null;
 	
 	JPanel navframe = new JPanel();		
 	JPanel contentframe = new JPanel();
@@ -56,7 +48,6 @@ public class GUI_3 extends JFrame implements ActionListener{
 	JMenuBar menueBar = new JMenuBar();	
 	JLabel gesamt = new JLabel();
 	JPanel loginPanel = new JPanel();
-	
 	
 	public GUI_3(String datei) {
 		try {
@@ -93,12 +84,13 @@ public class GUI_3 extends JFrame implements ActionListener{
 		/**
 			Menue Panel Bereich
 		**/
-		
-			
+		// Menü definieren
+		JMenuBar menueBar = new JMenuBar();
+		setJMenuBar(menueBar);
 		
 		JMenu mnDatei = new JMenu("Datei");
 		menueBar.add(mnDatei);
-
+		
 		JMenuItem mntmBeenden = new JMenuItem("Beenden");
 		mntmBeenden.addActionListener(this);
 		mnDatei.add(mntmBeenden);
@@ -129,7 +121,6 @@ public class GUI_3 extends JFrame implements ActionListener{
 		mnHilfe.add(mntmber);
 		mntmber.addActionListener(this);
 		
-	
 		/**
 			Login Panel Bereich	
 		**/
@@ -148,6 +139,12 @@ public class GUI_3 extends JFrame implements ActionListener{
 		spalten.add("Preis");
 		spalten.add("Packungsgröße");
 		spalten.add("Massengut");
+		
+		ausgabeTabelle = new JTable(new ArtikelTableModel(new Vector<Artikel>(), spalten) {
+			// public boolean isCellEditable(int rowIndex, int vColIndex) {
+			// return false;
+			// }
+		});
 		
 		// TableModel als "Datencontainer" anlegen:
 		ArtikelTableModel artikeltable = new ArtikelTableModel(new Vector<Artikel>(), spalten);
