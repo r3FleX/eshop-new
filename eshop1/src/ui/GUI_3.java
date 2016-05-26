@@ -85,7 +85,7 @@ public class GUI_3 extends JFrame implements ActionListener{
 		loginPanel.setVisible(true);	
 		
 		//SuchPanel
-		suchPanel.setLayout(new GridLayout(1, 3));
+		suchPanel.setLayout(new GridLayout(1, 4));
 		contentframe.add(suchPanel);
 		this.contentframe.add(suchPanel, BorderLayout.NORTH);
 		add(suchPanel, BorderLayout.NORTH); 
@@ -135,12 +135,13 @@ public class GUI_3 extends JFrame implements ActionListener{
 		suchenTextField = new JTextField();		
 		suchPanel.add(suchenTextField);
 		
-		suchPanel.add(new JLabel()); //Platzhalter
 		JButton suchButton = new JButton("Suchen");
 		suchPanel.add(suchButton);
 		
-		suchButton.addActionListener(this);
+		suchPanel.add(new JLabel()); //Platzhalter
+		suchPanel.add(new JLabel()); //Platzhalter
 		
+		suchButton.addActionListener(this);
 		suchPanel.setBorder(BorderFactory.createTitledBorder("Suchen")); //Uberschrift Suchen
 		
 		/**
