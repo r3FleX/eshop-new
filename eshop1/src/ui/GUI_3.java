@@ -37,8 +37,6 @@ import domain.exceptions.AccountExistiertNichtException;
 import domain.exceptions.ArtikelExistiertBereitsException;
 import domain.exceptions.ArtikelExistiertNichtException;
 import domain.exceptions.StatExistiertBereitsException;
-import ui.GuiModule.Gui_loginpanel;
-import ui.GuiModule.Gui_suchepanel;
 import valueobjects.Account;
 import valueobjects.Artikel;
 import valueobjects.Kunde;
@@ -49,16 +47,17 @@ public class GUI_3 extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 1L;
 
 	private Shopverwaltung shop;
-	private JButton addButton;
-	private JTextField titleField;
-	private JTextField numberField;
-	private JTextField searchTextField;
 	private JTextField nameTextField;
 	private JPasswordField passTextField;
-	private JTextField textField;
-	private Account user;
-	private Container hauptscreen = null;
-
+	
+	JPanel navframe = new JPanel();		
+	JPanel contentframe = new JPanel();
+	JPanel mainPanel = new JPanel();
+	JMenuBar menueBar = new JMenuBar();	
+	JLabel gesamt = new JLabel();
+	JPanel loginPanel = new JPanel();
+	
+	
 	public GUI_3(String datei) {
 		try {
 			shop = new Shopverwaltung(datei);
@@ -72,14 +71,30 @@ public class GUI_3 extends JFrame implements ActionListener{
 	private void initialize() {
 		setTitle("E-Shop");
 		setSize(800, 600);
+	
+		//PANELS anlegen	
+		
+		this.mainPanel.setLayout(new BorderLayout());
+		this.navframe.setLayout(new BorderLayout());
+		this.contentframe.setLayout(new BorderLayout());
+		
+		//GUI setzen
+		this.mainPanel.add(this.navframe,BorderLayout.NORTH);
+		this.mainPanel.add(this.contentframe,BorderLayout.CENTER);	
+		add(this.mainPanel);
+		
+		//LoginPanel
+		loginPanel.setLayout(new GridLayout(2, 3));
+		//navframe.add(loginPanel(), BorderLayout.NORTH);	
+		loginPanel.setBorder(BorderFactory.createTitledBorder("Login")); //Ueberschrift Login
+		add(loginPanel, BorderLayout.NORTH); 
+		loginPanel.setVisible(false);	
+		
 		/**
-		//Inhalt der Startseite festlegen
-		setLayout(new BorderLayout());
-		Gui_suchepanel suchPanel = new Gui_suchepanel();
-		add(suchPanel.getSuchPanel(), BorderLayout.NORTH);
+			Menue Panel Bereich
 		**/
-		//Menü definieren
-		JMenuBar menueBar = new JMenuBar();		
+		
+			
 		
 		JMenu mnDatei = new JMenu("Datei");
 		menueBar.add(mnDatei);
@@ -93,11 +108,8 @@ public class GUI_3 extends JFrame implements ActionListener{
 		
 		JMenuItem mnLogin = new JMenuItem("Einloggen");
 		mnAccount.add(mnLogin);
-		Gui_loginpanel gui_loginpanel = new Gui_loginpanel(shop);
-		mnLogin.addActionListener(gui_loginpanel);
 		
 		JMenuItem mnReg = new JMenuItem("Registrieren");
-		mnReg.addActionListener(gui_loginpanel);
 		mnAccount.add(mnReg);
 		
 		JMenuItem mnLogout = new JMenuItem("Ausloggen");
@@ -116,38 +128,16 @@ public class GUI_3 extends JFrame implements ActionListener{
 		JMenuItem mntmber = new JMenuItem("\u00DCber uns");
 		mnHilfe.add(mntmber);
 		mntmber.addActionListener(this);
-		//setMenue(menueBar);
+		
+	
+		/**
+			Login Panel Bereich	
+		**/
 
-		//Login Panel Bereich
-		JPanel loginPanel = new JPanel();
 		
-		loginPanel.setLayout(new GridLayout(2, 3));
-		loginPanel.add(new JLabel("Name"));
-		loginPanel.add(new JLabel("Passwort"));
-		loginPanel.add(new JLabel(""));
-		
-		nameTextField = new JTextField();
-		passTextField = new JPasswordField();
-		loginPanel.add(nameTextField);
-		loginPanel.add(passTextField);
-		
-		//LoginButton
-		JButton loginButton = new JButton("Login");
-		loginPanel.add(loginButton);
-		loginButton.addActionListener(this);
-		loginPanel.setBorder(BorderFactory.createTitledBorder("Login")); //Überschrift Login
-		
-		//Inhalt der Startseite festlegen
-		/*
-		setLayout(new BorderLayout());
-		Gui_suchepanel suchPanel1 = new Gui_suchepanel();
-		add(suchPanel1.getSuchPanel(), BorderLayout.NORTH);	
-		*/
-		
-		//MAIN PANEL
-		JPanel mainPanel = new JPanel();
-		
-		//Artikel
+		/**
+			Artikel Panel Bereich
+		**/
 		JPanel artikelPanel = new JPanel();
 		artikelPanel.setBorder(BorderFactory.createTitledBorder("Artikel"));
 		
@@ -169,30 +159,14 @@ public class GUI_3 extends JFrame implements ActionListener{
 		JScrollPane scrollPane = new JScrollPane(ausgabeTabelle);
 		
 		// Anzeige der Artikelliste auch in der Kunden-Ansicht
-		artikeltable.setDataVector(shop.gibAlleArtikel());
+		artikeltable.setDataVector(shop.gibAlleArtikel());	
 		
-		//PANELS ANLEGEN
-		JMenuBar menueBar = new JMenuBar();	
-		add(loginPanel, BorderLayout.NORTH);
-		add(new JScrollPane(artikelPanel));
+		add(new JScrollPane(artikelPanel)); //Artikel Panel
 		artikelPanel.add(scrollPane);
-		//add(artikelPanel, BorderLayout.CENTER);
 		artikelPanel.setLayout(new GridLayout());
 	}
 	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GUI_3 frame = new GUI_3("Shop");
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	//ACTIONLISTENER
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
 		//Für Beenden Button
@@ -203,30 +177,73 @@ public class GUI_3 extends JFrame implements ActionListener{
 		//Für Login Button
 		else if (command.equals("Login")) {
 
-			String name = nameTextField.getText();
-			String passwort = String.valueOf(passTextField.getPassword());
-			
-			try {
-				user = shop.loginAccount(name, passwort);
-			}
-			catch (AccountExistiertNichtException ex) {
-				JOptionPane.showMessageDialog(null, ex.getMessage());
-			}
-			if (user instanceof Kunde) {
-
-				JFrame kundeEingeloggt = new JFrame();
-
-				this.hauptscreen = this.getContentPane();
-
-				Container container = kundeEingeloggt.getContentPane();
-				setContentPane(container);
-				container.setLayout(new GridLayout(1, 2));
-
-				JPanel panel = new JPanel();
-				container.add(panel);
-
-				panel.setBorder(BorderFactory.createTitledBorder("Kundenbereich - Willkommen "+ user.getName() + "!"));
-				panel.setLayout(new GridLayout(1, 2));
+			System.out.println("test einloggen");
+			if(command.equals("Einloggen")){
+				
+				final JFrame login = new JFrame();
+		
+				login.setSize(200, 300);
+				login.setLayout(new GridLayout(7, 1));
+		
+				JLabel labelname = new JLabel("Name:");
+				login.add(labelname);
+				
+		
+				final JTextField nameFeld = new JTextField();
+				login.add(nameFeld);
+		
+				JLabel labelpasswort = new JLabel("Passwort:");
+				login.add(labelpasswort);
+		
+				final JPasswordField passwortFeld = new JPasswordField();
+				login.add(passwortFeld);
+		
+				JButton loginButton = new JButton("Login");
+				loginButton.addActionListener(new ActionListener() { 
+					
+					public void actionPerformed(ActionEvent arg0) {
+						
+						System.out.println("loginbutton");
+						
+						
+						//LoginButton
+						JButton loginButton = new JButton("Login");
+						loginPanel.add(loginButton);
+						loginButton.addActionListener(this);
+						
+						//Überschrift Login
+						
+						//hole Name und Passwort aus Textfelder
+						String name = nameFeld.getText();
+						String passwort = String.valueOf(passwortFeld.getPassword());
+				
+						//Ueberpruefe ob Kunde oder Mitarbeiter
+						try {
+							Account user = shop.loginAccount(name, passwort);
+							
+							if (user instanceof Kunde) {
+								login.setVisible(false);
+								//loginPanel.setVisible(true);
+					
+								loginPanel.setBorder(BorderFactory.createTitledBorder("Kundenbereich - Willkommen !"));
+								System.out.println("Kunde eingeloggt");
+								
+								JOptionPane.showMessageDialog(null,"Erfolgreich als Kunde eingeloggt!");		
+							}
+							else if (user instanceof Mitarbeiter){
+								System.out.println("Mitarbeiter eingeloggt");
+								JOptionPane.showMessageDialog(null,"Erfolgreich als Mitarbeiter eingeloggt!");
+								//login.setVisible(false); //Login Eingabefenster schlieï¿½en
+							}
+						} catch (AccountExistiertNichtException ex) {
+							JOptionPane.showMessageDialog(null, ex.getMessage());
+						}
+					}
+				});
+				
+				login.add(loginButton);
+				
+				login.setVisible(true);
 			}
 		}
 		//Für Account Registrieren
@@ -286,5 +303,18 @@ public class GUI_3 extends JFrame implements ActionListener{
 					+ "Daniel Böckmann \n\n" 
 					+ "HS Bremen, Prog 2, SS 2016");
 		}
+	}
+	
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					GUI_3 frame = new GUI_3("Shop");
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 }
