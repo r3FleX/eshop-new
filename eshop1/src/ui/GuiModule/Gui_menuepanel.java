@@ -74,12 +74,6 @@ public class Gui_menuepanel implements ActionListener{
 		this.menuBar = menue;
 	}
 
-	public void initialize() {
-		//Men� Bereich
-		
-		
-	}
-
 	//F�r Men� Datei -> Beenden Button
 	public void actionPerformed(ActionEvent arg0) {
 		String command = arg0.getActionCommand();
