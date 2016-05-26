@@ -82,7 +82,7 @@ public class GUI_3 extends JFrame implements ActionListener{
 		//LoginPanel
 		loginPanel.setLayout(new GridLayout(2, 3));
 		loginPanel.setBorder(BorderFactory.createTitledBorder("Login")); //Ueberschrift Login
-		navframe.add(loginPanel, BorderLayout.NORTH);
+		mainPanel.add(loginPanel, BorderLayout.NORTH);
 		add(loginPanel, BorderLayout.NORTH); 
 		loginPanel.setVisible(true);	
 		
