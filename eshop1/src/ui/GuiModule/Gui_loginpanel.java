@@ -51,7 +51,7 @@ public class Gui_loginpanel implements ActionListener{
 	public void actionPerformed(ActionEvent arg0) {
 		String command = arg0.getActionCommand();
 		//loginPanel.setVisible(false);	
-		System.out.println("test");
+		System.out.println("test einloggen");
 		if(command.equals("Einloggen")){
 			
 			final JFrame login = new JFrame();
@@ -92,31 +92,18 @@ public class Gui_loginpanel implements ActionListener{
 					String name = nameFeld.getText();
 					String passwort = String.valueOf(passwortFeld.getPassword());
 			
-					//�berpr�fe ob Kunde oder Mitarbeiter
+					//Ueberpruefe ob Kunde oder Mitarbeiter
 					try {
 						Account user = shop.loginAccount(name, passwort);
 						
 						if (user instanceof Kunde) {
 							login.setVisible(false);
-							loginPanel.setVisible(true);
+							//loginPanel.setVisible(true);
 				
 							loginPanel.setBorder(BorderFactory.createTitledBorder("Kundenbereich - Willkommen !"));
 							System.out.println("Kunde eingeloggt");
 							
-							JOptionPane.showMessageDialog(null,"Erfolgreich als Kunde eingeloggt!");
-				
-							JPanel loginPanel = new JPanel();
-							
-							loginPanel.setLayout(new GridLayout(2, 3));
-							loginPanel.add(new JLabel("Name"));
-							loginPanel.add(new JLabel("Passwort"));
-							loginPanel.add(new JLabel(""));
-							
-							nameTextField = new JTextField();
-							passTextField = new JPasswordField();
-							loginPanel.add(nameTextField);
-							loginPanel.add(passTextField);
-							
+							JOptionPane.showMessageDialog(null,"Erfolgreich als Kunde eingeloggt!");		
 						}
 						else if (user instanceof Mitarbeiter){
 							System.out.println("Mitarbeiter eingeloggt");

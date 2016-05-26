@@ -63,7 +63,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 	}
 	public GUI_2(String datei) {
 		setTitle("E-Shop");
-		setSize(800, 600); //Fenstergr��e
+		setSize(800, 600); //Fenstergroesse
 		setResizable(false);
 		
 		try {

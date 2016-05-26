@@ -41,7 +41,6 @@ public class Gui_suchepanel implements ActionListener {
 		
 		suchPanel.add(new JLabel()); //Platzhalter
 		
-		suchPanel.setLayout(new GridLayout(1, 4));
 		/*
 		JButton inWarenKorbLegenButton = new JButton("in Warenkorb legen");
 		suchPanel.add(inWarenKorbLegenButton);
