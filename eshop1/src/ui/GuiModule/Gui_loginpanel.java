@@ -26,13 +26,16 @@ public class Gui_loginpanel implements ActionListener{
 
 	private JPanel loginPanel;	
 	private Shopverwaltung shop;
+	private Account user;
+	private JTextField nameTextField;
+	private JPasswordField passTextField;
 
 	public Gui_loginpanel(Shopverwaltung shop) {
 		this.shop = shop;
 		JPanel loginPanel = new JPanel();
 		loginPanel.setLayout(new GridLayout(1, 2));
-		//loginPanel.setVisible(false);		
-		//loginPanel.setBorder(BorderFactory.createTitledBorder("Kundenbereich - Willkommen "+ user.getName() + "!")); //ï¿½berschrift Login
+		loginPanel.setVisible(true);		
+		loginPanel.setBorder(BorderFactory.createTitledBorder("Kundenbereich - Willkommen !")); //ï¿½berschrift Login
 		
 		setloginPanel(loginPanel);
 	}
@@ -47,7 +50,7 @@ public class Gui_loginpanel implements ActionListener{
 	
 	public void actionPerformed(ActionEvent arg0) {
 		String command = arg0.getActionCommand();
-		
+		//loginPanel.setVisible(false);	
 		System.out.println("test");
 		if(command.equals("Einloggen")){
 			
@@ -73,8 +76,18 @@ public class Gui_loginpanel implements ActionListener{
 			loginButton.addActionListener(new ActionListener() { 
 				
 				public void actionPerformed(ActionEvent arg0) {
-						
+					loginPanel.setVisible(true);	
+					
 					System.out.println("loginbutton");
+					
+					
+					//LoginButton
+					JButton loginButton = new JButton("Login");
+					loginPanel.add(loginButton);
+					loginButton.addActionListener(this);
+					
+					//Überschrift Login
+					
 					//hole Name und Passwort aus Textfelder
 					String name = nameFeld.getText();
 					String passwort = String.valueOf(passwortFeld.getPassword());
@@ -84,15 +97,31 @@ public class Gui_loginpanel implements ActionListener{
 						Account user = shop.loginAccount(name, passwort);
 						
 						if (user instanceof Kunde) {
-							//loginPanel.setVisible(true);
+							login.setVisible(false);
+							loginPanel.setVisible(true);
+				
+							loginPanel.setBorder(BorderFactory.createTitledBorder("Kundenbereich - Willkommen !"));
 							System.out.println("Kunde eingeloggt");
+							
 							JOptionPane.showMessageDialog(null,"Erfolgreich als Kunde eingeloggt!");
+				
+							JPanel loginPanel = new JPanel();
+							
+							loginPanel.setLayout(new GridLayout(2, 3));
+							loginPanel.add(new JLabel("Name"));
+							loginPanel.add(new JLabel("Passwort"));
+							loginPanel.add(new JLabel(""));
+							
+							nameTextField = new JTextField();
+							passTextField = new JPasswordField();
+							loginPanel.add(nameTextField);
+							loginPanel.add(passTextField);
 							
 						}
 						else if (user instanceof Mitarbeiter){
 							System.out.println("Mitarbeiter eingeloggt");
 							JOptionPane.showMessageDialog(null,"Erfolgreich als Mitarbeiter eingeloggt!");
-							login.setVisible(false); //Login Eingabefenster schlieï¿½en
+							//login.setVisible(false); //Login Eingabefenster schlieï¿½en
 						}
 					} catch (AccountExistiertNichtException ex) {
 						JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -106,7 +135,6 @@ public class Gui_loginpanel implements ActionListener{
 			
 		}
 		
-			
 		else if (command.equals("Registrieren")){
 			final JFrame registrieren = new JFrame();
 
@@ -146,11 +174,11 @@ public class Gui_loginpanel implements ActionListener{
 			JButton regButton = new JButton("Registrieren");
 			registrieren.add(regButton);
 			
-			//Fï¿½r Menï¿½ Account -> Registrieren -> Registrieren Button
+			//Fuer Menï¿½ Account -> Registrieren -> Registrieren Button
 			regButton.addActionListener(new ActionListener() { 
 		
 				public void actionPerformed(ActionEvent arg0) {
-						
+					
 					//hole Name, Passwort, Starsse, PLZ und Ort aus Textfelder
 					String name = nameFeld.getText();
 					String passwort = String.valueOf(passwortFeld.getPassword());

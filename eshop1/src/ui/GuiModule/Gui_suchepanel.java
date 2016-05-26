@@ -77,8 +77,8 @@ public class Gui_suchepanel implements ActionListener {
 			suchErgebnis = shop.sucheNachArtikelNummer(suche);
 		}
 		// TODO: keine Gui_artikelpanel
-		gui.setArtikelPanel(new Gui_artikelpanel(suchErgebnis));	
-
+		//artikelListe.removeAll(artikelListe);
+		gui.setArtikelPanel(new Gui_artikelpanel(suchErgebnis));
 	}		
 }
 

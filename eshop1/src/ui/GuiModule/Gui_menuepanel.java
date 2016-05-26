@@ -110,7 +110,6 @@ public class Gui_menuepanel implements ActionListener{
 					+ "HS Bremen, Prog 2, SS 2016");
 		}
 		
-		
 		System.out.println("menuepanel aktion ausgefuehrt");
 	}
 }
