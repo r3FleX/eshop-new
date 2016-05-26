@@ -42,12 +42,15 @@ public class GUI_3 extends JFrame implements ActionListener{
 	private JPasswordField passTextField;
 	private JTable ausgabeTabelle = null;
 	
-	JPanel navframe = new JPanel();		
-	JPanel contentframe = new JPanel();
-	JPanel mainPanel = new JPanel();
-	JMenuBar menueBar = new JMenuBar();	
-	JLabel gesamt = new JLabel();
-	JPanel loginPanel = new JPanel();
+	private JPanel navframe = new JPanel();		
+	private JPanel contentframe = new JPanel();
+	private JPanel mainPanel = new JPanel();
+	private JMenuBar menueBar = new JMenuBar();
+	//private JLabel gesamt = new JLabel();
+	private JPanel loginPanel = new JPanel();
+	private JPanel suchPanel = new JPanel();
+	private JPanel artikelPanel = new JPanel();
+	private JTextField suchenTextField;
 	
 	public GUI_3(String datei) {
 		try {
@@ -63,29 +66,34 @@ public class GUI_3 extends JFrame implements ActionListener{
 		setTitle("E-Shop");
 		setSize(800, 600);
 	
-		//PANELS anlegen	
+		//  ---- PANELS anlege ----
 		
-		this.mainPanel.setLayout(new BorderLayout());
-		this.navframe.setLayout(new BorderLayout());
-		this.contentframe.setLayout(new BorderLayout());
+		mainPanel.setLayout(new BorderLayout());
+		navframe.setLayout(new BorderLayout());
+		contentframe.setLayout(new BorderLayout());
 		
 		//GUI setzen
-		this.mainPanel.add(this.navframe,BorderLayout.NORTH);
-		this.mainPanel.add(this.contentframe,BorderLayout.CENTER);	
-		add(this.mainPanel);
+		mainPanel.add(navframe,BorderLayout.NORTH);
+		mainPanel.add(contentframe,BorderLayout.CENTER);	
+		//add(mainPanel);
 		
 		//LoginPanel
 		loginPanel.setLayout(new GridLayout(2, 3));
-		//navframe.add(loginPanel(), BorderLayout.NORTH);	
+		navframe.add(loginPanel);	
 		loginPanel.setBorder(BorderFactory.createTitledBorder("Login")); //Ueberschrift Login
 		add(loginPanel, BorderLayout.NORTH); 
-		loginPanel.setVisible(false);	
+		loginPanel.setVisible(true);	
 		
+		//SuchPanel
+		suchPanel.setLayout(new GridLayout(1, 3));
+		contentframe.add(suchPanel);
+		this.contentframe.add(suchPanel, BorderLayout.NORTH);
+		add(suchPanel, BorderLayout.NORTH); 
+	
 		/**
 			Menue Panel Bereich
 		**/
-		// Menü definieren
-		JMenuBar menueBar = new JMenuBar();
+	
 		setJMenuBar(menueBar);
 		
 		JMenu mnDatei = new JMenu("Datei");
@@ -122,6 +130,20 @@ public class GUI_3 extends JFrame implements ActionListener{
 		mntmber.addActionListener(this);
 		
 		/**
+			Such Panel Bereich	
+		 **/
+		suchenTextField = new JTextField();		
+		suchPanel.add(suchenTextField);
+		
+		suchPanel.add(new JLabel()); //Platzhalter
+		JButton suchButton = new JButton("Suchen");
+		suchPanel.add(suchButton);
+		
+		suchButton.addActionListener(this);
+		
+		suchPanel.setBorder(BorderFactory.createTitledBorder("Suchen")); //Uberschrift Suchen
+		
+		/**
 			Login Panel Bereich	
 		**/
 
@@ -129,9 +151,6 @@ public class GUI_3 extends JFrame implements ActionListener{
 		/**
 			Artikel Panel Bereich
 		**/
-		JPanel artikelPanel = new JPanel();
-		artikelPanel.setBorder(BorderFactory.createTitledBorder("Artikel"));
-		
 		Vector spalten = new Vector();
 		spalten.add("Nummer");
 		spalten.add("Name");
@@ -158,9 +177,10 @@ public class GUI_3 extends JFrame implements ActionListener{
 		// Anzeige der Artikelliste auch in der Kunden-Ansicht
 		artikeltable.setDataVector(shop.gibAlleArtikel());	
 		
-		add(new JScrollPane(artikelPanel)); //Artikel Panel
+		add(new JScrollPane(artikelPanel)); 
 		artikelPanel.add(scrollPane);
 		artikelPanel.setLayout(new GridLayout());
+		artikelPanel.setBorder(BorderFactory.createTitledBorder("Artikel"));
 	}
 	
 	//ACTIONLISTENER
