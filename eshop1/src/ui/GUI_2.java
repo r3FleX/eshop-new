@@ -41,7 +41,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 
 	private Shopverwaltung shop;
 	JPanel mainPanel = new JPanel();
-	//men�bar
+	//Menuebar
 	Gui_menuepanel menuBar;	
 	
 	//LayoutPanel
@@ -99,21 +99,19 @@ public class GUI_2 extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
 		
-		//F�r Men� Datei -> Beenden Button
+		//Fuer Menue Datei -> Beenden Button
 		if (command.equals("Beenden")) {
 			System.exit(0);
 		}
 		
-		//F�r Men� Account -> Registrieren Button
+		//Fuer Menuer Account -> Registrieren Button
 		
 		
-		//F�r Suchen Button
+		//Fuer Suchen Button
 		else if (command.equals("Suchen")) {
-			
-
-			
+				
 		}
-		//F�r Suchen Button
+		//Fuer Warenkorb Button
 		else if (command.equals("in Warenkorb legen")) {
 			try {
 
@@ -149,7 +147,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 				e1.printStackTrace();
 			}	
 		}
-		//F�r Suchen Button
+		//Fuer Suchen Button
 		else if (command.equals("zum Warenkorb")) {
 			Warenkorb suchErgebnis;
 			Kunde kunde = (Kunde) user;
