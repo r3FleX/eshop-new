@@ -65,7 +65,9 @@ public class GUI_3 extends JFrame implements ActionListener{
 	private void initialize() {
 		setTitle("E-Shop");
 		setSize(800, 600);
-	
+		
+		setLayout(new BorderLayout());
+		
 		//  ---- PANELS anlege ----
 		
 		mainPanel.setLayout(new BorderLayout());
@@ -79,21 +81,20 @@ public class GUI_3 extends JFrame implements ActionListener{
 		
 		//LoginPanel
 		loginPanel.setLayout(new GridLayout(2, 3));
-		navframe.add(loginPanel);	
 		loginPanel.setBorder(BorderFactory.createTitledBorder("Login")); //Ueberschrift Login
+		navframe.add(loginPanel, BorderLayout.NORTH);
 		add(loginPanel, BorderLayout.NORTH); 
 		loginPanel.setVisible(true);	
 		
 		//SuchPanel
 		suchPanel.setLayout(new GridLayout(1, 4));
-		contentframe.add(suchPanel);
-		this.contentframe.add(suchPanel, BorderLayout.NORTH);
+		suchPanel.setBorder(BorderFactory.createTitledBorder("Login")); //Ueberschrift Login
+		navframe.add(suchPanel, BorderLayout.NORTH);
 		add(suchPanel, BorderLayout.NORTH); 
-	
+		
 		/**
 			Menue Panel Bereich
 		**/
-	
 		setJMenuBar(menueBar);
 		
 		JMenu mnDatei = new JMenu("Datei");
@@ -143,7 +144,7 @@ public class GUI_3 extends JFrame implements ActionListener{
 		
 		suchButton.addActionListener(this);
 		suchPanel.setBorder(BorderFactory.createTitledBorder("Suchen")); //Uberschrift Suchen
-		
+			
 		/**
 			Login Panel Bereich	
 		**/
@@ -191,7 +192,6 @@ public class GUI_3 extends JFrame implements ActionListener{
 		if (command.equals("Beenden")) {
 			System.exit(0);
 		}
-		
 		//Für Login Button
 		else if (command.equals("Login")) {
 
@@ -206,7 +206,6 @@ public class GUI_3 extends JFrame implements ActionListener{
 				JLabel labelname = new JLabel("Name:");
 				login.add(labelname);
 				
-		
 				final JTextField nameFeld = new JTextField();
 				login.add(nameFeld);
 		
@@ -222,8 +221,7 @@ public class GUI_3 extends JFrame implements ActionListener{
 					public void actionPerformed(ActionEvent arg0) {
 						
 						System.out.println("loginbutton");
-						
-						
+
 						//LoginButton
 						JButton loginButton = new JButton("Login");
 						loginPanel.add(loginButton);

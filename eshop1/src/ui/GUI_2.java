@@ -109,9 +109,7 @@ public class GUI_2 extends JFrame implements ActionListener{
 		
 		//F�r Suchen Button
 		else if (command.equals("Suchen")) {
-			
-
-			
+				
 		}
 		//F�r Suchen Button
 		else if (command.equals("in Warenkorb legen")) {
