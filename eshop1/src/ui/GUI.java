@@ -1,44 +1,55 @@
 package ui;
 
 import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.table.TableModel;
+import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
 import java.awt.GridLayout;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.JButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.IOException;
+import java.util.HashMap;
+import java.util.Set;
 import java.util.Vector;
 
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.table.TableModel;
+
+import valueobjects.Account;
 
 import domain.Shopverwaltung;
 import domain.exceptions.AccountExistiertBereitsException;
-import domain.exceptions.AccountExistiertNichtException;
 import domain.exceptions.ArtikelExistiertBereitsException;
 import domain.exceptions.ArtikelExistiertNichtException;
-import domain.exceptions.StatExistiertBereitsException;
-import valueobjects.Account;
+import domain.exceptions.BestandUeberschrittenException;
+
+import java.io.IOException;
 import valueobjects.Artikel;
 import valueobjects.Kunde;
 import valueobjects.Mitarbeiter;
+import valueobjects.Rechnung;
+import valueobjects.Warenkorb;
+import domain.exceptions.AccountExistiertNichtException;
 
+import ui.ArtikelTableModel;
+
+//import bib.local.valueobjects.Buch;
 
 public class GUI extends JFrame implements ActionListener, MouseListener {
 
@@ -48,16 +59,30 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 	private JTextField textField;
 
 	private Container hauptscreen = null;
+
+	// private JButton artikelSuchenButton = null;
+	// private JTextField suchenTextFeld = null;
+	// private JButton inWarenkorbLegenButton = null;
+	// private JButton warenkorbLeerenButton = null;
+
+	// private JList ausgabeListe = null;
 	private JTable ausgabeTabelle = null;
+	private JTable warenkorbTabelle = null;
 
 	private Shopverwaltung shop;
+	// private BufferedReader reader;
 	private Account user;
+	// private boolean massengut;
+
+	// gehË†rt zu Melek = Artikelliste Ausgabe Versuch
 	private Vector<Artikel> alleArtikel;
-	
 	@SuppressWarnings("rawtypes")
 	private Vector spalten;
 	private JScrollPane scrollPane = null;
 	private JTable table;
+
+	float gesamtpreis = 0.0f;
+	JLabel gesamt = new JLabel();
 
 	JTextField nummerFeld = new JTextField();
 	JTextField bezeichnungsFeld = new JTextField();
@@ -66,28 +91,10 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 	JRadioButton ja = new JRadioButton("Ja");
 	JRadioButton nein = new JRadioButton("Nein", true);
 	ButtonGroup istMassenartikel = new ButtonGroup();
-	JButton einfuegeButton = new JButton("Einfügen");
+	JButton einfuegeButton = new JButton("EinfÂ¸gen");
 
-	
-	/**
-	 * Launch the application.
-	 */
-	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GUI frame = new GUI("Shop");
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 	/**
 	 * Create the frame.
-	 * @throws StatExistiertBereitsException 
 	 */
 	public GUI(String datei) {
 		super("Shop");
@@ -100,12 +107,34 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 
 		}
 		this.initialize();
-	}
-	private void initialize() {
-		setTitle("E-Shop");
-//		setSize(800, 600);
+	};
 
-		// Menü definieren
+	// Melek = Artikelliste Ausgabe Versuch
+	private void gebeBestandAus() {
+		alleArtikel = (Vector<Artikel>) shop.gibAlleArtikel();
+		Vector<String> a = new Vector<String>();
+		for (Artikel art : alleArtikel) {
+			Vector<String> artikelVector = new Vector<String>();
+			artikelVector.add(art.getName());
+			a.addAll(artikelVector);
+
+			// 16.07
+			ausgabeTabelle = new JTable();
+			TableModel itemsModel = new ArtikelTableModel(alleArtikel, spalten);
+			ausgabeTabelle.setModel(itemsModel);
+			ausgabeTabelle.setAutoCreateRowSorter(true); // <<< sortiert hier
+															// nach name
+		}
+
+	}
+
+	@SuppressWarnings({ "serial", "unchecked", "rawtypes" })
+	private void initialize() {
+
+		setTitle("E-Shop (Unregistrierte Testversion)");
+		setSize(1024, 576);
+
+		// MenÂ¸ definieren
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
@@ -131,14 +160,12 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		
 		// Unterteilung in linke Spalte und rechte Spalte
 		JPanel leftpanel = new JPanel();
 		getContentPane().add(leftpanel);
 		leftpanel.setLayout(new GridLayout(2, 1));
 
 		JPanel rightpanel = new JPanel();
-		rightpanel.setPreferredSize(new Dimension(400, 600));
 		getContentPane().add(rightpanel);
 
 		// linke Spalte oben
@@ -211,9 +238,64 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 		rightpanel.add(scrollPane_1);
 		scrollPane_1.setBorder(BorderFactory.createTitledBorder("Artikel"));
 
-		this.pack();
-//		this.show();
+		// Alternative 2: Swing-Tabelle
+		// Vector mit Spaltennamen anlegen:
 
+		Vector spalten = new Vector();
+
+		spalten.add("Nummer");
+		spalten.add("Name");
+		spalten.add("Bestand");
+		spalten.add("Preis");
+		spalten.add("PackungsgrË†ï¬‚e");
+		spalten.add("Massengut");
+
+		ausgabeTabelle = new JTable(new ArtikelTableModel(
+				new Vector<Artikel>(), spalten) {
+			// public boolean isCellEditable(int rowIndex, int vColIndex) {
+			// return false;
+			// }
+		});
+
+		ArtikelTableModel tModel = (ArtikelTableModel) ausgabeTabelle
+				.getModel();
+		tModel.setDataVector(shop.gibAlleArtikel());
+
+		ausgabeTabelle.setAutoCreateRowSorter(true);
+		scrollPane_1.setViewportView(ausgabeTabelle);
+
+		table = new JTable();
+		scrollPane_1.setColumnHeaderView(table);
+
+	}
+
+	class SuchListener implements ActionListener {
+
+		@SuppressWarnings("unused")
+		@Override
+		public void actionPerformed(ActionEvent ae) {
+			String command = ae.getActionCommand();
+			// if (command.equals("Artikel suchen")) {
+			// String suchbegriff = suchenTextFeld.getText();
+			// java.util.List<Artikel> suchErgebnis;
+			// if (suchbegriff.isEmpty()) {
+			// suchErgebnis = shop.gibAlleArtikel();
+			// } else {
+			// suchErgebnis = shop.sucheNachArtikel(suchbegriff);
+			// }
+			// // Alternative 1: Ausgabe des Suchergebnisses Â¸ber JList
+			// // DefaultListModel lModel = (DefaultListModel)
+			// // ausgabeListe.getModel();
+			// // lModel.removeAllElements();
+			// // for (Buch aktBuch : suchErgebnis) {
+			// // lModel.addElement(aktBuch);
+			// // }
+			// // Alternative 2: Ausgabe des Suchergebnisses Â¸ber JTable
+			// ArtikelTableModel tModel = (ArtikelTableModel) ausgabeTabelle
+			// .getModel();
+			// tModel.setDataVector(suchErgebnis);
+			// }
+		}
 	}
 
 	@SuppressWarnings("serial")
@@ -221,19 +303,53 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 
 		public DateiMenu() {
 			super("Datei");
+
+			// mi = new MenuItem("-");
+			// this.add(mi);
 			this.addSeparator();
 
+			// mi = new JMenuItem("Quit");
+			// mi.addActionListener(this);
+			// this.add(mi);
+
+			// Geht auch (alternativ zu mi.addActionListener(this)-Aufrufen
+			// oben):
+			// this.addActionListener(this);
 		}
 
+		@SuppressWarnings("unused")
 		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
+		public void actionPerformed(ActionEvent ae) {
+			String command = ae.getActionCommand();
+			// System.out.println(command);
 
+			// if (command.equals("Beenden")) {
+			// // BibGuiAusVL.this.setVisible(false);
+			// setVisible(false);
+			// dispose();
+			//
+			// System.exit(0);
+			// }
+		}
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes", "unused" })
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					GUI frame = new GUI("Shop");
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes", "unused", "serial" })
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
@@ -259,6 +375,8 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 
 					this.hauptscreen = this.getContentPane();
 
+					// setBounds(100, 100, 450, 300);
+
 					Container container = kundeEingeloggt.getContentPane();
 					setContentPane(container);
 					container.setLayout(new GridLayout(1, 2));
@@ -281,6 +399,16 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 
 					JButton suchen = new JButton("Suchen");
 					final JTextField suchbegriff = new JTextField();
+					JButton inWarenkorb = new JButton("In den Warenkorb legen",
+							new ImageIcon("src/assets/images.jpg"));
+
+					JButton warenkorbAnzeigen = new JButton(
+							"Warenkorb anzeigen");
+					JButton warenkorbLeeren = new JButton("Warenkorb leeren");
+					JButton warenkorbKaufen = new JButton(
+							"Bestellung abschlieï¬‚en");
+					// JButton mengeAendern = new
+					// JButton("Artikelmenge â€°ndern");
 
 					JButton ausloggen = new JButton("Ausloggen");
 
@@ -314,14 +442,34 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 							} else {
 								suchErgebnis = shop.sucheNachArtikel(suche);
 							}
-
-							
+							// Alternative 1: Ausgabe des Suchergebnisses Â¸ber
+							// JList
+							// DefaultListModel lModel = (DefaultListModel)
+							// ausgabeListe.getModel();
+							// lModel.removeAllElements();
+							// for (Buch aktBuch : suchErgebnis) {
+							// lModel.addElement(aktBuch);
+							// }
+							// Alternative 2: Ausgabe des Suchergebnisses Â¸ber
+							// JTable
 							ArtikelTableModel tModel = (ArtikelTableModel) ausgabeTabelle
 									.getModel();
 							tModel.setDataVector(suchErgebnis);
 
 						}
 					});
+
+					// links unten
+
+					links_unten.setBorder(BorderFactory
+							.createTitledBorder("Warenkorb"));
+					links_unten.setLayout(new GridLayout(5, 1));
+					links_unten.add(inWarenkorb);
+					inWarenkorb.addActionListener(this);
+					links_unten.add(warenkorbAnzeigen);
+					warenkorbAnzeigen.addActionListener(this);
+					links_unten.add(warenkorbLeeren);
+					warenkorbLeeren.addActionListener(this);
 
 					// Logout-Bereich
 
@@ -330,29 +478,32 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 
 					// rechte Seite
 
-					//rechteSeite.setLayout(new GridLayout(3, 1));
-					rechteSeite.setLayout(new GridLayout(1, 1));
+					rechteSeite.setLayout(new GridLayout(3, 1));
 					JPanel rechts_oben = new JPanel();
-					//JPanel rechts_mitte = new JPanel();
-					//JPanel rechts_unten = new JPanel();
+					JPanel rechts_mitte = new JPanel();
+					JPanel rechts_unten = new JPanel();
 					rechteSeite.add(rechts_oben);
-					//rechteSeite.add(rechts_mitte);
-					//rechteSeite.add(rechts_unten);
+					rechteSeite.add(rechts_mitte);
+					rechteSeite.add(rechts_unten);
 
 					// rechts oben
 
 					rechts_oben.setBorder(BorderFactory
 							.createTitledBorder("Artikel"));
 
+					@SuppressWarnings("unused")
 					JScrollPane scrollpane = new JScrollPane();
+
+					// TODO funktioniert, aber Preis, Packung, Massengut sind
 					// leer
 
+					@SuppressWarnings("rawtypes")
 					Vector spalten = new Vector();
 					spalten.add("Nummer");
 					spalten.add("Name");
 					spalten.add("Bestand");
 					spalten.add("Preis");
-					spalten.add("Packungsgröße");
+					spalten.add("PackungsgrË†ï¬‚e");
 					spalten.add("Massengut");
 					// TableModel als "Datencontainer" anlegen:
 					ArtikelTableModel tModel = new ArtikelTableModel(
@@ -360,8 +511,6 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 					// JTable-Objekt erzeugen und mit Datenmodell
 					// initialisieren:
 					ausgabeTabelle = new JTable(tModel);
-					ausgabeTabelle.setPreferredSize(new Dimension(400, 600));
-					
 					// JTable in ScrollPane platzieren:
 					scrollPane = new JScrollPane(ausgabeTabelle);
 					ausgabeTabelle.setAutoCreateRowSorter(true);
@@ -371,10 +520,13 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 					tModel.setDataVector(shop.gibAlleArtikel());
 
 					rechts_oben.add(scrollPane);
-					
-					pack();
 
-					/*JScrollPane scrollPane2 = new JScrollPane();
+					// rechts mitte
+
+					rechts_mitte.setBorder(BorderFactory
+							.createTitledBorder("Warenkorb"));
+
+					JScrollPane scrollPane2 = new JScrollPane();
 
 					Vector spalten2 = new Vector();
 					spalten2.add("Nummer");
@@ -382,12 +534,44 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 					spalten2.add("Anzahl");
 					spalten2.add("Preis");
 
+					warenkorbTabelle = new JTable(new ArtikelTableModel(
+							new Vector<Artikel>(), spalten2) {
+
+					});
+
+					ArtikelTableModel tModel2 = (ArtikelTableModel) warenkorbTabelle
+							.getModel();
+
+					// JTable in ScrollPane platzieren:
+					scrollPane2 = new JScrollPane(warenkorbTabelle);
+
+					Warenkorb suchErgebnis;
 					Kunde kunde = (Kunde) user;
+
+					// suchErgebnis = kunde.getWarenkorb().getInhalt().keySet();
+					suchErgebnis = kunde.getWarenkorb();
+
+					// int anzahl = (Integer)
+					// kunde.getWarenkorb().getInhalt().get(suchErgebnis);
+
+					tModel2.setDataVector2(suchErgebnis);
+
+					warenkorbTabelle.setAutoCreateRowSorter(true);
+					scrollPane2.setViewportView(warenkorbTabelle);
 
 					table = new JTable();
 					scrollPane2.setColumnHeaderView(table);
 
-					rechts_mitte.add(scrollPane2);*/
+					rechts_mitte.add(scrollPane2);
+
+					// rechts unten
+
+					rechts_unten.setLayout(new GridLayout(6, 1));
+					rechts_unten.add(gesamt);
+					// rechts_unten.add(mengeAendern);
+					// mengeAendern.addActionListener(this);
+					rechts_unten.add(warenkorbKaufen);
+					warenkorbKaufen.addActionListener(this);
 
 				}
 
@@ -423,10 +607,10 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 					JPanel right_up = new JPanel();
 					JPanel right_low = new JPanel();
 
-					// alles für links oben
+					// alles fÂ¸r links oben
 
 					left_up.setBorder(BorderFactory
-							.createTitledBorder("Neuen Artikel einfügen"));
+							.createTitledBorder("Neuen Artikel einfÂ¸gen"));
 
 					istMassenartikel.add(ja);
 					istMassenartikel.add(nein);
@@ -448,8 +632,8 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 					left_up.add(new JLabel("Preis:"));
 					left_up.add(new JLabel());
 					left_up.add(preisFeld);
-					left_up.add(new JLabel("€"));
-					left_up.add(new JLabel("Bestand:"));
+					left_up.add(new JLabel("Ã„"));
+					left_up.add(new JLabel("Bestand: "));
 					left_up.add(new JLabel());
 					left_up.add(bestandFeld);
 					left_up.add(new JLabel());
@@ -464,9 +648,9 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 					left_up.add(new JLabel());
 					left_up.add(einfuegeButton);
 					einfuegeButton.addActionListener(this);
-					// TODO einfügen noch nicht implementiert
+					// TODO einfÂ¸gen noch nicht implementiert
 
-					// alles für links unten
+					// alles fÂ¸r links unten
 
 					left_low.setBorder(BorderFactory
 							.createTitledBorder("Artikel suchen"));
@@ -490,6 +674,16 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 							} else {
 								suchErgebnis = shop.sucheNachArtikel(suche);
 							}
+							// Alternative 1: Ausgabe des Suchergebnisses Â¸ber
+							// JList
+							// DefaultListModel lModel = (DefaultListModel)
+							// ausgabeListe.getModel();
+							// lModel.removeAllElements();
+							// for (Buch aktBuch : suchErgebnis) {
+							// lModel.addElement(aktBuch);
+							// }
+							// Alternative 2: Ausgabe des Suchergebnisses Â¸ber
+							// JTable
 							ArtikelTableModel tModel = (ArtikelTableModel) ausgabeTabelle
 									.getModel();
 							tModel.setDataVector(suchErgebnis);
@@ -504,11 +698,11 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 					left_logout.add(logout);
 					logout.addActionListener(this);
 
-					// alles für rechts
-					JButton bestandAendern = new JButton("Bestand ändern");
-					JButton loeschen = new JButton("Artikel löschen");
+					// alles fÂ¸r rechts
+					JButton bestandAendern = new JButton("Bestand â€°ndern");
+					JButton loeschen = new JButton("Artikel lË†schen");
 					// JButton packungAendern = new
-					// JButton("Packungsgröße ändern");
+					// JButton("PackungsgrË†ï¬‚e â€°ndern");
 
 					right.setLayout(new GridLayout(2, 1));
 					right.add(right_up);
@@ -528,7 +722,7 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 					spalten.add("Name");
 					spalten.add("Bestand");
 					spalten.add("Preis");
-					spalten.add("Packungsgröße");
+					spalten.add("PackungsgrË†ï¬‚e");
 					spalten.add("Massengut");
 					// TableModel als "Datencontainer" anlegen:
 					ArtikelTableModel tModel = new ArtikelTableModel(
@@ -555,7 +749,8 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 					right_low.add(new JLabel());
 					right_low.add(bestandAendern);
 					bestandAendern.addActionListener(this);
-
+					// right_low.add(packungAendern);
+					// packungAendern.addActionListener(this);
 					right_low.add(loeschen);
 					loeschen.addActionListener(this);
 					right_low.add(new JLabel());
@@ -566,7 +761,7 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 					this.setVisible(true);
 
 					/**
-					 * Menü anlegen
+					 * MenÂ¸ anlegen
 					 */
 
 					JMenuBar menuBar = new JMenuBar();
@@ -653,7 +848,7 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 							|| Integer.parseInt(plzFeld.getText()) < 10000) {
 						JOptionPane
 								.showMessageDialog(null,
-										"Bitte geben Sie eine gültige Postleitzahl ein!");
+										"Bitte geben Sie eine gÂ¸ltige Postleitzahl ein!");
 					}
 
 					else {
@@ -734,17 +929,14 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 					.showMessageDialog(
 							null,
 							"Willkommen im E-Shop. \n Wenn Sie Artikel kaufen wollen, dann registrieren"
-									+ "Sie sich und loggen Sie sich ein! \n Anschließend können Sie die gewünschten "
+									+ "Sie sich und loggen Sie sich ein! \n Anschlieï¬‚end kË†nnen Sie die gewÂ¸nschten "
 									+ "Artikel kaufen.");
 		}
 
 		else if (command.equals("\u00DCber...")) {
 			JOptionPane.showMessageDialog(null, "Entwickler: \n"
-					+ "Stefan Meyer\n"
-					+ "Daniel Böckmann\n"
-					+ "Immanuel Zimmermann\n"
-					+ " \n" + "\n"
-					+ "\n");
+					+ "Daniel Boeckmann \n" + "Stefan Meyer \n"
+					+ "Immanuel Zimmermann \n"	+ "HS Bremen, Prog 2, SS 2016");
 		}
 
 		else if (command.equals("Ausloggen")) {
@@ -753,10 +945,11 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 			// System.out.println(user);
 		}
 
-		else if (command.equals("Einfügen")) {
+		else if (command.equals("EinfÂ¸gen")) {
 
-			// TODO is noch grün hinter den Ohren!!
+			// TODO klappt noch nicht so ganz
 
+			// TODO bearbeiten!
 
 			try {
 
@@ -773,33 +966,48 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 					packungsgroesse = 0;
 
 					shop.fuegeArtikelEin(artname, artnr, artbestand, preis,
-							packungsgroesse);
+							packungsgroesse, massengut);
 					shop.schreibeArtikeldaten();
 					JOptionPane.showMessageDialog(null,
-							"Artikel wurde eingefügt.");
+							"Artikel wurde eingefÂ¸gt.");
 
 				}
-
+				// else if (ja.isSelected()) {
+				// System.out.println("ja");
+				// massengut = true;
+				// JFrame packung = new JFrame("PackungsgrË†ï¬‚e festlegen");
+				// JLabel packungsgr = new JLabel("PackungsgrË†ï¬‚e:");
+				// JTextField packungsgroesse2 = new JTextField();
+				// JButton okay = new JButton("OK");
+				//
+				// packung.setLayout(new GridLayout(2, 2));
+				// packung.add(packungsgr);
+				// packung.add(packungsgroesse2);
+				// packung.add(new JLabel());
+				// packung.add(okay);
+				// packung.setSize(200, 200);
+				// packung.setVisible(true);
+				//
+				// shop.fuegeArtikelEin(artname, artnr, artbestand, preis,
+				// packungsgroesse, massengut);
+				// // JOptionPane.showMessageDialog(null,
+				// // "Artikel wurde eingefÂ¸gt.");
+				//
+				// }
+				//
+				//
 			} catch (ArtikelExistiertBereitsException e1) {
 				JOptionPane.showMessageDialog(null, e1.getMessage());
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-		} else if (command.equals("Artikel löschen")) {
+		} else if (command.equals("Artikel lË†schen")) {
 			try {
-				try {
-					shop.entferneArtikel(Integer.parseInt(((ausgabeTabelle
-							.getValueAt(ausgabeTabelle.getSelectedRow(), 0))
-							.toString())));
-				} catch (ArtikelExistiertNichtException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				} catch (IOException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				}
-				JOptionPane.showMessageDialog(null, "Artikel wurde gelöscht.");
+				shop.entferneArtikel(Integer.parseInt(((ausgabeTabelle
+						.getValueAt(ausgabeTabelle.getSelectedRow(), 0))
+						.toString())));
+				JOptionPane.showMessageDialog(null, "Artikel wurde gelË†scht.");
 				try {
 					shop.schreibeArtikeldaten();
 				} catch (IOException e1) {
@@ -812,9 +1020,9 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 
 		}
 
-		else if (command.equals("Bestand ändern")) {
+		else if (command.equals("Bestand â€°ndern")) {
 
-			final JFrame bestand = new JFrame("Bestand ändern");
+			final JFrame bestand = new JFrame("Bestand â€°ndern");
 			JLabel best = new JLabel("Neuer Bestand:");
 			final JTextField bestandNeu = new JTextField();
 			JButton ok = new JButton("OK");
@@ -846,7 +1054,7 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 											ausgabeTabelle.getSelectedRow(), 0))
 									.toString()));
 							JOptionPane.showMessageDialog(null,
-									"Artikel wurde gelöscht.");
+									"Artikel wurde gelË†scht.");
 							shop.schreibeArtikeldaten();
 							bestand.setVisible(false);
 						} else {
@@ -855,7 +1063,7 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 
 							shop.aendereBestand(artnr, newBestand1);
 							JOptionPane.showMessageDialog(null,
-									"Bestand wurde geändert.");
+									"Bestand wurde geâ€°ndert.");
 							shop.schreibeArtikeldaten();
 							bestand.setVisible(false);
 						}
@@ -870,21 +1078,208 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 		}
 
 		else if (command.equals("In den Warenkorb legen")) {
-			//TODO warenkorb
+
+			// if((ausgabeTabelle.getValueAt(ausgabeTabelle.getSelectedRow(),
+			// 0)) == null) {
+			// JOptionPane.showMessageDialog(null, "Kein Artikel ausgewâ€°hlt!");
+			// }
+			// else {
+
+			try {
+
+				JLabel anz = new JLabel(
+						"Wie oft wollen Sie den Artikel kaufen?");
+				final JTextField anzahl1 = new JTextField();
+				JButton ok = new JButton("In den Warenkorb");
+
+				final JFrame wieViele = new JFrame();
+				wieViele.getContentPane().setLayout(new GridLayout(2, 1));
+				wieViele.setSize(450, 100);
+				wieViele.getContentPane().add(anz);
+				wieViele.getContentPane().add(anzahl1);
+				wieViele.getContentPane().add(ok);
+				ok.addActionListener(new ActionListener() {
+
+					public void actionPerformed(ActionEvent arg0) {
+						try {
+							shop.inWarenkorbEinfuegen(shop
+									.artikelSuchen(Integer
+											.parseInt((ausgabeTabelle
+													.getValueAt(ausgabeTabelle
+															.getSelectedRow(),
+															0)).toString())),
+									Integer.parseInt(anzahl1.getText()),
+									(Kunde) user);
+							wieViele.setVisible(false);
+						} catch (NumberFormatException e) {
+
+							e.printStackTrace();
+						} catch (BestandUeberschrittenException e) {
+							JOptionPane.showMessageDialog(null, e.getMessage());
+						} catch (ArtikelExistiertNichtException e) {
+							JOptionPane.showMessageDialog(null, e.getMessage());
+						}
+					}
+
+				});
+
+				wieViele.setVisible(true);
+
+			} catch (NumberFormatException e1) {
+				e1.printStackTrace();
+			}
+
 		}
+		// }
+
+		// else if (command.equals("Artikelmenge â€°ndern")) {
+		// JOptionPane.showMessageDialog(null,
+		// "Diese Funktion wurde noch nicht implementiert.");
+		// }
 
 		else if (command.equals("Warenkorb leeren")) {
-			//TODO warenkorb
+			Kunde kaeufer = (Kunde) user;
+			kaeufer.getWarenkorb().leeren();
+
+			JOptionPane.showMessageDialog(null, "Ihr Warenkorb wurde geleert.");
 
 		}
 
-		else if (command.equals("Bestellung abschließen")) {
-			//TODO Bestellungen
-			
+		else if (command.equals("Bestellung abschlieï¬‚en")) {
+			int jaNein = JOptionPane.showConfirmDialog(null,
+					"Bestellung abschlieï¬‚en?");
+
+			if (jaNein == 0) {
+				HashMap<Artikel, Integer> fehlerliste = shop
+						.pruefeKauf((Kunde) user);
+				if (!fehlerliste.isEmpty()) {
+					JOptionPane
+							.showMessageDialog(null,
+									"Es konnten nicht alle Artikel zum Kauf angeboten werden.");
+				} else {
+
+					Rechnung rechnung = null;
+
+					try {
+						rechnung = shop.kaufAbwickeln((Kunde) user);
+					} catch (IOException e1) {
+
+					}
+
+					final JFrame rechnungFenster = new JFrame();
+					rechnungFenster.setTitle("Rechnung");
+					rechnungFenster.setSize(500, 500);
+					rechnungFenster.getContentPane().setLayout(
+							new GridLayout(3, 1));
+
+					JPanel oben = new JPanel();
+					JPanel unten = new JPanel();
+					JPanel ganz_unten = new JPanel();
+
+					JPanel links_oben = new JPanel();
+					JPanel links_unten = new JPanel();
+
+					JLabel datum = new JLabel("Kaufdatum: "
+							+ rechnung.getDatum());
+					JLabel kaeufer = new JLabel(user.getName() + " ");
+					JLabel strasse = new JLabel(((Kunde) user).getStrasse());
+					JLabel plzUndOrt = new JLabel(((Kunde) user).getPlz() + " "
+							+ ((Kunde) user).getWohnort());
+
+					rechnungFenster.getContentPane().add(oben);
+					rechnungFenster.getContentPane().add(unten);
+					rechnungFenster.getContentPane().add(ganz_unten);
+
+					oben.setLayout(new GridLayout(1, 1));
+
+					unten.setLayout(new GridLayout(2, 1));
+
+					oben.add(links_oben);
+					oben.add(links_unten);
+
+					// oben kommt das Datum und die Adresse des Kunden hin
+
+					links_oben.setLayout(new GridLayout(4, 1));
+					links_oben.setBorder(BorderFactory
+							.createTitledBorder("Kundendaten"));
+					links_oben.add(datum);
+					links_oben.add(kaeufer);
+					links_oben.add(strasse);
+					links_oben.add(plzUndOrt);
+
+					// unten kommen die gekauften Artikel hin
+
+					unten.setBorder(BorderFactory
+							.createTitledBorder("Gekaufte Artikel"));
+
+					java.util.Set<Artikel> gekauft;
+					Kunde kunde = (Kunde) user;
+					gekauft = kunde.getWarenkorb().getInhalt().keySet();
+
+					gesamtpreis = rechnung.getGesamtpreis();
+					gesamt.setText("Gesamtpreis: " + gesamtpreis + "Ã„");
+
+					JScrollPane scrollPane2 = new JScrollPane();
+					// JScrollBar scrollbar = new JScrollBar();
+
+					Vector spalten2 = new Vector();
+					spalten2.add("Nummer");
+					spalten2.add("Name");
+					spalten2.add("Anzahl");
+					spalten2.add("Preis");
+					// TableModel als "Datencontainer" anlegen:
+					ArtikelTableModel tModel2 = new ArtikelTableModel(
+							new Vector<Artikel>(), spalten2);
+
+					tModel2 = (ArtikelTableModel) warenkorbTabelle.getModel();
+
+					// JTable-Objekt erzeugen und mit Datenmodell
+					// initialisieren:
+					warenkorbTabelle = new JTable(tModel2);
+					// warenkorbTabelle.add(scrollbar);
+					// JTable in ScrollPane platzieren:
+					scrollPane2 = new JScrollPane(warenkorbTabelle);
+
+					unten.add(scrollPane2);
+
+					// ganz unten kommt der Gesamtpreis hin und der OK-Button
+					// zum
+					// Schlieï¬‚en
+					JButton schliessen = new JButton("Schlieï¬‚en");
+
+					ganz_unten.setLayout(new GridLayout(4, 1));
+
+					ganz_unten.add(gesamt);
+					ganz_unten.add(schliessen);
+					schliessen.addActionListener(new ActionListener() {
+
+						public void actionPerformed(ActionEvent actionEv) {
+							rechnungFenster.setVisible(false);
+						}
+
+					});
+
+					rechnungFenster.setVisible(true);
+				}
+			}
 		}
 
 		else if (command.equals("Warenkorb anzeigen")) {
-			//TODO Warenkorb
+			Warenkorb suchErgebnis;
+			Kunde kunde = (Kunde) user;
+
+			suchErgebnis = kunde.getWarenkorb();
+
+			ArtikelTableModel tModel = (ArtikelTableModel) warenkorbTabelle.getModel();
+			tModel.setDataVector2(suchErgebnis);
+
+			float gesamtpreis = 0.0f;
+
+			// for (Artikel art : suchErgebnis) {
+			// gesamtpreis = art.getPreis() * kunde.getWarenkorb().getInhalt().
+			// }
+
+			gesamt.setText("Gesampreis: " + gesamtpreis + "Ã„");
 
 		}
 
@@ -897,12 +1292,13 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 		final int artnr = Integer.parseInt(nummerFeld.getText());
 		final int artbestand = Integer.parseInt(bestandFeld.getText());
 		final float preis = Float.parseFloat(preisFeld.getText());
+		boolean massengut = false;
 		int packungsgroesse = 0;
 
 		if (me.getSource().equals(ja)) {
 
-			JFrame packung = new JFrame("Packungsgröße festlegen");
-			JLabel packungsgr = new JLabel("Packungsgröße:");
+			JFrame packung = new JFrame("PackungsgrË†ï¬‚e festlegen");
+			JLabel packungsgr = new JLabel("PackungsgrË†ï¬‚e:");
 			final JTextField packungsgroesse2 = new JTextField();
 			JButton okay = new JButton("OK");
 			okay.addActionListener(new ActionListener() {
@@ -918,7 +1314,7 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 								preis, packungsgroesse);
 						shop.schreibeArtikeldaten();
 						JOptionPane.showMessageDialog(null,
-								"Artikel wurde eingefügt.");
+								"Artikel wurde eingefÂ¸gt.");
 					} catch (ArtikelExistiertBereitsException e) {
 						JOptionPane.showMessageDialog(null, e.getMessage());
 					}
@@ -930,24 +1326,37 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 				}
 
 			});
+
 			packung.getContentPane().setLayout(new GridLayout(2, 2));
 			packung.getContentPane().add(packungsgr);
 			packung.getContentPane().add(packungsgroesse2);
 			packung.getContentPane().add(new JLabel());
 			packung.getContentPane().add(okay);
 			// okay.addActionListener(this);
-			// // TODO Artikel einfügen hier rein (AktionListener)
+			// // TODO Artikel einfÂ¸gen hier rein (AktionListener)
 			packung.setSize(300, 100);
 			packung.setVisible(true);
 
+			// try {
+			// shop.fuegeArtikelEin(artname, artnr, artbestand, preis,
+			// packungsgroesse, massengut);
+			// // JOptionPane.showMessageDialog(null,
+			// // "Artikel wurde eingefÂ¸gt.");
+			// } catch (ArtikelExistiertBereitsException e) {
+			// JOptionPane.showMessageDialog(null,
+			// "Es existiert bereits ein Artikel \n" +
+			// "mit dieser Nummer \n" +
+			// "oder diesem Namen!");
+			// }
 		} else if (me.getSource().equals(nein)) {
+			massengut = false;
 			packungsgroesse = 0;
 
 			try {
 				shop.fuegeArtikelEin(artname, artnr, artbestand, preis,
-						packungsgroesse);
+						packungsgroesse, massengut);
 				// JOptionPane.showMessageDialog(null,
-				// "Artikel wurde eingefügt.");
+				// "Artikel wurde eingefÂ¸gt.");
 				shop.schreibeArtikeldaten();
 			} catch (ArtikelExistiertBereitsException e) {
 				JOptionPane.showMessageDialog(null, e.getMessage());
@@ -957,22 +1366,7 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 			}
 		}
 	}
-	private void gebeBestandAus() {
-		alleArtikel = (Vector<Artikel>) shop.gibAlleArtikel();
-		Vector<String> a = new Vector<String>();
-		for (Artikel art : alleArtikel) {
-			Vector<String> artikelVector = new Vector<String>();
-			artikelVector.add(art.getName());
-			a.addAll(artikelVector);
 
-			ausgabeTabelle = new JTable();
-			TableModel itemsModel = new ArtikelTableModel(alleArtikel, spalten);
-			ausgabeTabelle.setModel(itemsModel);
-			ausgabeTabelle.setAutoCreateRowSorter(true); // <<< sortiert hier
-															// nach name
-		}
-
-	}
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 
