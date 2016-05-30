@@ -18,6 +18,14 @@ import ui.GUI_2;
 public class Gui_menuepanel implements ActionListener{
 
 	private JMenuBar menuBar;
+	public JMenuBar getMenuBar() {
+		return menuBar;
+	}
+
+	public void setMenuBar(JMenuBar menuBar) {
+		this.menuBar = menuBar;
+	}
+
 	private Shopverwaltung shop;
 	private Account user;
 	JLabel gesamt = new JLabel();

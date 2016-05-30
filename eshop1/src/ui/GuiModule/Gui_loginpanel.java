@@ -1,6 +1,8 @@
 package ui.GuiModule;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +12,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -29,12 +32,15 @@ public class Gui_loginpanel implements ActionListener{
 	private Account user;
 	private JTextField nameTextField;
 	private JPasswordField passTextField;
+	
+	JPanel navframe = new JPanel();		
+	JPanel contentframe = new JPanel();	
 
 	public Gui_loginpanel(Shopverwaltung shop) {
 		this.shop = shop;
 		JPanel loginPanel = new JPanel();
 		loginPanel.setLayout(new GridLayout(1, 2));
-		loginPanel.setVisible(true);		
+		loginPanel.setVisible(false);		
 		loginPanel.setBorder(BorderFactory.createTitledBorder("Kundenbereich - Willkommen !")); //�berschrift Login
 		
 		setloginPanel(loginPanel);
@@ -97,10 +103,10 @@ public class Gui_loginpanel implements ActionListener{
 						Account user = shop.loginAccount(name, passwort);
 						
 						if (user instanceof Kunde) {
+					
 							login.setVisible(false);
-							//loginPanel.setVisible(true);
-				
-							loginPanel.setBorder(BorderFactory.createTitledBorder("Kundenbereich - Willkommen !"));
+							loginPanel.setVisible(true);
+							loginPanel.setBorder(BorderFactory.createTitledBorder("Kundenbereich - "+user.getName() +"Willkommen !"));
 							System.out.println("Kunde eingeloggt");
 							
 							JOptionPane.showMessageDialog(null,"Erfolgreich als Kunde eingeloggt!");		
@@ -108,7 +114,7 @@ public class Gui_loginpanel implements ActionListener{
 						else if (user instanceof Mitarbeiter){
 							System.out.println("Mitarbeiter eingeloggt");
 							JOptionPane.showMessageDialog(null,"Erfolgreich als Mitarbeiter eingeloggt!");
-							//login.setVisible(false); //Login Eingabefenster schlie�en
+							//login.setVisible(false); //Login Eingabefenster schliessen
 						}
 					} catch (AccountExistiertNichtException ex) {
 						JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -119,7 +125,6 @@ public class Gui_loginpanel implements ActionListener{
 			login.add(loginButton);
 			
 			login.setVisible(true);
-			
 		}
 		
 		else if (command.equals("Registrieren")){
