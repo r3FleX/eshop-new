@@ -152,10 +152,6 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 		mnHilfe.add(menuItem);
 		menuItem.addActionListener(this);
 
-		JMenuItem mntmber = new JMenuItem("\u00DCber...");
-		mnHilfe.add(mntmber);
-		mntmber.addActionListener(this);
-
 		getContentPane().setLayout(new GridLayout(1, 2));
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -932,15 +928,7 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 									+ "Sie sich und loggen Sie sich ein! \n Anschlieﬂend kˆnnen Sie die gew¸nschten "
 									+ "Artikel kaufen.");
 		}
-
-		else if (command.equals("\u00DCber...")) {
-			JOptionPane.showMessageDialog(null, "Entwickler: \n"
-					+ "Anna Neumann \n" + "Jessika Rosemeyer \n"
-					+ "Melek ÷zsari \n" + "Sonja Riemann \n" + "\n"
-					+ "Version: 1.0 (unregistrierte Testversion) \n"
-					+ "HS Bremen, Prog 2, SS 2011");
-		}
-
+		
 		else if (command.equals("Ausloggen")) {
 			user = shop.logoutAccount(user.getName(), user.getPasswort());
 			this.setContentPane(this.hauptscreen);
@@ -1006,9 +994,17 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 			}
 		} else if (command.equals("Artikel lˆschen")) {
 			try {
-				shop.entferneArtikel(Integer.parseInt(((ausgabeTabelle
-						.getValueAt(ausgabeTabelle.getSelectedRow(), 0))
-						.toString())));
+				try {
+					shop.entferneArtikel(Integer.parseInt(((ausgabeTabelle
+							.getValueAt(ausgabeTabelle.getSelectedRow(), 0))
+							.toString())));
+				} catch (ArtikelExistiertNichtException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				} catch (IOException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
 				JOptionPane.showMessageDialog(null, "Artikel wurde gelˆscht.");
 				try {
 					shop.schreibeArtikeldaten();
