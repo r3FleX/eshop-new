@@ -935,8 +935,10 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 
 		else if (command.equals("\u00DCber...")) {
 			JOptionPane.showMessageDialog(null, "Entwickler: \n"
-					+ "Daniel Boeckmann \n" + "Stefan Meyer \n"
-					+ "Immanuel Zimmermann \n"	+ "HS Bremen, Prog 2, SS 2016");
+					+ "Anna Neumann \n" + "Jessika Rosemeyer \n"
+					+ "Melek ÷zsari \n" + "Sonja Riemann \n" + "\n"
+					+ "Version: 1.0 (unregistrierte Testversion) \n"
+					+ "HS Bremen, Prog 2, SS 2011");
 		}
 
 		else if (command.equals("Ausloggen")) {

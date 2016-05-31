@@ -73,8 +73,8 @@ public class Shopverwaltung {
 		meineArtikel.einfuegen(a);
 		return false;
 	}	
-	// Fügt Artikel ein
-	public boolean fuegeArtikelEin(String artname, int artnr, int artbestand, float preis, int packungsgroesse) throws ArtikelExistiertBereitsException{
+	// Fï¿½gt Artikel ein
+	public boolean fuegeArtikelEin(String artname, int artnr, int artbestand, float preis, int packungsgroesse, boolean massengut) throws ArtikelExistiertBereitsException{
 		Artikel a = new Artikel(artname, artnr, artbestand, preis);
 		meineArtikel.einfuegen(a);
 		return true;
