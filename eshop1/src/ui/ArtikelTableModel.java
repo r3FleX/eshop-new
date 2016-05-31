@@ -27,13 +27,13 @@ public class ArtikelTableModel extends DefaultTableModel {
 		// Spaltennamen in geerbtem Attribut merken
 		this.columnIdentifiers = columnNames;
 		
-		// Bücher-Liste aufbereiten
+		// Bï¿½cher-Liste aufbereiten
 		setDataVector(articles);
 	}
 	
-	// Tabellendaten hinzufügen
+	// Tabellendaten hinzufï¿½gen
 	public void setDataVector(List<Artikel> articles) {
-		// DefaultTableModel erwartet Repräsentation der Tabellendaten
+		// DefaultTableModel erwartet Reprï¿½sentation der Tabellendaten
 		// als Vector von Vectoren
 		Vector rows = new Vector();
 		for (Artikel artikel: articles) {
@@ -52,13 +52,13 @@ public class ArtikelTableModel extends DefaultTableModel {
 
 			//einArtikelAlsVector.add(kunde.getWarenkorb().getInhalt().values());
 		}
-		// Vector von Vectoren mit Bücher-Strings eintragen
+		// Vector von Vectoren mit Bï¿½cher-Strings eintragen
 		// (geerbte Methode)
 		this.setDataVector(rows, columnIdentifiers);
 	}
 	
 	/**
-	 * Tabellendaten hinzufügen (für den Warenkorb)
+	 * Tabellendaten hinzufï¿½gen (fï¿½r den Warenkorb)
 	 * 
 	 * @param articles
 	 */
@@ -69,8 +69,8 @@ public class ArtikelTableModel extends DefaultTableModel {
 //		this.positionen = kunde.getWarenkorb().getInhalt();
 //		Set<Artikel> articles1 = this.positionen.keySet();
 		
-		// Bücher aus Liste aufbereiten:
-		// DefaultTableModel erwartet Repräsentation der Tabellendaten
+		// Bï¿½cher aus Liste aufbereiten:
+		// DefaultTableModel erwartet Reprï¿½sentation der Tabellendaten
 		// als Vector von Vectoren
 //		Set<Artikel> articles1 = this.positionen.keySet();
 		Vector rows = new Vector();
@@ -93,7 +93,7 @@ public class ArtikelTableModel extends DefaultTableModel {
 		//	einArtikelAlsVector.add
 			rows.add(einArtikelAlsVector);
 		}
-		// Vector von Vectoren mit Bücher-Strings eintragen
+		// Vector von Vectoren mit Bï¿½cher-Strings eintragen
 		// (geerbte Methode)
 		this.setDataVector(rows, columnIdentifiers);
 	}

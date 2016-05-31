@@ -940,7 +940,7 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
 			// TODO klappt noch nicht so ganz
 
 			// TODO bearbeiten!
-
+			
 			try {
 
 				String artname = bezeichnungsFeld.getText();
